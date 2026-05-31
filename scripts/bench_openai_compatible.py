@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from l40s_bench.config import load_benchmark_matrix, load_models
+from l40s_bench.errors import HTTP_ERROR, TIMEOUT, classify_url_error
 from l40s_bench.io import write_jsonl
 from l40s_bench.openai_stream import extract_delta_text, iter_sse_data
 from l40s_bench.schema import validate_result
@@ -68,6 +69,8 @@ def dry_run_record(
         "output_token_events": case["output_tokens"] if stream else None,
         "output_tokens_per_second": round(output_tps, 3),
         "error": None,
+        "error_kind": None,
+        "http_status": None,
     }
 
 
@@ -95,6 +98,8 @@ def real_request_record(
     started = time.perf_counter()
     status = "ok"
     error = None
+    error_kind = None
+    http_status = None
     first_token_at: float | None = None
     output_token_events: int | None = None
     try:
@@ -112,12 +117,16 @@ def real_request_record(
     except urllib.error.HTTPError as exc:
         status = "error"
         error = f"HTTP {exc.code}: {exc.reason}"
+        error_kind = HTTP_ERROR
+        http_status = exc.code
     except urllib.error.URLError as exc:
         status = "error"
         error = str(exc.reason)
+        error_kind = classify_url_error(exc.reason)
     except TimeoutError:
         status = "error"
         error = "request timed out"
+        error_kind = TIMEOUT
     finished = time.perf_counter()
     latency_ms = (finished - started) * 1000.0
     ttft_ms = (first_token_at - started) * 1000.0 if first_token_at is not None else None
@@ -157,6 +166,8 @@ def real_request_record(
         "output_token_events": output_token_events,
         "output_tokens_per_second": round(output_tps, 3) if output_tps else None,
         "error": error,
+        "error_kind": error_kind,
+        "http_status": http_status,
     }
 
 

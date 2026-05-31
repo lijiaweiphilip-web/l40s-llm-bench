@@ -1,4 +1,5 @@
 from scripts.run_sanity_checks import run_scenarios
+from l40s_bench.errors import HTTP_ERROR
 
 
 def test_sanity_check_suite_passes() -> None:
@@ -17,3 +18,5 @@ def test_sanity_check_suite_passes() -> None:
         record for record in records if record["case_id"] == "concurrent_stream"
     ]
     assert {record["request_index"] for record in concurrent_records} == {0, 1, 2, 3}
+    server_error = next(record for record in records if record["case_id"] == "server_error")
+    assert server_error["error_kind"] == HTTP_ERROR

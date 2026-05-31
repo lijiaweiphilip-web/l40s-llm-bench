@@ -18,6 +18,11 @@ def base_row(**updates):
         "median_ttft_ms": "20.0",
         "median_tpot_ms": "5.0",
         "avg_output_tokens_per_second": "100.0",
+        "http_error_runs": "0",
+        "timeout_runs": "0",
+        "connection_error_runs": "0",
+        "url_error_runs": "0",
+        "other_error_runs": "0",
     }
     row.update(updates)
     return row
@@ -59,6 +64,19 @@ def test_compare_flags_error_count_from_zero() -> None:
     )
 
     errors = next(row for row in rows if row["metric"] == "error_runs")
+
+    assert errors["status"] == "regression"
+    assert has_regression(rows)
+
+
+def test_compare_flags_error_kind_regression() -> None:
+    rows = compare_summaries(
+        [base_row(http_error_runs="0")],
+        [base_row(http_error_runs="1")],
+        max_regression_pct=5.0,
+    )
+
+    errors = next(row for row in rows if row["metric"] == "http_error_runs")
 
     assert errors["status"] == "regression"
     assert has_regression(rows)

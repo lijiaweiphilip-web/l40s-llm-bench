@@ -4,11 +4,13 @@ import csv
 from pathlib import Path
 from typing import Any
 
+from l40s_bench.errors import ERROR_SUMMARY_COLUMNS
 from l40s_bench.summary import GROUP_KEYS
 
 
 LOWER_IS_BETTER = {
     "error_runs",
+    *ERROR_SUMMARY_COLUMNS,
     "median_latency_ms",
     "p95_latency_ms",
     "median_ttft_ms",

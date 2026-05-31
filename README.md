@@ -75,6 +75,13 @@ python scripts/compare_summaries.py --baseline results/baselines/summary.csv --c
 
 See `docs/regression_comparison.md` for details.
 
+## Error Taxonomy
+
+Failed requests are tagged with `error_kind` and summarized into HTTP, timeout,
+connection, URL-layer, and other error counts.
+
+See `docs/error_taxonomy.md` for details.
+
 ## MVP Scope
 
 - Framework path one: vLLM through an OpenAI-compatible endpoint.
@@ -115,8 +122,8 @@ borrowed ideas, and small experiments to run before spending GPU time.
 ## Current Status
 
 The scaffold now supports dry runs, streaming sanity checks, workload profiles,
-summary reports, and regression comparison. No real GPU benchmark results are
-claimed yet.
+summary reports, regression comparison, and error taxonomy counts. No real GPU
+benchmark results are claimed yet.
 
 ## Next Steps
 

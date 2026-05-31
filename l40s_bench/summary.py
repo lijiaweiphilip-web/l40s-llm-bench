@@ -4,6 +4,12 @@ from collections import defaultdict
 from statistics import mean, median
 from typing import Any
 
+from l40s_bench.errors import (
+    ERROR_KIND_TO_SUMMARY_COLUMN,
+    ERROR_SUMMARY_COLUMNS,
+    OTHER_ERROR_SUMMARY_COLUMN,
+)
+
 
 GROUP_KEYS = (
     "case_id",
@@ -34,6 +40,16 @@ def summarize_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
     rows: list[dict[str, Any]] = []
     for group, group_records in sorted(groups.items()):
+        error_kind_counts = {kind: 0 for kind in ERROR_KIND_TO_SUMMARY_COLUMN}
+        other_error_runs = 0
+        for item in group_records:
+            if item.get("status") == "ok":
+                continue
+            error_kind = item.get("error_kind")
+            if error_kind in error_kind_counts:
+                error_kind_counts[error_kind] += 1
+            else:
+                other_error_runs += 1
         latencies = [
             float(item["latency_ms"])
             for item in group_records
@@ -74,6 +90,13 @@ def summarize_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 ),
             }
         )
+        row.update(
+            {
+                column: error_kind_counts[kind]
+                for kind, column in ERROR_KIND_TO_SUMMARY_COLUMN.items()
+            }
+        )
+        row[OTHER_ERROR_SUMMARY_COLUMN] = other_error_runs
         rows.append(row)
     return rows
 
@@ -95,6 +118,7 @@ def rows_to_markdown(rows: list[dict[str, Any]]) -> str:
         "median_ttft_ms",
         "median_tpot_ms",
         "avg_output_tokens_per_second",
+        *ERROR_SUMMARY_COLUMNS,
     ]
     lines = [
         "| " + " | ".join(headers) + " |",

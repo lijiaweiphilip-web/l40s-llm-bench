@@ -26,6 +26,9 @@ OPTIONAL_RESULT_FIELDS = {
     "output_token_events": None,
     "concurrency": None,
     "request_index": None,
+    "error": None,
+    "error_kind": None,
+    "http_status": None,
 }
 
 VALID_STATUSES = {"ok", "error", "oom", "skipped"}
@@ -58,6 +61,10 @@ def validate_result(record: dict[str, Any]) -> None:
         raise ValueError("concurrency must be positive")
     if int(record["request_index"]) < 0:
         raise ValueError("request_index must be non-negative")
+    if record["http_status"] is not None and not (
+        100 <= int(record["http_status"]) <= 599
+    ):
+        raise ValueError("http_status must be a valid HTTP status or null")
     if (
         record["output_tokens_per_second"] is not None
         and float(record["output_tokens_per_second"]) < 0

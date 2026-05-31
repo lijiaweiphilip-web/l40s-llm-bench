@@ -26,7 +26,7 @@ improve this repository.
 | P0 | Fake-server TTFT/TPOT sanity checks | Prevents measurement bugs before GPU runs | Done |
 | P0 | Client concurrency sanity checks | Validates request throughput and tail latency handling | Done |
 | P1 | Prompt/output shape profiles | Mirrors real use cases such as summary, code, chat, and long context | Done |
-| P1 | Error and timeout taxonomy | Keeps failures visible instead of silently dropping them | Planned |
+| P1 | Error and timeout taxonomy | Keeps failures visible instead of silently dropping them | Done |
 | P1 | Regression comparison | Checks whether benchmark metrics got worse between runs | Done |
 | P1 | JSONL schema version migration check | Keeps old raw logs readable as metrics evolve | Planned |
 | P2 | vLLM smoke run on a small model | First real model-serving path | Deferred until GPU/server access |

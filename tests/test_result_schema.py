@@ -48,3 +48,5 @@ def test_legacy_record_gets_optional_streaming_fields() -> None:
     assert record["output_token_events"] is None
     assert record["concurrency"] == 1
     assert record["request_index"] == 0
+    assert record["error_kind"] is None
+    assert record["http_status"] is None
