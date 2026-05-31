@@ -1,0 +1,5 @@
+models:
+  - name: dry-run-model
+    model_id: synthetic/dry-run
+    source: synthetic
+    notes: Used only for local dry-run validation.

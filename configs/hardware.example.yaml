@@ -1,0 +1,12 @@
+hardware:
+  gpu: NVIDIA L40S 48GB
+  gpu_count: 1
+  cpu: TBD
+  ram_gb: TBD
+  driver_version: TBD
+  cuda_version: TBD
+  os: TBD
+
+notes:
+  - Replace placeholder values before publishing real benchmark results.
+  - Do not include private cluster paths, usernames, hostnames, or job IDs.

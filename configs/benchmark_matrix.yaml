@@ -1,0 +1,19 @@
+defaults:
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  timeout_seconds: 60
+  repeats: 2
+
+cases:
+  - case_id: dryrun-vllm-small
+    framework: vllm
+    model: dry-run-model
+    prompt_tokens: 128
+    output_tokens: 32
+    batch_size: 1
+
+  - case_id: dryrun-vllm-context
+    framework: vllm
+    model: dry-run-model
+    prompt_tokens: 512
+    output_tokens: 64
+    batch_size: 1

@@ -1,27 +1,77 @@
 # l40s-llm-bench
 
-minimal scaffold for reproducible llm inference benchmark experiments.
+Minimal scaffold for reproducible LLM inference benchmark experiments.
 
-## purpose
+This repository is intentionally starting with the parts that can be built and
+verified without GPU access: configuration, dry-run execution, raw result
+schemas, summarization, environment capture, and tests. It does not claim
+performance results yet.
 
-this repository starts as a small benchmark skeleton. it does not claim performance results yet. the first goal is to make future results traceable through configs, raw logs, environment notes, summary tables, and clear limitations.
+## Purpose
 
-## mvp scope
+- Run small LLM inference benchmark experiments against OpenAI-compatible
+  servers.
+- Record raw JSONL logs for each request and benchmark case.
+- Summarize latency, throughput, errors, and environment metadata.
+- Keep benchmark claims tied to reproducible commands and versioned configs.
 
-first path is vllm. llama cpp comes after the vllm path is working. the first real run should use one small open model. the first metrics should cover latency, output tokens per second, error status, and environment notes. dry run comes before real gpu runs.
+## Quickstart
 
-## result policy
+```bash
+python -m pip install -r requirements-dev.txt
+python scripts/bench_openai_compatible.py --dry-run
+python scripts/summarize_results.py --input results/raw --output-dir results/tables
+python -m pytest
+```
 
-no benchmark number should be shown without model version, framework version, hardware notes, config, raw log path, and a repeated run policy.
+The dry run writes synthetic records only. It does not contact a model server,
+download a model, or use a GPU.
 
-## current status
+## MVP Scope
 
-starting repository. no benchmark results are claimed yet.
+- Framework path one: vLLM through an OpenAI-compatible endpoint.
+- Framework path two: llama.cpp after the vLLM path is working.
+- First model target: one small open model.
+- First metrics: latency, output tokens per second, error status, and
+  environment notes.
+- First mode: dry run before real GPU runs.
 
-## next steps
+## Project Structure
 
-add benchmark config schema. add dry run benchmark script. add jsonl result schema and validation tests. add csv and markdown summarizer. run the first real benchmark after the dry run path is verified.
+```text
+l40s-llm-bench/
+|-- configs/
+|-- docs/
+|-- l40s_bench/
+|-- results/
+|-- scripts/
+`-- tests/
+```
 
-## limitations
+## Result Policy
 
-this is not yet a complete benchmark suite. early results, when added, should be treated as local measurements rather than universal claims about any gpu, model, or inference framework.
+No benchmark number should be shown without:
+
+- model name and version
+- framework name and version
+- hardware and driver notes
+- config used for the run
+- raw log path
+- repeated-run policy
+
+## Current Status
+
+Starting repository. No benchmark results are claimed yet.
+
+## Next Steps
+
+- Add a real vLLM server run against a small open model.
+- Add streaming support for time-to-first-token measurements.
+- Add GPU metric capture around real runs.
+- Add llama.cpp once the vLLM path is stable.
+
+## Limitations
+
+This is not yet a complete benchmark suite. Early results, when added, should
+be treated as local measurements rather than universal claims about any GPU,
+model, or inference framework.
