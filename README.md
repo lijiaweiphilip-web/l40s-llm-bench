@@ -45,6 +45,15 @@ python scripts/summarize_results.py --input results/raw/fake_server_streaming.js
 
 This checks the benchmark client, not model performance.
 
+For a multi-scenario harness check:
+
+```bash
+python scripts/run_sanity_checks.py
+```
+
+The sanity suite covers baseline streaming, high TTFT, slow TPOT, and HTTP error
+handling.
+
 ## MVP Scope
 
 - Framework path one: vLLM through an OpenAI-compatible endpoint.

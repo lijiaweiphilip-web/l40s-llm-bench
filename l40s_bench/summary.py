@@ -5,7 +5,14 @@ from statistics import mean, median
 from typing import Any
 
 
-GROUP_KEYS = ("framework", "model", "prompt_tokens", "output_tokens", "batch_size")
+GROUP_KEYS = (
+    "case_id",
+    "framework",
+    "model",
+    "prompt_tokens",
+    "output_tokens",
+    "batch_size",
+)
 
 
 def percentile(values: list[float], p: float) -> float | None:
@@ -72,6 +79,7 @@ def summarize_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def rows_to_markdown(rows: list[dict[str, Any]]) -> str:
     headers = [
+        "case_id",
         "framework",
         "model",
         "prompt_tokens",

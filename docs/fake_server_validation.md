@@ -36,3 +36,19 @@ Expected behavior:
   buffering add noise.
 
 This is not a model benchmark. It is a measurement harness sanity check.
+
+For the packaged suite, run:
+
+```bash
+python scripts/run_sanity_checks.py
+```
+
+The suite starts local fake servers for:
+
+- baseline streaming
+- high TTFT
+- slow TPOT
+- HTTP 500 error handling
+
+It writes raw JSONL to `results/raw/sanity_checks.jsonl` and a short report to
+`results/tables/sanity_checks.md`.
