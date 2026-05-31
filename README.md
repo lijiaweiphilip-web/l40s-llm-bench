@@ -65,6 +65,14 @@ python scripts/bench_openai_compatible.py --config configs/generated_workload_ma
 
 See `docs/workload_profiles.md` for the current profile set.
 
+Create a scenario-oriented report after summarization:
+
+```bash
+python scripts/report_workload_profiles.py --summary results/tables/summary.csv
+```
+
+See `docs/workload_profile_report.md` for details.
+
 ## Regression Comparison
 
 Compare two summary CSV files and flag metric regressions:
@@ -133,7 +141,8 @@ borrowed ideas, and small experiments to run before spending GPU time.
 
 The scaffold now supports dry runs, streaming sanity checks, workload profiles,
 summary reports, regression comparison, error taxonomy counts, and JSONL
-compatibility checks. No real GPU benchmark results are claimed yet.
+compatibility checks. It can also create workload profile reports for review.
+No real GPU benchmark results are claimed yet.
 
 ## Next Steps
 

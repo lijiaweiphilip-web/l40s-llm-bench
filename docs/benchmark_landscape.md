@@ -31,7 +31,7 @@ improve this repository.
 | P1 | JSONL schema version migration check | Keeps old raw logs readable as metrics evolve | Done |
 | P2 | vLLM smoke run on a small model | First real model-serving path | Deferred until GPU/server access |
 | P2 | llama.cpp GGUF metadata path | Makes local quantized inference comparable later | Deferred |
-| P2 | Workload profile report | Makes results easier to compare across runs | Planned |
+| P2 | Workload profile report | Makes results easier to compare across runs | Done |
 
 ## Current Rule
 

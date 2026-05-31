@@ -31,7 +31,14 @@ python scripts/bench_openai_compatible.py \
 python scripts/summarize_results.py \
   --input results/raw/workload_profiles_dry_run.jsonl \
   --output-dir results/tables
+
+python scripts/report_workload_profiles.py \
+  --profiles configs/workload_profiles.yaml \
+  --summary results/tables/summary.csv \
+  --output results/tables/workload_profile_report.md
 ```
 
 This is still not a model benchmark. It validates that the benchmark harness can
 represent multiple request shapes and concurrency levels consistently.
+
+See `docs/workload_profile_report.md` for the scenario report format.

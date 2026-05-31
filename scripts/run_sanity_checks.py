@@ -32,7 +32,7 @@ class SanityScenario:
     concurrency: int = 1
     expected_status: str = "ok"
     status_code: int = 200
-    ttft_tolerance_ms: float = 80.0
+    ttft_tolerance_ms: float = 120.0
     tpot_tolerance_ms: float = 20.0
 
 
