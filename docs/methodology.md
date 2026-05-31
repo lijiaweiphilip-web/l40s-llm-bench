@@ -14,6 +14,7 @@ Real benchmark runs should record:
 - driver and CUDA versions
 - benchmark config
 - raw JSONL output
+- run manifest with artifact hashes
 - repeated-run policy
 - failed, skipped, or OOM cases
 

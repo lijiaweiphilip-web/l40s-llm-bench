@@ -14,3 +14,5 @@ results/baselines/*.md
 results/tables/*.csv
 results/tables/*.md
 results/env/*.json
+results/manifests/*.json
+results/manifests/*.md

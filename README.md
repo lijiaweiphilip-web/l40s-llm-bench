@@ -100,6 +100,16 @@ python scripts/check_jsonl_compat.py --input results/raw
 
 See `docs/jsonl_compatibility.md` for details.
 
+## Run Manifest
+
+Create a compact evidence bundle for one benchmark run:
+
+```bash
+python scripts/build_run_manifest.py --run-id workload-profiles-dry-run
+```
+
+See `docs/run_manifest.md` for details.
+
 ## MVP Scope
 
 - Framework path one: vLLM through an OpenAI-compatible endpoint.
@@ -142,7 +152,8 @@ borrowed ideas, and small experiments to run before spending GPU time.
 The scaffold now supports dry runs, streaming sanity checks, workload profiles,
 summary reports, regression comparison, error taxonomy counts, and JSONL
 compatibility checks. It can also create workload profile reports for review.
-No real GPU benchmark results are claimed yet.
+Run manifests tie those artifacts together. No real GPU benchmark results are
+claimed yet.
 
 ## Next Steps
 

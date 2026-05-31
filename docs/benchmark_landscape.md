@@ -29,6 +29,7 @@ improve this repository.
 | P1 | Error and timeout taxonomy | Keeps failures visible instead of silently dropping them | Done |
 | P1 | Regression comparison | Checks whether benchmark metrics got worse between runs | Done |
 | P1 | JSONL schema version migration check | Keeps old raw logs readable as metrics evolve | Done |
+| P1 | Run manifest evidence bundle | Ties config, raw logs, summaries, reports, and hashes together | Done |
 | P2 | vLLM smoke run on a small model | First real model-serving path | Deferred until GPU/server access |
 | P2 | llama.cpp GGUF metadata path | Makes local quantized inference comparable later | Deferred |
 | P2 | Workload profile report | Makes results easier to compare across runs | Done |
