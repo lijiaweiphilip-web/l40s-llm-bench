@@ -54,6 +54,17 @@ python scripts/run_sanity_checks.py
 The sanity suite covers baseline streaming, concurrent streaming, high TTFT,
 slow TPOT, and HTTP error handling.
 
+## Workload Profiles
+
+Generate benchmark cases from reusable workload profiles:
+
+```bash
+python scripts/generate_matrix.py
+python scripts/bench_openai_compatible.py --config configs/generated_workload_matrix.yaml --dry-run --stream --output results/raw/workload_profiles_dry_run.jsonl
+```
+
+See `docs/workload_profiles.md` for the current profile set.
+
 ## MVP Scope
 
 - Framework path one: vLLM through an OpenAI-compatible endpoint.

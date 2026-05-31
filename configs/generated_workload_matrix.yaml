@@ -1,0 +1,57 @@
+defaults: {}
+cases:
+- case_id: chat_short
+  framework: vllm
+  model: dry-run-model
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  timeout_seconds: 60
+  repeats: 2
+  prompt_tokens: 128
+  output_tokens: 128
+  batch_size: 1
+  concurrency: 1
+  description: Short assistant-style interaction.
+- case_id: summarization_medium
+  framework: vllm
+  model: dry-run-model
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  timeout_seconds: 60
+  repeats: 2
+  prompt_tokens: 1024
+  output_tokens: 256
+  batch_size: 1
+  concurrency: 1
+  description: Medium input with shorter generated summary.
+- case_id: code_generation
+  framework: vllm
+  model: dry-run-model
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  timeout_seconds: 60
+  repeats: 2
+  prompt_tokens: 512
+  output_tokens: 1024
+  batch_size: 1
+  concurrency: 1
+  description: Moderate prompt with long generated code output.
+- case_id: long_context_qa
+  framework: vllm
+  model: dry-run-model
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  timeout_seconds: 60
+  repeats: 2
+  prompt_tokens: 4096
+  output_tokens: 128
+  batch_size: 1
+  concurrency: 1
+  description: Long-context prompt with concise answer.
+- case_id: burst_chat_concurrency
+  framework: vllm
+  model: dry-run-model
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  timeout_seconds: 60
+  repeats: 2
+  prompt_tokens: 128
+  output_tokens: 128
+  batch_size: 1
+  concurrency: 4
+  description: Small chat requests under concurrent load.
