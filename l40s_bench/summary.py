@@ -12,6 +12,7 @@ GROUP_KEYS = (
     "prompt_tokens",
     "output_tokens",
     "batch_size",
+    "concurrency",
 )
 
 
@@ -85,6 +86,7 @@ def rows_to_markdown(rows: list[dict[str, Any]]) -> str:
         "prompt_tokens",
         "output_tokens",
         "batch_size",
+        "concurrency",
         "runs",
         "ok_runs",
         "error_runs",

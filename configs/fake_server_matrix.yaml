@@ -10,3 +10,4 @@ cases:
     prompt_tokens: 64
     output_tokens: 8
     batch_size: 1
+    concurrency: 1

@@ -11,6 +11,7 @@ def test_summary_groups_records() -> None:
         "prompt_tokens": 128,
         "output_tokens": 32,
         "batch_size": 1,
+        "concurrency": 1,
     }
     records = [
         dry_run_record(case, repeat_index=0, run_id="test-run"),

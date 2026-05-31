@@ -51,8 +51,8 @@ For a multi-scenario harness check:
 python scripts/run_sanity_checks.py
 ```
 
-The sanity suite covers baseline streaming, high TTFT, slow TPOT, and HTTP error
-handling.
+The sanity suite covers baseline streaming, concurrent streaming, high TTFT,
+slow TPOT, and HTTP error handling.
 
 ## MVP Scope
 
@@ -85,6 +85,11 @@ No benchmark number should be shown without:
 - config used for the run
 - raw log path
 - repeated-run policy
+
+## Experiment Roadmap
+
+See `docs/benchmark_landscape.md` for the current list of reference projects,
+borrowed ideas, and small experiments to run before spending GPU time.
 
 ## Current Status
 

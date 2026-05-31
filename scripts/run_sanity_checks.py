@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from http.server import ThreadingHTTPServer
 from pathlib import Path
@@ -28,6 +29,7 @@ class SanityScenario:
     ttft_ms: float
     tpot_ms: float
     tokens: int
+    concurrency: int = 1
     expected_status: str = "ok"
     status_code: int = 200
     ttft_tolerance_ms: float = 80.0
@@ -38,6 +40,7 @@ SCENARIOS = [
     SanityScenario(name="baseline_stream", ttft_ms=80, tpot_ms=20, tokens=8),
     SanityScenario(name="high_ttft_stream", ttft_ms=350, tpot_ms=20, tokens=8),
     SanityScenario(name="slow_tpot_stream", ttft_ms=80, tpot_ms=90, tokens=8),
+    SanityScenario(name="concurrent_stream", ttft_ms=80, tpot_ms=20, tokens=8, concurrency=4),
     SanityScenario(
         name="server_error",
         ttft_ms=0,
@@ -107,19 +110,28 @@ def run_scenarios(repeats: int) -> tuple[list[dict[str, Any]], list[str]]:
                     "prompt_tokens": 64,
                     "output_tokens": scenario.tokens,
                     "batch_size": 1,
+                    "concurrency": scenario.concurrency,
                     "timeout_seconds": 10,
                 }
-                record = real_request_record(
-                    case,
-                    repeat_index=repeat_index,
-                    run_id="sanity-checks",
-                    stream=True,
-                )
-                validate_result(record)
-                record["expected_ttft_ms"] = scenario.ttft_ms
-                record["expected_tpot_ms"] = scenario.tpot_ms
-                records.append(record)
-                failures.extend(check_record(record, scenario))
+                with ThreadPoolExecutor(max_workers=scenario.concurrency) as executor:
+                    futures = [
+                        executor.submit(
+                            real_request_record,
+                            case,
+                            repeat_index,
+                            "sanity-checks",
+                            True,
+                            request_index,
+                        )
+                        for request_index in range(scenario.concurrency)
+                    ]
+                    for future in as_completed(futures):
+                        record = future.result()
+                        validate_result(record)
+                        record["expected_ttft_ms"] = scenario.ttft_ms
+                        record["expected_tpot_ms"] = scenario.tpot_ms
+                        records.append(record)
+                        failures.extend(check_record(record, scenario))
         finally:
             server.shutdown()
             server.server_close()

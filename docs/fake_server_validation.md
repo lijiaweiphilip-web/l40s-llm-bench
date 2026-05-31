@@ -46,6 +46,7 @@ python scripts/run_sanity_checks.py
 The suite starts local fake servers for:
 
 - baseline streaming
+- concurrent streaming
 - high TTFT
 - slow TPOT
 - HTTP 500 error handling

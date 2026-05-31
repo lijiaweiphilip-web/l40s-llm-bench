@@ -6,6 +6,7 @@ import time
 import urllib.error
 import urllib.request
 import uuid
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import UTC, datetime
 from pathlib import Path
 import sys
@@ -35,6 +36,7 @@ def dry_run_record(
     repeat_index: int,
     run_id: str,
     stream: bool = False,
+    request_index: int = 0,
 ) -> dict[str, Any]:
     ttft_ms = 25.0 + case["prompt_tokens"] * 0.01 if stream else None
     tpot_ms = 8.0 if stream else None
@@ -55,7 +57,9 @@ def dry_run_record(
         "prompt_tokens": case["prompt_tokens"],
         "output_tokens": case["output_tokens"],
         "batch_size": case["batch_size"],
+        "concurrency": case["concurrency"],
         "repeat_index": repeat_index,
+        "request_index": request_index,
         "dry_run": True,
         "status": "ok",
         "latency_ms": round(latency_ms, 3),
@@ -72,6 +76,7 @@ def real_request_record(
     repeat_index: int,
     run_id: str,
     stream: bool = False,
+    request_index: int = 0,
 ) -> dict[str, Any]:
     endpoint = case["endpoint"]
     payload = {
@@ -141,7 +146,9 @@ def real_request_record(
         "prompt_tokens": case["prompt_tokens"],
         "output_tokens": case["output_tokens"],
         "batch_size": case["batch_size"],
+        "concurrency": case["concurrency"],
         "repeat_index": repeat_index,
+        "request_index": request_index,
         "dry_run": False,
         "status": status,
         "latency_ms": round(latency_ms, 3),
@@ -163,13 +170,22 @@ def run_benchmark(args: argparse.Namespace) -> list[dict[str, Any]]:
         if case["model"] not in models:
             raise ValueError(f"unknown model in benchmark case: {case['model']}")
         for repeat_index in range(case["repeats"]):
-            record = (
-                dry_run_record(case, repeat_index, run_id, stream=args.stream)
-                if args.dry_run
-                else real_request_record(case, repeat_index, run_id, stream=args.stream)
-            )
-            validate_result(record)
-            records.append(record)
+            with ThreadPoolExecutor(max_workers=case["concurrency"]) as executor:
+                futures = [
+                    executor.submit(
+                        dry_run_record if args.dry_run else real_request_record,
+                        case,
+                        repeat_index,
+                        run_id,
+                        args.stream,
+                        request_index,
+                    )
+                    for request_index in range(case["concurrency"])
+                ]
+                for future in as_completed(futures):
+                    record = future.result()
+                    validate_result(record)
+                    records.append(record)
     return records
 
 

@@ -10,6 +10,7 @@ cases:
     prompt_tokens: 128
     output_tokens: 32
     batch_size: 1
+    concurrency: 1
 
   - case_id: dryrun-vllm-context
     framework: vllm
@@ -17,3 +18,4 @@ cases:
     prompt_tokens: 512
     output_tokens: 64
     batch_size: 1
+    concurrency: 1

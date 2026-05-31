@@ -11,6 +11,7 @@ def test_dry_run_record_matches_schema() -> None:
         "prompt_tokens": 128,
         "output_tokens": 32,
         "batch_size": 1,
+        "concurrency": 1,
     }
 
     record = dry_run_record(case, repeat_index=0, run_id="test-run")
@@ -18,6 +19,8 @@ def test_dry_run_record_matches_schema() -> None:
     validate_result(record)
     assert record["dry_run"] is True
     assert record["status"] == "ok"
+    assert record["concurrency"] == 1
+    assert record["request_index"] == 0
 
 
 def test_legacy_record_gets_optional_streaming_fields() -> None:
@@ -43,3 +46,5 @@ def test_legacy_record_gets_optional_streaming_fields() -> None:
     assert record["ttft_ms"] is None
     assert record["tpot_ms"] is None
     assert record["output_token_events"] is None
+    assert record["concurrency"] == 1
+    assert record["request_index"] == 0

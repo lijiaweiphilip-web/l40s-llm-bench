@@ -24,6 +24,8 @@ OPTIONAL_RESULT_FIELDS = {
     "ttft_ms": None,
     "tpot_ms": None,
     "output_token_events": None,
+    "concurrency": None,
+    "request_index": None,
 }
 
 VALID_STATUSES = {"ok", "error", "oom", "skipped"}
@@ -32,6 +34,10 @@ VALID_STATUSES = {"ok", "error", "oom", "skipped"}
 def validate_result(record: dict[str, Any]) -> None:
     for key, value in OPTIONAL_RESULT_FIELDS.items():
         record.setdefault(key, value)
+    if record["concurrency"] is None:
+        record["concurrency"] = record.get("batch_size")
+    if record["request_index"] is None:
+        record["request_index"] = 0
     missing = REQUIRED_RESULT_FIELDS - set(record)
     if missing:
         raise ValueError(f"result record missing fields: {sorted(missing)}")
@@ -48,6 +54,10 @@ def validate_result(record: dict[str, Any]) -> None:
         raise ValueError("tpot_ms must be non-negative or null")
     if record["output_token_events"] is not None and int(record["output_token_events"]) < 0:
         raise ValueError("output_token_events must be non-negative or null")
+    if int(record["concurrency"]) <= 0:
+        raise ValueError("concurrency must be positive")
+    if int(record["request_index"]) < 0:
+        raise ValueError("request_index must be non-negative")
     if (
         record["output_tokens_per_second"] is not None
         and float(record["output_tokens_per_second"]) < 0

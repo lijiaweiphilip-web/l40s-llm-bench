@@ -24,6 +24,7 @@ def test_fake_server_streaming_metrics_are_measured() -> None:
             "prompt_tokens": 8,
             "output_tokens": 4,
             "batch_size": 1,
+            "concurrency": 1,
             "timeout_seconds": 5,
         }
 

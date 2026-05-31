@@ -17,3 +17,4 @@ def test_cases_have_positive_sizes() -> None:
         assert case["prompt_tokens"] > 0
         assert case["output_tokens"] > 0
         assert case["batch_size"] > 0
+        assert case["concurrency"] > 0

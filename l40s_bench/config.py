@@ -53,6 +53,9 @@ def load_benchmark_matrix(path: str | Path) -> dict[str, Any]:
         case["repeats"] = int(case.get("repeats", 1))
         if case["repeats"] <= 0:
             raise ValueError(f"repeats must be positive in {case['case_id']}")
+        case["concurrency"] = int(case.get("concurrency", case["batch_size"]))
+        if case["concurrency"] <= 0:
+            raise ValueError(f"concurrency must be positive in {case['case_id']}")
         normalized_cases.append(case)
 
     matrix["cases"] = normalized_cases
