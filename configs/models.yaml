@@ -3,3 +3,8 @@ models:
     model_id: synthetic/dry-run
     source: synthetic
     notes: Used only for local dry-run validation.
+
+  - name: fake-openai-model
+    model_id: synthetic/fake-openai
+    source: synthetic
+    notes: Used with scripts/fake_openai_server.py to validate TTFT and TPOT measurement.

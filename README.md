@@ -20,20 +20,38 @@ performance results yet.
 ```bash
 python -m pip install -r requirements-dev.txt
 python scripts/bench_openai_compatible.py --dry-run
-python scripts/summarize_results.py --input results/raw --output-dir results/tables
+python scripts/summarize_results.py --input results/raw/dry_run.jsonl --output-dir results/tables
 python -m pytest
 ```
 
 The dry run writes synthetic records only. It does not contact a model server,
 download a model, or use a GPU.
 
+## Local Measurement Check
+
+Before spending GPU time, validate streaming TTFT/TPOT measurement against a
+controlled fake OpenAI-compatible server:
+
+```bash
+python scripts/fake_openai_server.py --port 18000 --ttft-ms 120 --tpot-ms 25 --tokens 8
+```
+
+In another terminal:
+
+```bash
+python scripts/bench_openai_compatible.py --config configs/fake_server_matrix.yaml --output results/raw/fake_server_streaming.jsonl --stream
+python scripts/summarize_results.py --input results/raw/fake_server_streaming.jsonl --output-dir results/tables
+```
+
+This checks the benchmark client, not model performance.
+
 ## MVP Scope
 
 - Framework path one: vLLM through an OpenAI-compatible endpoint.
 - Framework path two: llama.cpp after the vLLM path is working.
 - First model target: one small open model.
-- First metrics: latency, output tokens per second, error status, and
-  environment notes.
+- First metrics: latency, TTFT, TPOT, output tokens per second, error status,
+  and environment notes.
 - First mode: dry run before real GPU runs.
 
 ## Project Structure
@@ -66,7 +84,6 @@ Starting repository. No benchmark results are claimed yet.
 ## Next Steps
 
 - Add a real vLLM server run against a small open model.
-- Add streaming support for time-to-first-token measurements.
 - Add GPU metric capture around real runs.
 - Add llama.cpp once the vLLM path is stable.
 

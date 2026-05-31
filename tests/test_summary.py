@@ -22,3 +22,4 @@ def test_summary_groups_records() -> None:
     assert len(rows) == 1
     assert rows[0]["runs"] == 2
     assert rows[0]["ok_runs"] == 2
+    assert rows[0]["median_latency_ms"] is not None

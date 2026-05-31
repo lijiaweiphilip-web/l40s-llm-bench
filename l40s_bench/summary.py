@@ -31,6 +31,16 @@ def summarize_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
             for item in group_records
             if item.get("latency_ms") is not None and item.get("status") == "ok"
         ]
+        ttfts = [
+            float(item["ttft_ms"])
+            for item in group_records
+            if item.get("ttft_ms") is not None and item.get("status") == "ok"
+        ]
+        tpots = [
+            float(item["tpot_ms"])
+            for item in group_records
+            if item.get("tpot_ms") is not None and item.get("status") == "ok"
+        ]
         token_rates = [
             float(item["output_tokens_per_second"])
             for item in group_records
@@ -49,6 +59,8 @@ def summarize_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "p95_latency_ms": (
                     round(percentile(latencies, 0.95), 3) if latencies else None
                 ),
+                "median_ttft_ms": round(median(ttfts), 3) if ttfts else None,
+                "median_tpot_ms": round(median(tpots), 3) if tpots else None,
                 "avg_output_tokens_per_second": (
                     round(mean(token_rates), 3) if token_rates else None
                 ),
@@ -70,6 +82,8 @@ def rows_to_markdown(rows: list[dict[str, Any]]) -> str:
         "error_runs",
         "median_latency_ms",
         "p95_latency_ms",
+        "median_ttft_ms",
+        "median_tpot_ms",
         "avg_output_tokens_per_second",
     ]
     lines = [

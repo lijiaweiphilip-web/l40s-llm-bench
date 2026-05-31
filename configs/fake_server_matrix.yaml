@@ -1,0 +1,12 @@
+defaults:
+  endpoint: http://127.0.0.1:18000/v1/chat/completions
+  timeout_seconds: 10
+  repeats: 2
+
+cases:
+  - case_id: fake-server-streaming
+    framework: fake-openai
+    model: fake-openai-model
+    prompt_tokens: 64
+    output_tokens: 8
+    batch_size: 1

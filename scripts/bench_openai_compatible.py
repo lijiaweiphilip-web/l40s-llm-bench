@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
 
 from l40s_bench.config import load_benchmark_matrix, load_models
 from l40s_bench.io import write_jsonl
+from l40s_bench.openai_stream import extract_delta_text, iter_sse_data
 from l40s_bench.schema import validate_result
 
 
@@ -29,8 +30,19 @@ def synthetic_prompt(prompt_tokens: int) -> str:
     return " ".join(words)
 
 
-def dry_run_record(case: dict[str, Any], repeat_index: int, run_id: str) -> dict[str, Any]:
-    latency_ms = 40.0 + case["prompt_tokens"] * 0.02 + case["output_tokens"] * 0.4
+def dry_run_record(
+    case: dict[str, Any],
+    repeat_index: int,
+    run_id: str,
+    stream: bool = False,
+) -> dict[str, Any]:
+    ttft_ms = 25.0 + case["prompt_tokens"] * 0.01 if stream else None
+    tpot_ms = 8.0 if stream else None
+    latency_ms = (
+        ttft_ms + max(case["output_tokens"] - 1, 0) * tpot_ms
+        if stream and ttft_ms is not None and tpot_ms is not None
+        else 40.0 + case["prompt_tokens"] * 0.02 + case["output_tokens"] * 0.4
+    )
     output_tps = case["output_tokens"] / max(latency_ms / 1000.0, 0.001)
     return {
         "schema_version": "0.1",
@@ -47,20 +59,27 @@ def dry_run_record(case: dict[str, Any], repeat_index: int, run_id: str) -> dict
         "dry_run": True,
         "status": "ok",
         "latency_ms": round(latency_ms, 3),
-        "ttft_ms": None,
+        "ttft_ms": round(ttft_ms, 3) if ttft_ms is not None else None,
+        "tpot_ms": round(tpot_ms, 3) if tpot_ms is not None else None,
+        "output_token_events": case["output_tokens"] if stream else None,
         "output_tokens_per_second": round(output_tps, 3),
         "error": None,
     }
 
 
-def real_request_record(case: dict[str, Any], repeat_index: int, run_id: str) -> dict[str, Any]:
+def real_request_record(
+    case: dict[str, Any],
+    repeat_index: int,
+    run_id: str,
+    stream: bool = False,
+) -> dict[str, Any]:
     endpoint = case["endpoint"]
     payload = {
         "model": case["model"],
         "messages": [{"role": "user", "content": synthetic_prompt(case["prompt_tokens"])}],
         "max_tokens": case["output_tokens"],
         "temperature": 0,
-        "stream": False,
+        "stream": stream,
     }
     request = urllib.request.Request(
         endpoint,
@@ -71,9 +90,20 @@ def real_request_record(case: dict[str, Any], repeat_index: int, run_id: str) ->
     started = time.perf_counter()
     status = "ok"
     error = None
+    first_token_at: float | None = None
+    output_token_events: int | None = None
     try:
         with urllib.request.urlopen(request, timeout=int(case["timeout_seconds"])) as response:
-            response.read()
+            if stream:
+                output_token_events = 0
+                for event in iter_sse_data(response):
+                    text = extract_delta_text(event)
+                    if text:
+                        output_token_events += 1
+                        if first_token_at is None:
+                            first_token_at = time.perf_counter()
+            else:
+                response.read()
     except urllib.error.HTTPError as exc:
         status = "error"
         error = f"HTTP {exc.code}: {exc.reason}"
@@ -83,9 +113,22 @@ def real_request_record(case: dict[str, Any], repeat_index: int, run_id: str) ->
     except TimeoutError:
         status = "error"
         error = "request timed out"
-    latency_ms = (time.perf_counter() - started) * 1000.0
+    finished = time.perf_counter()
+    latency_ms = (finished - started) * 1000.0
+    ttft_ms = (first_token_at - started) * 1000.0 if first_token_at is not None else None
+    tpot_ms = None
+    if (
+        ttft_ms is not None
+        and output_token_events is not None
+        and output_token_events > 1
+    ):
+        tpot_ms = (latency_ms - ttft_ms) / (output_token_events - 1)
     output_tps = (
-        case["output_tokens"] / (latency_ms / 1000.0) if status == "ok" and latency_ms else None
+        output_token_events / (latency_ms / 1000.0)
+        if stream and status == "ok" and output_token_events is not None and latency_ms
+        else case["output_tokens"] / (latency_ms / 1000.0)
+        if status == "ok" and latency_ms
+        else None
     )
     return {
         "schema_version": "0.1",
@@ -102,7 +145,9 @@ def real_request_record(case: dict[str, Any], repeat_index: int, run_id: str) ->
         "dry_run": False,
         "status": status,
         "latency_ms": round(latency_ms, 3),
-        "ttft_ms": None,
+        "ttft_ms": round(ttft_ms, 3) if ttft_ms is not None else None,
+        "tpot_ms": round(tpot_ms, 3) if tpot_ms is not None else None,
+        "output_token_events": output_token_events,
         "output_tokens_per_second": round(output_tps, 3) if output_tps else None,
         "error": error,
     }
@@ -119,9 +164,9 @@ def run_benchmark(args: argparse.Namespace) -> list[dict[str, Any]]:
             raise ValueError(f"unknown model in benchmark case: {case['model']}")
         for repeat_index in range(case["repeats"]):
             record = (
-                dry_run_record(case, repeat_index, run_id)
+                dry_run_record(case, repeat_index, run_id, stream=args.stream)
                 if args.dry_run
-                else real_request_record(case, repeat_index, run_id)
+                else real_request_record(case, repeat_index, run_id, stream=args.stream)
             )
             validate_result(record)
             records.append(record)
@@ -134,6 +179,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--models-config", default="configs/models.yaml")
     parser.add_argument("--output", default="results/raw/dry_run.jsonl")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--stream", action="store_true")
     parser.add_argument("--run-id")
     parser.add_argument("--limit-cases", type=int)
     return parser.parse_args()

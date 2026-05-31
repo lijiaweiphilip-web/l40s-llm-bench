@@ -20,10 +20,18 @@ REQUIRED_RESULT_FIELDS = {
     "output_tokens_per_second",
 }
 
+OPTIONAL_RESULT_FIELDS = {
+    "ttft_ms": None,
+    "tpot_ms": None,
+    "output_token_events": None,
+}
+
 VALID_STATUSES = {"ok", "error", "oom", "skipped"}
 
 
 def validate_result(record: dict[str, Any]) -> None:
+    for key, value in OPTIONAL_RESULT_FIELDS.items():
+        record.setdefault(key, value)
     missing = REQUIRED_RESULT_FIELDS - set(record)
     if missing:
         raise ValueError(f"result record missing fields: {sorted(missing)}")
@@ -34,6 +42,12 @@ def validate_result(record: dict[str, Any]) -> None:
             raise ValueError(f"{key} must be non-negative")
     if record["latency_ms"] is not None and float(record["latency_ms"]) < 0:
         raise ValueError("latency_ms must be non-negative or null")
+    if record["ttft_ms"] is not None and float(record["ttft_ms"]) < 0:
+        raise ValueError("ttft_ms must be non-negative or null")
+    if record["tpot_ms"] is not None and float(record["tpot_ms"]) < 0:
+        raise ValueError("tpot_ms must be non-negative or null")
+    if record["output_token_events"] is not None and int(record["output_token_events"]) < 0:
+        raise ValueError("output_token_events must be non-negative or null")
     if (
         record["output_tokens_per_second"] is not None
         and float(record["output_tokens_per_second"]) < 0
