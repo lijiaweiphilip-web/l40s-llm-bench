@@ -82,6 +82,16 @@ connection, URL-layer, and other error counts.
 
 See `docs/error_taxonomy.md` for details.
 
+## JSONL Compatibility
+
+Check raw result logs for schema versions, missing fields, and invalid records:
+
+```bash
+python scripts/check_jsonl_compat.py --input results/raw
+```
+
+See `docs/jsonl_compatibility.md` for details.
+
 ## MVP Scope
 
 - Framework path one: vLLM through an OpenAI-compatible endpoint.
@@ -122,8 +132,8 @@ borrowed ideas, and small experiments to run before spending GPU time.
 ## Current Status
 
 The scaffold now supports dry runs, streaming sanity checks, workload profiles,
-summary reports, regression comparison, and error taxonomy counts. No real GPU
-benchmark results are claimed yet.
+summary reports, regression comparison, error taxonomy counts, and JSONL
+compatibility checks. No real GPU benchmark results are claimed yet.
 
 ## Next Steps
 
