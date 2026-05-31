@@ -9,6 +9,8 @@ dist/
 build/
 *.egg-info/
 results/raw/*.jsonl
+results/baselines/*.csv
+results/baselines/*.md
 results/tables/*.csv
 results/tables/*.md
 results/env/*.json

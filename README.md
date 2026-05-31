@@ -65,6 +65,16 @@ python scripts/bench_openai_compatible.py --config configs/generated_workload_ma
 
 See `docs/workload_profiles.md` for the current profile set.
 
+## Regression Comparison
+
+Compare two summary CSV files and flag metric regressions:
+
+```bash
+python scripts/compare_summaries.py --baseline results/baselines/summary.csv --candidate results/tables/summary.csv
+```
+
+See `docs/regression_comparison.md` for details.
+
 ## MVP Scope
 
 - Framework path one: vLLM through an OpenAI-compatible endpoint.
@@ -104,7 +114,9 @@ borrowed ideas, and small experiments to run before spending GPU time.
 
 ## Current Status
 
-Starting repository. No benchmark results are claimed yet.
+The scaffold now supports dry runs, streaming sanity checks, workload profiles,
+summary reports, and regression comparison. No real GPU benchmark results are
+claimed yet.
 
 ## Next Steps
 
