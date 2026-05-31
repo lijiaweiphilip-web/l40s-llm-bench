@@ -17,6 +17,9 @@ performance results yet.
 
 ## Quickstart
 
+For a first pass through dry-run records, fake-server streaming validation, and
+run manifests, see `docs/ten_minute_smoke_run.md`.
+
 ```bash
 python -m pip install -r requirements-dev.txt
 python scripts/bench_openai_compatible.py --dry-run
@@ -110,6 +113,9 @@ python scripts/build_run_manifest.py --run-id workload-profiles-dry-run
 
 See `docs/run_manifest.md` for details.
 
+For a single guided path that ties dry runs, fake-server validation, summaries,
+and manifests together, see `docs/ten_minute_smoke_run.md`.
+
 ## MVP Scope
 
 - Framework path one: vLLM through an OpenAI-compatible endpoint.
@@ -152,7 +158,8 @@ borrowed ideas, and small experiments to run before spending GPU time.
 The scaffold now supports dry runs, streaming sanity checks, workload profiles,
 summary reports, regression comparison, error taxonomy counts, and JSONL
 compatibility checks. It can also create workload profile reports for review.
-Run manifests tie those artifacts together. No real GPU benchmark results are
+Run manifests tie those artifacts together, and `docs/ten_minute_smoke_run.md`
+now provides a 10-minute public entrypoint. No real GPU benchmark results are
 claimed yet.
 
 ## Next Steps
