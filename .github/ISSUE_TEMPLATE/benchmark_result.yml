@@ -1,0 +1,90 @@
+name: Benchmark result
+description: Share a reproducible benchmark run or ask for result review.
+title: "[Result]: "
+labels: ["benchmark-result"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This project is early-stage. Please frame results as reproducibility evidence, not broad performance claims. Redact secrets and private infrastructure details.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Result summary
+      description: Briefly describe what was measured and what should be reviewed.
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Repository commit
+      placeholder: e.g. git rev-parse HEAD
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Exact commands
+      description: Include benchmark, summarization, and manifest commands.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuration
+      description: Link to the config file or paste the relevant non-secret parameters.
+    validations:
+      required: true
+  - type: textarea
+    id: serving
+    attributes:
+      label: Serving stack
+      description: OpenAI-compatible server implementation, version, model identifier if public, streaming mode, and notable settings.
+      placeholder: |
+        Server:
+        Version:
+        Model:
+        Streaming:
+        Batch/concurrency settings:
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware and runtime
+      description: GPU model such as L40S, count, driver/runtime, CPU, memory, cloud/bare-metal context, and constraints.
+      placeholder: |
+        GPU:
+        Driver/runtime:
+        CPU/memory:
+        Deployment context:
+        Power/thermal/shared constraints:
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Result artifacts
+      description: Link or attach redacted raw JSONL logs, summary CSV/JSON, and run manifest when possible.
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations
+      description: What should readers not infer from this result?
+      placeholder: e.g. Single run only, shared host, synthetic prompt set, not a model quality evaluation.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Result checks
+      options:
+        - label: I included enough information for another contributor to attempt reproduction.
+          required: true
+        - label: I removed API keys, private endpoint URLs, and confidential data.
+          required: true
+        - label: I am not presenting this as a general leaderboard or adoption claim.
+          required: true
