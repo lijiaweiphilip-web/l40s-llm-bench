@@ -1,0 +1,57 @@
+name: Feature request
+description: Suggest a focused improvement to the benchmark scaffold.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement. Please keep requests focused on reproducible LLM inference benchmarking and related infrastructure.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or gap
+      description: What reproducibility, usability, or benchmark-coverage gap would this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the smallest useful version of the feature.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - OpenAI-compatible serving
+        - L40S / GPU metadata
+        - Workload profiles
+        - Raw result schema
+        - Summaries or reports
+        - Run manifests / reproducibility
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or example
+      description: Link to a reproducible example, command, config, or result artifact if available.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Optional, but helpful for keeping the implementation small.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: This request avoids unsupported benchmark or adoption claims.
+          required: true
+        - label: This request does not require publishing secrets or private infrastructure details.
+          required: true

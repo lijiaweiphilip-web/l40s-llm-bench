@@ -1,11 +1,12 @@
 # l40s-llm-bench
 
-Minimal scaffold for reproducible LLM inference benchmark experiments.
+Minimal scaffold for reproducible LLM inference benchmark experiments on L40S
+and similar single-GPU setups.
 
 This repository is intentionally starting with the parts that can be built and
 verified without GPU access: configuration, dry-run execution, raw result
-schemas, summarization, environment capture, and tests. It does not claim
-performance results yet.
+schemas, summarization, environment capture, fake-server validation, and tests.
+It does not claim real GPU benchmark results yet.
 
 ## Purpose
 
@@ -15,10 +16,87 @@ performance results yet.
 - Summarize latency, throughput, errors, and environment metadata.
 - Keep benchmark claims tied to reproducible commands and versioned configs.
 
+## Why This Exists
+
+LLM benchmark posts often compress too much context into one number. Hardware,
+driver versions, serving flags, prompt shapes, concurrency, streaming behavior,
+and failed requests can change the story. This project exists to make small
+local measurements easier to repeat and harder to overstate.
+
+The first goal is not to crown a winner. The first goal is a public, inspectable
+path from config to raw JSONL to summary table to run manifest.
+
+See `docs/project-rationale.md` for the longer rationale and audience.
+
+## Who It Helps
+
+- Practitioners checking whether their local L40S inference setup is behaving
+  as expected.
+- Researchers who need benchmark artifacts that can be audited after the fact.
+- Maintainers comparing changes to a benchmark harness before spending GPU
+  time.
+- Readers of benchmark results who want enough context to reproduce or question
+  a claim.
+
+This is not a leaderboard, hosted benchmark service, or adoption signal for any
+model, framework, or hardware vendor.
+
+## Reproducibility Contract
+
+Any shared result should include:
+
+- the command used to run the benchmark
+- benchmark config and model config
+- raw JSONL output
+- summary CSV or Markdown
+- run manifest with artifact hashes
+- hardware, driver, CUDA, framework, and model revision notes
+- repeated-run policy, including failed, skipped, timeout, or OOM cases
+
+If one of those items is missing, treat the result as a local observation rather
+than a benchmark claim.
+
+## What Is Measured
+
+The current scaffold records request-level harness data:
+
+- total request latency
+- streaming time to first token, when streaming is enabled
+- streaming time per output token, when token events are observed
+- output token event count for streaming responses
+- output tokens per second as calculated from the observed request
+- status, HTTP status, and error category
+- prompt and output token targets from the benchmark case
+- concurrency, repeat index, and request index
+
+See `docs/result-schema.md` for the current raw JSONL schema.
+
+## What Is Not Measured Yet
+
+- No real GPU benchmark results are included in this repository.
+- Dry-run numbers are synthetic and test only the pipeline.
+- The fake server validates timing measurement mechanics, not model or GPU
+  performance.
+- GPU utilization, power draw, memory bandwidth, and scheduler effects are not
+  captured by the benchmark client yet.
+- Token counts are config-level targets, not tokenizer-verified counts.
+- No universal claims are made about L40S, vLLM, llama.cpp, or any model.
+
+## Hardware Disclosure
+
+Before sharing real numbers, replace placeholders in
+`configs/hardware.example.yaml` or attach equivalent notes. At minimum, disclose
+GPU model, GPU count, VRAM, CPU, system RAM, driver version, CUDA version,
+framework version, model identifier or revision, and any serving flags that
+affect throughput or latency.
+
+Do not publish private cluster paths, hostnames, usernames, job IDs, API keys,
+or internal data.
+
 ## Quickstart
 
-For a first pass through dry-run records, fake-server streaming validation, and
-run manifests, see `docs/ten_minute_smoke_run.md`.
+Start here if you have 10 minutes and want to check the harness before using
+GPU time:
 
 ```bash
 python -m pip install -r requirements-dev.txt
@@ -29,6 +107,10 @@ python -m pytest
 
 The dry run writes synthetic records only. It does not contact a model server,
 download a model, or use a GPU.
+
+For the full guided path through dry-run records, fake-server streaming
+validation, summary tables, and run manifests, see
+`docs/ten_minute_smoke_run.md`.
 
 ## Local Measurement Check
 
@@ -147,6 +229,30 @@ No benchmark number should be shown without:
 - config used for the run
 - raw log path
 - repeated-run policy
+
+Also include a run manifest when possible. It ties artifact paths to file sizes
+and SHA256 hashes so readers can tell which files supported a claim.
+
+## How To Cite Or Share Results
+
+This project is early-stage, so cite or share outputs as local measurements,
+not as canonical benchmark results. A useful result note should include:
+
+- repository commit or release reference
+- benchmark command and config paths
+- raw JSONL path and run manifest path
+- hardware and software disclosure
+- summary table
+- short caveat describing what the run does not prove
+
+Suggested wording:
+
+> Local measurement produced with `l40s-llm-bench` on the disclosed hardware and
+> software stack. Results are tied to the linked config, raw JSONL, and run
+> manifest, and should not be generalized beyond that setup.
+
+For questions, result reports, or requests for missing metadata, see
+`docs/community-feedback.md`.
 
 ## Experiment Roadmap
 

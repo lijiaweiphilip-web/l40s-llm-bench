@@ -7,7 +7,7 @@ import urllib.error
 import urllib.request
 import uuid
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 import sys
 from typing import Any
@@ -24,7 +24,7 @@ from l40s_bench.schema import validate_result
 
 
 def utc_now() -> str:
-    return datetime.now(UTC).isoformat(timespec="seconds")
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
 def synthetic_prompt(prompt_tokens: int) -> str:

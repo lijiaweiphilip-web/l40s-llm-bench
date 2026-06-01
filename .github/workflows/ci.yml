@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: CPU quality checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run tests
+        run: python -m pytest -q
+
+      - name: Run CPU-only dry run
+        run: |
+          python scripts/bench_openai_compatible.py \
+            --dry-run \
+            --run-id ci-dry-run \
+            --output results/raw/ci_dry_run.jsonl
+
+      - name: Summarize dry run
+        run: |
+          python scripts/summarize_results.py \
+            --input results/raw/ci_dry_run.jsonl \
+            --output-dir results/tables
+
+      - name: Check JSONL compatibility
+        run: |
+          python scripts/check_jsonl_compat.py \
+            --input results/raw/ci_dry_run.jsonl \
+            --output results/tables/jsonl_compat.md
+
+      - name: Run local fake-server sanity checks
+        run: |
+          python scripts/run_sanity_checks.py \
+            --repeats 1 \
+            --output results/raw/sanity_checks.jsonl \
+            --report results/tables/sanity_checks.md
+
+      - name: Upload CI reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-quality-reports
+          path: |
+            results/raw/ci_dry_run.jsonl
+            results/raw/sanity_checks.jsonl
+            results/tables/*.csv
+            results/tables/*.md
+          if-no-files-found: ignore

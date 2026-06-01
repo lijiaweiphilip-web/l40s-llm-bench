@@ -1,0 +1,84 @@
+name: Bug report
+description: Report a reproducible problem with the benchmark scaffold.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve `l40s-llm-bench`. Please avoid posting API keys, private endpoint URLs, or confidential benchmark data.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What went wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Include exact commands and the smallest config needed to reproduce.
+      placeholder: |
+        1. python -m pip install -r requirements-dev.txt
+        2. python scripts/bench_openai_compatible.py --dry-run
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Repository commit
+      placeholder: e.g. git rev-parse HEAD
+    validations:
+      required: true
+  - type: dropdown
+    id: run_type
+    attributes:
+      label: Run type
+      options:
+        - Dry run
+        - Fake OpenAI-compatible server
+        - Real OpenAI-compatible server
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, serving stack/version, GPU details if relevant.
+      placeholder: |
+        OS:
+        Python:
+        Serving stack:
+        GPU / driver / runtime:
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include a short redacted log excerpt if useful.
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Artifacts
+      description: Link or paste redacted raw JSONL, summary output, or manifest snippets if available.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Safety checks
+      options:
+        - label: I removed API keys, bearer tokens, private endpoint URLs, and confidential data.
+          required: true
+        - label: I understand this report is not a validated benchmark claim.
+          required: true
