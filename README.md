@@ -114,6 +114,9 @@ validation, summary tables, and run manifests, see
 If any step behaves unexpectedly, use
 `docs/first_run_troubleshooting.md` before escalating to a real server run.
 
+For early usability feedback on the dry-run and fake-server path, see
+`docs/first-user-smoke-test.md` and `docs/feedback-request-template.md`.
+
 ## Local Measurement Check
 
 Before spending GPU time, validate streaming TTFT/TPOT measurement against a
