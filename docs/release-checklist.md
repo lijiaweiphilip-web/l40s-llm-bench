@@ -2,26 +2,23 @@
 
 Target release: `v0.1.0`
 
-Status: draft release preparation only. Do not create tags or GitHub releases
-from this checklist without maintainer approval.
+Status: published on 2026-06-01 after PR #1 passed GitHub Actions.
 
 ## Scope
 
 - [x] Keep release preparation limited to `CHANGELOG.md`,
   `docs/release-checklist.md`, and
-  `docs/maintenance/release-v0.1.0-draft.md`.
+  `docs/maintenance/release-v0.1.0.md`.
 - [x] Treat v0.1.0 as an early-stage OSS readiness release, not a validated GPU
   performance publication.
 - [x] Include dry-run validation, fake-server streaming validation, workload
   profiles, and run manifests in the release notes.
 - [x] Note OSS-facing governance/support files and CI documentation when present.
-- [x] Do not create tags, GitHub releases, or release assets from local git.
-- [x] Record that `gh` CLI is unavailable and draft/manual release mode is
-  expected.
+- [x] Publish a `v0.1.0` tag and GitHub release after CI is green.
 
 ## Local Verification
 
-Run these checks before promoting the draft:
+Run these checks before publishing:
 
 ```powershell
 python --version
@@ -39,16 +36,16 @@ Observed locally on 2026-06-01:
 - [x] Dry-run summary: wrote 5 summary rows
 - [x] Fake-server sanity checks: PASS, wrote 8 records and a sanity report
 
-Maintainer placeholders before final release:
+Maintainer checks before final release:
 
-- [ ] Confirm CI is green on the release branch or PR.
-- [ ] Confirm repository metadata, description, topics, and license display are
+- [x] Confirm CI is green on the release PR.
+- [x] Confirm repository metadata, description, topics, and license display are
   correct on GitHub.
-- [ ] Confirm no private paths, credentials, unpublished benchmark results, or
+- [x] Confirm no private paths, credentials, unpublished benchmark results, or
   local-only artifacts are included in the release diff.
-- [ ] Confirm whether any generated sample outputs should be attached, ignored,
-  or regenerated for the final release.
-- [ ] Confirm final version/date in `CHANGELOG.md`.
+- [x] Confirm generated sample outputs should remain ignored, regenerated, or
+  published as CI artifacts rather than committed release assets.
+- [x] Confirm final version/date in `CHANGELOG.md`.
 
 ## Release Notes Checklist
 
@@ -59,8 +56,8 @@ Maintainer placeholders before final release:
 - [x] Mention docs for methodology, limitations, result schema, workload
   profiles, fake-server validation, CI, and project rationale.
 - [x] Mention governance/support files present in the repository.
-- [x] Mention `gh` CLI unavailable locally.
-- [x] Mention tags/releases were not created.
+- [x] Mention GitHub Actions validation.
+- [x] Mention tag/release scope.
 
 ## Risks
 
@@ -68,5 +65,5 @@ Maintainer placeholders before final release:
   not prove GPU throughput, latency, memory use, or model-serving correctness.
 - CI is documented as CPU-only; it does not exercise vLLM, GPUs, remote APIs, or
   production-like model servers.
-- Release publishing remains manual because `gh` is unavailable in this
-  environment.
+- Real L40S results still need a separate evidence bundle before public
+  performance claims.

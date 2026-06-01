@@ -1,7 +1,6 @@
-# v0.1.0 Release Draft
+# v0.1.0 Release Notes
 
-This is a draft release note for maintainers. No tag or GitHub release has been
-created from this file.
+This is the maintainer release note for the initial OSS readiness release.
 
 ## Summary
 
@@ -35,7 +34,7 @@ fake-server streaming checks, and documentation/release hygiene.
 
 ## Local Validation
 
-Observed on 2026-06-01 from the `oss/day1-readiness` branch:
+Observed on 2026-06-01 before publishing `v0.1.0`:
 
 ```powershell
 python --version
@@ -67,9 +66,9 @@ python scripts\run_sanity_checks.py --repeats 1 --output $env:TEMP\l40s-sanity-c
 
 Result: PASS, wrote 8 records and a sanity report
 
-## Draft GitHub Release Text
+## GitHub Release Text
 
-Title: `v0.1.0 - OSS readiness draft`
+Title: `v0.1.0 - OSS readiness baseline`
 
 Body:
 
@@ -101,14 +100,10 @@ Known limitations:
 
 ## Publishing Notes
 
-- `gh` CLI is unavailable in the current local environment, so release creation
-  should be completed manually through the GitHub UI or from another
-  environment with `gh` installed.
-- No tag was created locally.
-- No GitHub release was created locally.
-- Confirm CI status before publishing.
-- Confirm final release date and tag name before updating `CHANGELOG.md` from
-  draft to final.
+- GitHub Actions `CPU quality checks` passed on PR #1 before merge.
+- Tag: `v0.1.0`
+- This release should remain clearly scoped as harness and documentation
+  readiness, not real GPU performance.
 
 ## Follow-Up
 

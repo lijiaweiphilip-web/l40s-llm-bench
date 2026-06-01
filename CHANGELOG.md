@@ -2,7 +2,7 @@
 
 All notable release preparation notes for this project are recorded here.
 
-## [0.1.0] - Draft
+## [0.1.0] - 2026-06-01
 
 Early-stage OSS readiness release for `l40s-llm-bench`, a minimal scaffold for
 reproducible LLM inference benchmark experiments.
@@ -36,13 +36,12 @@ reproducible LLM inference benchmark experiments.
   - `python scripts/bench_openai_compatible.py --config configs/generated_workload_matrix.yaml --dry-run --stream --output $env:TEMP/l40s-workload-profiles-dry-run.jsonl` -> wrote 16 records
   - `python scripts/summarize_results.py --input $env:TEMP/l40s-workload-profiles-dry-run.jsonl --output-dir $env:TEMP/l40s-tables` -> wrote 5 summary rows
   - `python scripts/run_sanity_checks.py --repeats 1 --output $env:TEMP/l40s-sanity-checks.jsonl --report $env:TEMP/l40s-sanity-checks.md` -> PASS, wrote 8 records and a sanity report
+- Observed in GitHub Actions on PR #1 before merge:
+  - `CPU quality checks` -> success
 
 ### Known limitations
 
 - This release candidate validates the harness and synthetic workflows, not
   real L40S GPU performance.
-- No tag or GitHub release has been created from this draft.
-- `gh` CLI was not available in the local environment, so GitHub release work
-  remains a manual follow-up.
 - Real model-server, vLLM, GPU, and long-running benchmark validation remain
-  out of scope for this early v0.1.0 draft unless separately provisioned.
+  out of scope for this early v0.1.0 release unless separately provisioned.
