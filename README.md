@@ -111,6 +111,8 @@ download a model, or use a GPU.
 For the full guided path through dry-run records, fake-server streaming
 validation, summary tables, and run manifests, see
 `docs/ten_minute_smoke_run.md`.
+If any step behaves unexpectedly, use
+`docs/first_run_troubleshooting.md` before escalating to a real server run.
 
 ## Local Measurement Check
 
@@ -174,6 +176,8 @@ Failed requests are tagged with `error_kind` and summarized into HTTP, timeout,
 connection, URL-layer, and other error counts.
 
 See `docs/error_taxonomy.md` for details.
+See `docs/first_run_troubleshooting.md` for first-run failure patterns and how
+to interpret `status`, `error_kind`, `http_status`, `ttft_ms`, and `tpot_ms`.
 
 ## JSONL Compatibility
 
