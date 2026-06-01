@@ -70,4 +70,3 @@ Maintainer placeholders before final release:
   production-like model servers.
 - Release publishing remains manual because `gh` is unavailable in this
   environment.
-
