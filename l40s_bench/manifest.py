@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -51,7 +51,7 @@ def build_manifest(
     ]
     return {
         "schema_version": "0.1",
-        "created_utc": datetime.now(UTC).isoformat(timespec="seconds"),
+        "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "run_id": run_id,
         "status": "complete" if not missing_required else "missing-required-artifacts",
         "missing_required_artifacts": missing_required,

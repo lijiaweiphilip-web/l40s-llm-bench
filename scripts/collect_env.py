@@ -6,7 +6,7 @@ import platform
 import shutil
 import subprocess
 import sys
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,7 +27,7 @@ def run_command(command: list[str]) -> str | None:
 
 def collect_environment() -> dict[str, object]:
     return {
-        "timestamp_utc": datetime.now(UTC).isoformat(timespec="seconds"),
+        "timestamp_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "platform": platform.platform(),
         "python": sys.version,
         "git_commit": run_command(["git", "rev-parse", "HEAD"]),
