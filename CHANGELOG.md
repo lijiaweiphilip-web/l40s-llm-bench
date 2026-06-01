@@ -2,6 +2,38 @@
 
 All notable release preparation notes for this project are recorded here.
 
+## [0.1.1] - 2026-06-01
+
+Maintenance patch for the early OSS readiness track.
+
+### Added
+
+- First-run troubleshooting and result-interpretation guide for dry-run,
+  fake-server, and real-server boundary checks.
+- Synthetic fake-server example result fixture and lightweight validator.
+- AGENTS instructions and maintainer playbook for safer repeat maintenance.
+- Application readiness scorecard with conservative Codex for OSS form text.
+- First-user smoke-test feedback workflow, bilingual outreach template, smoke
+  feedback issue template, and outreach target template.
+
+### Validation
+
+- GitHub Actions `CPU quality checks` passed on PRs #8, #9, #10, and #11.
+- Local validation for PR #9:
+  - `python scripts/validate_result.py examples/results --require-synthetic-fake-server` -> PASS
+  - `python -m pytest -q` -> 24 passed
+- Local validation for PRs #10 and #11:
+  - `python -m pytest -q` -> 21 passed
+
+### Known limitations
+
+- This release still does not include real L40S, vLLM, or GPU benchmark
+  results.
+- Synthetic and fake-server artifacts are examples for validating the workflow,
+  not performance evidence.
+- The public feedback workflow invites early testers but does not claim that
+  users have adopted or validated the project.
+
 ## [0.1.0] - 2026-06-01
 
 Early-stage OSS readiness release for `l40s-llm-bench`, a minimal scaffold for

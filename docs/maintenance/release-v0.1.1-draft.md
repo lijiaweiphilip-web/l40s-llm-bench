@@ -2,16 +2,15 @@
 
 Prepared: 2026-06-01
 
-Status: draft only. Do not tag or publish from this file alone.
+Status: release-preparation note for the `v0.1.1` patch release.
 
 ## Source of Truth
 
 - Previous release: `v0.1.0`, published as `v0.1.0 - OSS readiness baseline`.
-- Candidate head inspected: `origin/main` at
-  `030a624350b5eb3f577f8ca95b5a4679d34852bb`.
+- Candidate head inspected: `origin/main` at the post-PR #11 merge commit.
 - Candidate range inspected: `v0.1.0^{}..origin/main`.
 - No local or remote `v0.1.1` tag was found during this check.
-- `CHANGELOG.md` currently records `0.1.0` only.
+- `CHANGELOG.md` now records the `0.1.1` maintenance patch.
 
 ## Merged Factual Changes Since v0.1.0
 
@@ -25,9 +24,18 @@ Status: draft only. Do not tag or publish from this file alone.
   dry-run failures, endpoint and configuration mistakes, streaming confusion,
   summary/manifest mismatches, first-run field interpretation, and what to
   attach when asking for help. It closes issue #6.
-- No benchmark behavior, benchmark fixtures, committed result artifacts,
-  adoption metrics, real model-server validation, or real L40S/GPU performance
-  claims were added.
+- PR #9 adds synthetic fake-server result fixtures, a lightweight validator,
+  validator tests, `AGENTS.md`, and a maintainer playbook. It closes or
+  materially addresses issue #7 without adding real benchmark claims.
+- PR #10 adds the application readiness scorecard and conservative Codex for
+  OSS form text variants.
+- PR #11 adds the first-user smoke-test feedback workflow, bilingual outreach
+  templates, a smoke-run feedback issue template, and an outreach target
+  template.
+- Issue #12 publicly invites early testers to try only the dry-run and
+  fake-server paths. It is an invitation, not adoption evidence.
+- No real model-server validation, adoption metrics, or real L40S/GPU
+  performance claims were added.
 
 ## Readiness Checklist
 
@@ -37,49 +45,37 @@ Status: draft only. Do not tag or publish from this file alone.
 - [x] Inspect likely incoming PR branch state, including the local
   `review/pr-8-troubleshooting` branch and GitHub PR #8.
 - [x] Confirm PR #8 is merged into `origin/main`.
+- [x] Confirm PRs #9, #10, and #11 are merged into `origin/main`.
+- [x] Confirm issue #12 is open as a truthful early-tester invitation.
 - [x] Confirm no `v0.1.1` tag exists locally or on `origin`.
 - [x] Keep draft notes limited to merged factual changes.
-- [x] Exclude open `v0.2.0` roadmap work from the patch release notes unless it
-  is separately merged before tagging.
+- [x] Exclude unmerged `v0.2.0` roadmap work from the patch release notes.
 - [ ] Confirm CI is green on the exact final commit to tag.
-- [ ] Decide whether to merge a `CHANGELOG.md` entry for `0.1.1`; the current
-  changelog stops at `0.1.0`.
+- [x] Add a `CHANGELOG.md` entry for `0.1.1`.
 - [ ] If this readiness note should be part of the tagged source, merge
   `release/v0.1.1-draft` before tagging.
-- [ ] Ensure the tag is cut from `030a624350b5eb3f577f8ca95b5a4679d34852bb` or
-  a later intended release commit, not from stale local `main` at
-  `49358ef8106413b4c01b7824ac10316143199a6c`.
+- [ ] Ensure the tag is cut from the final release commit after this PR merges.
 
 ## Must Merge Before Tagging v0.1.1
 
-For the narrow patch scope inspected here, the only content change that must be
-present on the tagged commit is PR #8, the first-run troubleshooting guide.
-`origin/main` already contains that merge commit.
-
-Before tagging, merge one of these documentation paths:
-
-- a small `CHANGELOG.md` `0.1.1` entry, if the changelog remains the canonical
-  in-repo release log; or
-- an explicit maintainer decision that the GitHub release body plus this
-  maintenance draft are sufficient for `v0.1.1`.
+For the patch scope inspected here, the tagged commit should include PRs #8,
+#9, #10, #11, and this release-preparation PR with the changelog entry.
 
 Do not include or mention these as `v0.1.1` release contents unless they are
 merged before the tag:
 
-- `maintain/result-schema-and-fixtures` local worktree changes;
-- `docs/application-scorecard`;
 - open `v0.2.0` roadmap issues #2, #3, #4, #5, and #7;
 - any real GPU, vLLM, L40S, adoption, usage, or downstream-user claims.
 
 ## Verification Run While Drafting
 
-Run from the clean `release/v0.1.1-draft` worktree:
+Run from the release-preparation worktree:
 
 ```powershell
 python -m pytest -q
 ```
 
-Result: `21 passed`.
+Result before final release prep: `21 passed`.
 
 ```powershell
 python scripts\bench_openai_compatible.py --dry-run --output $env:TEMP\l40s-v011-dry-run.jsonl
@@ -97,7 +93,7 @@ Body:
 ```markdown
 ## v0.1.1
 
-`v0.1.1` is a documentation and maintenance patch over `v0.1.0`.
+`v0.1.1` is a documentation, validation, and maintenance patch over `v0.1.0`.
 
 ### Changed
 
@@ -105,20 +101,26 @@ Body:
   existing dry-run and fake-server validation paths.
 - Linked the troubleshooting guide from the README and the 10-minute smoke-run
   guide.
-- Updated maintenance docs to record the published `v0.1.0` OSS readiness
-  baseline and the scoped `v0.2.0` roadmap issue set.
+- Added synthetic fake-server example result fixtures plus a lightweight
+  validator and tests.
+- Added AGENTS instructions and a maintainer playbook.
+- Added an application readiness scorecard with conservative Codex for OSS
+  text variants.
+- Added a first-user smoke-test feedback workflow, bilingual outreach template,
+  smoke-run feedback issue template, and outreach target template.
 
 ### Validation
 
-- `python -m pytest -q` -> 21 passed
+- GitHub Actions `CPU quality checks` passed on PRs #8, #9, #10, and #11
+- `python -m pytest -q` -> 24 passed on the validator branch
+- Result validator -> PASS on the synthetic fake-server fixture
 - Dry-run benchmark check -> wrote 4 records
 - Dry-run summary check -> wrote 2 rows
 
 ### Scope and limitations
 
-- This release does not add benchmark behavior, real model-server validation,
-  committed benchmark results, adoption metrics, or real L40S/GPU performance
-  claims.
-- Dry-run and fake-server paths remain harness validation only, not hardware or
-  model performance evidence.
+- This release does not add real model-server validation, adoption metrics, or
+  real L40S/GPU performance claims.
+- Synthetic and fake-server artifacts remain harness-validation examples only,
+  not hardware or model performance evidence.
 ```
