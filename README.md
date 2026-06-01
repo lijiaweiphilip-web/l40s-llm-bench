@@ -265,14 +265,16 @@ The scaffold now supports dry runs, streaming sanity checks, workload profiles,
 summary reports, regression comparison, error taxonomy counts, and JSONL
 compatibility checks. It can also create workload profile reports for review.
 Run manifests tie those artifacts together, and `docs/ten_minute_smoke_run.md`
-now provides a 10-minute public entrypoint. No real GPU benchmark results are
-claimed yet.
+now provides a 10-minute public entrypoint. The `v0.1.0` release is the initial
+OSS readiness baseline, with CPU-only GitHub Actions and scoped `v0.2.0`
+roadmap issues. No real GPU benchmark results are claimed yet.
 
 ## Next Steps
 
-- Add a real vLLM server run against a small open model.
+- Harden the v0.2 reproducibility evidence bundle.
+- Add a real vLLM server smoke-run profile for a small open model.
 - Add GPU metric capture around real runs.
-- Add llama.cpp once the vLLM path is stable.
+- Decide the next backend path after vLLM.
 
 ## Limitations
 

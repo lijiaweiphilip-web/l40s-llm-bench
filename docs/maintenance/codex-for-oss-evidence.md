@@ -40,6 +40,8 @@ Current project assets include:
 - Run manifest and artifact-hash documentation.
 - Error taxonomy and compatibility checks.
 - Tests for the current non-GPU scaffold.
+- A published `v0.1.0` OSS readiness release.
+- A `v0.2.0` milestone with scoped maintainer issues for the next work.
 
 ## Evidence Checklist
 
@@ -54,6 +56,10 @@ Current project assets include:
 - The current benchmark path can be exercised without GPU access through dry-run
   and fake-server validation.
 - Tests exist for the current scaffold.
+- PR #1 was reviewed through GitHub Actions and merged after `CPU quality
+  checks` passed.
+- Release `v0.1.0` is published as the initial OSS readiness baseline.
+- Milestone `v0.2.0` is open with scoped roadmap issues #2 through #7.
 - The repository explicitly says dry-run and fake-server outputs are not GPU
   benchmark results.
 - No adoption, usage, star, download, benchmark-result, or downstream-user
@@ -77,6 +83,7 @@ Current project assets include:
 
 Week 1:
 
+- Work through issue #2 to harden the reproducibility evidence bundle.
 - Run the documented smoke path on a clean environment.
 - File or fix any command drift found in the quickstart and docs.
 - Confirm that generated dry-run artifacts match the documented schema and
@@ -84,15 +91,18 @@ Week 1:
 
 Week 2:
 
+- Work through issues #5 and #7 to improve first-run troubleshooting and
+  sample result-submission examples.
 - Run fake-server streaming validation across the documented scenarios.
-- Add any missing examples needed to make timing fields easier to audit.
 - Review limitations wording so synthetic, fake-server, and real benchmark
   outputs are impossible to confuse.
 
 Weeks 3-4:
 
-- Prepare the first real L40S measurement only if hardware and environment
-  metadata can be disclosed safely.
+- Work through issues #3 and #4 to define GPU metrics capture and the next
+  backend decision.
+- Prepare the first real L40S measurement from issue #3 only if hardware and
+  environment metadata can be disclosed safely.
 - Publish raw JSONL, summaries, configs, and run manifest together if a real run
   is shared.
 - Invite focused feedback on reproducibility gaps rather than asking for broad
@@ -104,24 +114,23 @@ Weeks 3-4:
 
 I am applying for OpenAI Codex for Open Source support for `l40s-llm-bench`, an
 early-stage open source scaffold for reproducible LLM inference benchmark
-experiments on NVIDIA L40S and similar single-GPU setups. The project does not
-claim real GPU benchmark results or adoption metrics yet. Its current value is
-the evidence chain around future results: exact commands, configs, raw JSONL
-records, summary tables, run manifests, environment notes, and explicit
+experiments on NVIDIA L40S and similar single-GPU setups. The repository now has
+a `v0.1.0` OSS readiness release, passing CPU-only GitHub Actions, contribution
+and security docs, issue templates, and a scoped `v0.2.0` roadmap. The project
+does not claim real GPU benchmark results or adoption metrics yet. Its current
+value is the evidence chain around future results: exact commands, configs, raw
+JSONL records, summary tables, run manifests, environment notes, and explicit
 limitations. This matters because LLM benchmark numbers are often
 over-interpreted when driver versions, serving flags, prompt shape, concurrency,
 streaming behavior, and failed requests are missing. I am the intended and
-actual primary maintainer for this repository, responsible for keeping the
-harness, docs, tests, and benchmark claims honest. Over the next 2-4 weeks, I
-plan to validate the documented smoke path, strengthen fake-server timing
-checks, fix documentation drift, and prepare real L40S measurements only when
-the supporting metadata can be disclosed safely and publicly.
+actual primary maintainer, responsible for keeping the harness, docs, tests, and
+benchmark claims honest while preparing real L40S measurements only when the
+supporting metadata can be disclosed safely.
 
 ## 500-Character English Form Text
 
-`l40s-llm-bench` is an early-stage open source scaffold for reproducible LLM
-inference benchmarks on L40S-like single-GPU setups. It does not claim real GPU
-results or adoption yet. Its value is the evidence chain: commands, configs, raw
-JSONL, summaries, manifests, environment notes, and limitations. I am the
-intended and actual primary maintainer for this repo and will use Codex support
-to validate docs, tests, timing checks, and honest first measurements.
+`l40s-llm-bench` is an early-stage OSS scaffold for reproducible LLM inference
+benchmarks on L40S-like single-GPU setups. It has a v0.1.0 release, CI,
+governance docs, issue templates, and a v0.2.0 roadmap. It does not claim real
+GPU results or adoption yet. I am the primary maintainer and will use Codex to
+validate docs, tests, timing checks, and honest first measurements.

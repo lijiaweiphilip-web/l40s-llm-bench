@@ -1,11 +1,13 @@
 # Labels and Milestones
 
-This is a draft maintenance note for issue triage. It records suggested labels
-and the intended milestone for the issue drafts in this folder.
+This maintenance note records the labels, milestone, and roadmap issues created
+after the `v0.1.0` OSS readiness release.
 
 ## Milestone
 
 `v0.2.0`
+
+GitHub milestone: https://github.com/lijiaweiphilip-web/l40s-llm-bench/milestone/1
 
 Purpose:
 
@@ -48,13 +50,13 @@ Non-goals:
 | `usability` | First-run experience, troubleshooting, or result interpretation. |
 | `vllm` | vLLM-specific profile, server, or result interpretation work. |
 
-## Draft Issue Mapping
+## Issue Mapping
 
-| Draft issue | Suggested labels | Milestone |
+| Issue | Suggested labels | Milestone |
 | --- | --- | --- |
-| Harden v0.2 reproducibility evidence bundle | `enhancement`, `reproducibility`, `documentation` | `v0.2.0` |
-| Add a real vLLM L40S smoke-run profile and schema notes | `enhancement`, `vllm`, `l40s`, `schema` | `v0.2.0` |
-| Write GPU metrics collection guide for nvidia-smi and DCGM | `documentation`, `gpu-metrics`, `reproducibility` | `v0.2.0` |
-| Define the next backend path: llama.cpp or TensorRT-LLM | `enhancement`, `backend`, `needs-decision` | `v0.2.0` |
-| Improve first-run troubleshooting and result interpretation | `documentation`, `good first issue`, `usability` | `v0.2.0` |
-| Add sample fixtures and result submission examples | `documentation`, `good first issue`, `fixtures` | `v0.2.0` |
+| #2 Harden v0.2 reproducibility evidence bundle | `enhancement`, `reproducibility`, `documentation` | `v0.2.0` |
+| #3 Add a real vLLM L40S smoke-run profile and schema notes | `enhancement`, `vllm`, `l40s`, `schema` | `v0.2.0` |
+| #4 Write GPU metrics collection guide for nvidia-smi and DCGM | `documentation`, `gpu-metrics`, `reproducibility` | `v0.2.0` |
+| #5 Define the next backend path: llama.cpp or TensorRT-LLM | `enhancement`, `backend`, `needs-decision` | `v0.2.0` |
+| #6 Improve first-run troubleshooting and result interpretation | `documentation`, `good first issue`, `usability` | `v0.2.0` |
+| #7 Add sample fixtures and result submission examples | `documentation`, `good first issue`, `fixtures` | `v0.2.0` |

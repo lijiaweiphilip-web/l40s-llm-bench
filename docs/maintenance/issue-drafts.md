@@ -1,8 +1,9 @@
-# Issue Drafts
+# Roadmap Issue Source
 
-These are draft GitHub issues for maintainer review. They are intentionally
-scoped to reproducibility, documentation, and small implementation paths for
-the next project milestone. They do not claim external user demand or validated
+These issue drafts were used to create GitHub issues #2 through #7 after the
+`v0.1.0` OSS readiness release. They are intentionally scoped to
+reproducibility, documentation, and small implementation paths for the next
+project milestone. They do not claim external user demand or validated
 benchmark results.
 
 ## 1. Harden v0.2 reproducibility evidence bundle
