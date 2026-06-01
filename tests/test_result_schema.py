@@ -1,5 +1,13 @@
+import json
+from pathlib import Path
+
 from l40s_bench.schema import validate_result
 from scripts.bench_openai_compatible import dry_run_record
+from scripts.validate_result import main as validate_result_main
+from scripts.validate_result import validate_paths
+
+
+EXAMPLE_RESULT = Path("examples/results/fake-server-synthetic/raw.jsonl")
 
 
 def test_dry_run_record_matches_schema() -> None:
@@ -50,3 +58,40 @@ def test_legacy_record_gets_optional_streaming_fields() -> None:
     assert record["request_index"] == 0
     assert record["error_kind"] is None
     assert record["http_status"] is None
+
+
+def test_synthetic_fake_server_example_validates() -> None:
+    report = validate_paths([EXAMPLE_RESULT], require_synthetic_fake_server=True)
+
+    assert report.ok
+    assert report.records == 2
+
+
+def test_validator_rejects_unmarked_synthetic_example(tmp_path: Path) -> None:
+    case = {
+        "case_id": "case",
+        "framework": "fake-openai-compatible",
+        "model": "fake-server-model",
+        "endpoint": "http://127.0.0.1:18000/v1/chat/completions",
+        "prompt_tokens": 128,
+        "output_tokens": 32,
+        "batch_size": 1,
+        "concurrency": 1,
+    }
+    record = dry_run_record(case, repeat_index=0, run_id="test-run")
+    path = tmp_path / "unmarked.jsonl"
+    path.write_text(json.dumps(record) + "\n", encoding="utf-8")
+
+    report = validate_paths([path], require_synthetic_fake_server=True)
+
+    assert not report.ok
+    assert any("synthetic" in issue.message for issue in report.issues)
+
+
+def test_validator_cli_accepts_packaged_example() -> None:
+    assert (
+        validate_result_main(
+            [str(EXAMPLE_RESULT), "--require-synthetic-fake-server"]
+        )
+        == 0
+    )

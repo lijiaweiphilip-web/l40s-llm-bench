@@ -43,6 +43,29 @@ current schema version is `0.1`.
 - Error records should stay in the raw JSONL and summary path so failure rates
   are visible.
 
+## Synthetic Example Artifacts
+
+Packaged example artifacts live under `examples/results/` and are fixtures for
+schema, documentation, and validator checks. They are not benchmark claims.
+
+Every packaged example record must include these extra markers:
+
+| Field | Required value | Meaning |
+| --- | --- | --- |
+| `synthetic` | `true` | The record is a synthetic fixture. |
+| `server` | `fake-server` | The source is the local fake OpenAI-compatible server. |
+| `benchmark_claim` | `false` | The record must not be presented as a real model, GPU, or hardware result. |
+
+Validate packaged examples with:
+
+```bash
+python scripts/validate_result.py examples/results --require-synthetic-fake-server
+```
+
+The included `examples/results/fake-server-synthetic/raw.jsonl` artifact covers
+one successful streaming record and one HTTP-error record from the fake-server
+path. The values are intentionally small synthetic fixtures for tooling tests.
+
 ## Compatibility
 
 Use the JSONL compatibility check before comparing or publishing records:
