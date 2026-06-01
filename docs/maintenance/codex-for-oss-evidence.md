@@ -42,6 +42,7 @@ Current project assets include:
 - Tests for the current non-GPU scaffold.
 - A published `v0.1.0` OSS readiness release.
 - A `v0.2.0` milestone with scoped maintainer issues for the next work.
+- A maintainer readiness scorecard with conservative application wording.
 
 ## Evidence Checklist
 
@@ -60,6 +61,8 @@ Current project assets include:
   checks` passed.
 - Release `v0.1.0` is published as the initial OSS readiness baseline.
 - Milestone `v0.2.0` is open with scoped roadmap issues #2 through #7.
+- `docs/maintenance/application-readiness-scorecard.md` records a conservative
+  readiness assessment and form-ready text variants.
 - The repository explicitly says dry-run and fake-server outputs are not GPU
   benchmark results.
 - No adoption, usage, star, download, benchmark-result, or downstream-user
