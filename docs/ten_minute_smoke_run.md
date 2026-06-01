@@ -37,6 +37,9 @@ Expected artifacts:
 - `results/tables/summary.csv`
 - `results/tables/summary.md`
 
+If this step fails, stop here and work through
+`docs/first_run_troubleshooting.md` before attempting a fake or real server.
+
 ## Step 3: Controlled Streaming Check
 
 Start a fake OpenAI-compatible server in one terminal:
@@ -60,6 +63,10 @@ The fake server is configured with:
 
 The measured summary should be close to those values. Small desktop timing
 deviations are normal.
+
+If `ttft_ms`, `tpot_ms`, or `output_token_events` do not look plausible, use
+`docs/first_run_troubleshooting.md` to separate streaming-measurement issues
+from serving-stack issues.
 
 ## Step 4: Scenario Suite
 
