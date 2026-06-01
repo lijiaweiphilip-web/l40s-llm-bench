@@ -1,0 +1,102 @@
+name: Smoke-run feedback
+description: Share first-user feedback from the dry-run or fake-server path.
+title: "[Smoke run feedback]: "
+labels: ["documentation", "usability"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying the first-user smoke test. This form is for dry-run and local fake-server feedback only. Do not include API keys, private endpoint URLs, private hostnames, cluster job IDs, or confidential benchmark data.
+  - type: input
+    id: commit
+    attributes:
+      label: Repository commit
+      description: The commit or release you tested.
+      placeholder: e.g. git rev-parse HEAD
+    validations:
+      required: true
+  - type: dropdown
+    id: smoke_path
+    attributes:
+      label: Smoke-test path
+      description: Which path did you try?
+      options:
+        - Dry run only
+        - Fake-server sanity suite only
+        - Dry run and fake-server sanity suite
+        - Manual two-terminal fake-server path
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands run
+      description: Paste the exact dry-run or fake-server commands you ran.
+      render: shell
+      placeholder: |
+        python -m pip install -r requirements-dev.txt
+        python scripts/bench_openai_compatible.py --dry-run
+        python scripts/summarize_results.py --input results/raw/dry_run.jsonl --output-dir results/tables
+        python scripts/run_sanity_checks.py
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Share only non-sensitive setup details.
+      placeholder: |
+        OS:
+        Python version:
+        Shell or terminal:
+        Install method:
+    validations:
+      required: true
+  - type: checkboxes
+    id: artifacts
+    attributes:
+      label: Expected artifacts
+      options:
+        - label: "`results/raw/dry_run.jsonl` appeared."
+        - label: "`results/tables/summary.csv` or `results/tables/summary.md` appeared."
+        - label: "`results/raw/sanity_checks.jsonl` appeared."
+        - label: "`results/tables/sanity_checks.md` appeared."
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What happened?
+      description: Summarize whether the path worked and where it first became confusing or failed.
+      placeholder: |
+        Worked / failed / partially worked:
+        First confusing step:
+        First failure, if any:
+    validations:
+      required: true
+  - type: textarea
+    id: time_spent
+    attributes:
+      label: Approximate time spent
+      description: A rough estimate is enough.
+      placeholder: e.g. 12 minutes from install to sanity-check report
+  - type: textarea
+    id: logs
+    attributes:
+      label: Short redacted output, if useful
+      description: Include only the smallest useful excerpt. Redact local usernames, private paths, hostnames, and tokens.
+      render: text
+  - type: textarea
+    id: suggestions
+    attributes:
+      label: Suggested improvements
+      description: What should change before asking another first-time user to try this?
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Safety checks
+      options:
+        - label: I only used dry-run or local fake-server commands for this report.
+          required: true
+        - label: I removed API keys, bearer tokens, private endpoint URLs, private hostnames, job IDs, and confidential data.
+          required: true
+        - label: I understand this report is usability feedback, not a real GPU benchmark result.
+          required: true
