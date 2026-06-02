@@ -1,0 +1,28 @@
+backend: vllm
+endpoint_type: openai-compatible
+default_endpoint: http://127.0.0.1:8000/v1/chat/completions
+server_command_example:
+  - python
+  - -m
+  - vllm.entrypoints.openai.api_server
+  - --model
+  - <small-open-model-id>
+  - --host
+  - 127.0.0.1
+  - --port
+  - "8000"
+required_run_metadata:
+  - model_id
+  - model_revision
+  - vllm_version
+  - python_version
+  - cuda_version
+  - driver_version
+  - gpu_model
+  - gpu_count
+  - serving_flags
+  - benchmark_command
+result_boundary: >
+  This backend profile prepares a future real vLLM smoke run. It does not include
+  or imply real GPU performance results until a complete evidence bundle is
+  published.

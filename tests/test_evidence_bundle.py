@@ -29,6 +29,12 @@ def test_evidence_bundle_parent_directory_discovers_bundle() -> None:
     assert EXAMPLE_BUNDLE in report.bundles
 
 
+def test_evidence_bundle_parent_directory_ignores_placeholder_dirs() -> None:
+    report = validate_paths(["examples/evidence-bundles"])
+
+    assert all("placeholder" not in str(bundle) for bundle in report.bundles)
+
+
 def test_evidence_bundle_cli_accepts_packaged_example() -> None:
     assert evidence_bundle_main([str(EXAMPLE_BUNDLE)]) == 0
 

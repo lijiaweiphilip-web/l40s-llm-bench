@@ -8,3 +8,10 @@ models:
     model_id: synthetic/fake-openai
     source: synthetic
     notes: Used with scripts/fake_openai_server.py to validate TTFT and TPOT measurement.
+
+  - name: vllm-l40s-smoke-model
+    model_id: replace-with-small-open-model-id
+    source: placeholder
+    notes: >
+      Placeholder label for the future real L40S/vLLM smoke profile; replace or
+      document the served model before publishing real artifacts.

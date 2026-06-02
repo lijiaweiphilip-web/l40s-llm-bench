@@ -99,8 +99,8 @@ required files, and the run scope note.
 ## Optional Real vLLM Placeholder
 
 Only use this after the fake-server path works. Start a vLLM OpenAI-compatible
-server with a small model, then point `configs/benchmark_matrix.yaml` at its
-`/v1/chat/completions` endpoint:
+server with a small model, then use the dedicated vLLM/L40S smoke profile in
+`docs/vllm-l40s-smoke-run.md`.
 
 ```bash
 python -m vllm.entrypoints.openai.api_server --model <small-open-model> --host 127.0.0.1 --port 8000
@@ -109,7 +109,7 @@ python -m vllm.entrypoints.openai.api_server --model <small-open-model> --host 1
 Then run:
 
 ```bash
-python scripts/bench_openai_compatible.py --config configs/benchmark_matrix.yaml --models-config configs/models.yaml --output results/raw/vllm_smoke_run.jsonl --stream
+VLLM_SMOKE_DRY_RUN=0 bash scripts/run_vllm_smoke_profile.sh
 ```
 
 Do not publish latency or throughput numbers until the model, framework
