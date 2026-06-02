@@ -118,7 +118,8 @@ If any step behaves unexpectedly, use
 `docs/first_run_troubleshooting.md` before escalating to a real server run.
 
 For early usability feedback on the dry-run and fake-server path, see
-`docs/first-user-smoke-test.md` and `docs/feedback-request-template.md`.
+`docs/first-user-smoke-test.md`, `docs/feedback-request-template.md`, and
+`docs/feedback-triage-policy.md`.
 
 ## Local Measurement Check
 

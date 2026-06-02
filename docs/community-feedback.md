@@ -45,3 +45,8 @@ GPU benchmark results.
 The repository does not yet publish real GPU benchmark claims, adoption claims,
 or framework rankings. Feedback that assumes those claims already exist should
 be reframed as a request for the metadata or experiment needed to support them.
+
+For first-user dry-run and fake-server reports, maintainers use
+`docs/feedback-triage-policy.md` to separate documentation friction, setup
+failures, harness failures, artifact gaps, real-run requests, and out-of-scope
+claims.
