@@ -1,0 +1,12 @@
+# HELP DCGM_FI_DEV_GPU_UTIL GPU utilization.
+# TYPE DCGM_FI_DEV_GPU_UTIL gauge
+DCGM_FI_DEV_GPU_UTIL{gpu="0",UUID="GPU-synthetic-l40s-0001",device="nvidia0",modelName="Synthetic L40S-like fixture"} 68
+# HELP DCGM_FI_DEV_FB_USED Framebuffer memory used in MiB.
+# TYPE DCGM_FI_DEV_FB_USED gauge
+DCGM_FI_DEV_FB_USED{gpu="0",UUID="GPU-synthetic-l40s-0001",device="nvidia0",modelName="Synthetic L40S-like fixture"} 12150
+# HELP DCGM_FI_DEV_POWER_USAGE Power usage in watts.
+# TYPE DCGM_FI_DEV_POWER_USAGE gauge
+DCGM_FI_DEV_POWER_USAGE{gpu="0",UUID="GPU-synthetic-l40s-0001",device="nvidia0",modelName="Synthetic L40S-like fixture"} 130
+# HELP DCGM_FI_DEV_GPU_TEMP GPU temperature in Celsius.
+# TYPE DCGM_FI_DEV_GPU_TEMP gauge
+DCGM_FI_DEV_GPU_TEMP{gpu="0",UUID="GPU-synthetic-l40s-0001",device="nvidia0",modelName="Synthetic L40S-like fixture"} 58

@@ -1,0 +1,4 @@
+timestamp,gpu_name,gpu_uuid,driver_version,cuda_version,power.draw,power.limit,temperature.gpu,utilization.gpu,utilization.memory,memory.used,memory.total,clocks.sm,clocks.mem,pcie.link.gen.current,pcie.link.width.current
+2026-06-01T00:00:00Z,Synthetic L40S-like fixture,GPU-synthetic-l40s-0001,550.54.15,12.4,95.0,350.0,55,45,20,10240,46068,1200,1800,4,16
+2026-06-01T00:00:01Z,Synthetic L40S-like fixture,GPU-synthetic-l40s-0001,550.54.15,12.4,120.0,350.0,57,62,31,11800,46068,1450,1800,4,16
+2026-06-01T00:00:02Z,Synthetic L40S-like fixture,GPU-synthetic-l40s-0001,550.54.15,12.4,130.0,350.0,58,68,36,12150,46068,1510,1800,4,16

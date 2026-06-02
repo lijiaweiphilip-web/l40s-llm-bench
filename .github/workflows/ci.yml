@@ -56,6 +56,12 @@ jobs:
       - name: Validate packaged evidence bundles
         run: python scripts/validate_evidence_bundle.py examples/evidence-bundles
 
+      - name: Summarize sample GPU metrics
+        run: |
+          python scripts/summarize_gpu_metrics.py \
+            examples/gpu-metrics/nvidia-smi-sample.csv \
+            --output results/tables/gpu_metrics_summary.json
+
       - name: Run local fake-server sanity checks
         run: |
           python scripts/run_sanity_checks.py \
@@ -72,5 +78,6 @@ jobs:
             results/raw/ci_dry_run.jsonl
             results/raw/sanity_checks.jsonl
             results/tables/*.csv
+            results/tables/*.json
             results/tables/*.md
           if-no-files-found: ignore
