@@ -2,6 +2,49 @@
 
 All notable release preparation notes for this project are recorded here.
 
+## [0.1.2] - 2026-06-02
+
+Maintenance patch focused on reproducibility evidence, GPU telemetry
+preparation, and a dry-validatable vLLM/L40S smoke profile.
+
+### Added
+
+- Reproducibility evidence bundle docs, checklist, artifact review rubric,
+  synthetic fake-server evidence bundle, bundle validator, tests, and CI
+  validation. This closed issue #2 through PR #14.
+- GPU metrics guide for a minimal `nvidia-smi` path, optional DCGM notes,
+  synthetic telemetry samples, a bounded collection helper, summary parser,
+  tests, and CI sample validation. This closed issue #4 through PR #15.
+- vLLM/L40S smoke-run profile, backend config, schema interpretation notes,
+  dry-validation helper, real-artifact placeholder, tests, and CI dry
+  validation. This closed issue #3 through PR #16.
+- Public hardware-needed issue #17 describing the required first real
+  L40S/vLLM evidence bundle.
+- Updated Codex for Open Source evidence packet and readiness scorecard.
+
+### Validation
+
+- GitHub Actions `CPU quality checks` passed on PRs #14, #15, and #16.
+- GitHub Actions `CPU quality checks` passed on `main` after each merge through
+  commit `ca7292f`.
+- Local validation while preparing v0.1.2:
+  - `python scripts/validate_evidence_bundle.py examples/evidence-bundles` -> PASS
+  - `python scripts/summarize_gpu_metrics.py examples/gpu-metrics/nvidia-smi-sample.csv --output results/tables/gpu_metrics_summary.json` -> PASS
+  - `python scripts/bench_openai_compatible.py --config configs/workloads/vllm-l40s-smoke.yaml --models-config configs/models.yaml --dry-run --stream --run-id local-vllm-l40s-profile --output <temp-jsonl>` -> wrote 3 records
+  - `python scripts/validate_result.py <temp-jsonl>` -> PASS
+  - `bash scripts/run_vllm_smoke_profile.sh` -> PASS locally after Python auto-detection
+  - `python -m pytest -q` -> 36 passed
+
+### Known limitations
+
+- This release still does not include real L40S, vLLM, model-server, or GPU
+  benchmark results.
+- Synthetic fake-server and GPU telemetry files are tooling fixtures, not
+  performance evidence.
+- Issue #12 has no public external tester comments yet.
+- Issue #17 requests real hardware-backed evidence, but does not itself
+  satisfy the real-artifact gate.
+
 ## [0.1.1] - 2026-06-01
 
 Maintenance patch for the early OSS readiness track.
