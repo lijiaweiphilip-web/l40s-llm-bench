@@ -53,6 +53,9 @@ jobs:
             --input results/raw/ci_dry_run.jsonl \
             --output results/tables/jsonl_compat.md
 
+      - name: Validate packaged evidence bundles
+        run: python scripts/validate_evidence_bundle.py examples/evidence-bundles
+
       - name: Run local fake-server sanity checks
         run: |
           python scripts/run_sanity_checks.py \

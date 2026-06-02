@@ -1,0 +1,21 @@
+{
+  "cases": [
+    {
+      "batch_size": 1,
+      "case_id": "fake_server_baseline_streaming",
+      "concurrency": 1,
+      "output_tokens": 8,
+      "prompt_tokens": 32
+    },
+    {
+      "batch_size": 1,
+      "case_id": "fake_server_http_error",
+      "concurrency": 1,
+      "output_tokens": 8,
+      "prompt_tokens": 32
+    }
+  ],
+  "endpoint": "http://127.0.0.1:18000/v1/chat/completions",
+  "profile": "fake-server-smoke",
+  "streaming": true
+}
