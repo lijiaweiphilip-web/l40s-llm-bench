@@ -1,0 +1,24 @@
+{
+  "benchmark_claim": false,
+  "failure_count": 1,
+  "latency_ms_summary": {
+    "median": 296.4,
+    "unit": "ms"
+  },
+  "notes": [
+    "Synthetic fake-server smoke artifact for evidence bundle validation only."
+  ],
+  "request_count": 2,
+  "run_id": "synthetic-fake-server-smoke",
+  "schema_version": "0.1",
+  "success_count": 1,
+  "synthetic": true,
+  "tpot_ms_summary": {
+    "median": 25.0,
+    "unit": "ms"
+  },
+  "ttft_ms_summary": {
+    "median": 121.2,
+    "unit": "ms"
+  }
+}

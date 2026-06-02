@@ -1,0 +1,38 @@
+{
+  "backend": "fake-openai-compatible",
+  "benchmark_command": "python scripts/run_sanity_checks.py --repeats 1 --output results/raw/sanity_checks.jsonl --report results/tables/sanity_checks.md",
+  "config_file": "config.json",
+  "created_at": "2026-06-01T00:00:02Z",
+  "endpoint_type": "openai-compatible",
+  "environment_file": "environment.json",
+  "failure_count": 1,
+  "git_commit": "5731fa5",
+  "hardware": {
+    "gpu_count": 0,
+    "gpu_model": null,
+    "synthetic": true
+  },
+  "limitations": [
+    "Synthetic fake-server records validate the measurement and packaging path only.",
+    "No real model, vLLM server, GPU, or L40S hardware was used.",
+    "Latency values are fixture values and must not be compared as performance results."
+  ],
+  "manifest_file": "manifest.json",
+  "model": "fake-server-model",
+  "project_version": "v0.1.1",
+  "raw_event_file": "raw-events.jsonl",
+  "request_count": 2,
+  "run_id": "synthetic-fake-server-smoke",
+  "streaming": true,
+  "success_count": 1,
+  "summary_file": "summary.json",
+  "tpot_ms_summary": {
+    "median": 25.0,
+    "unit": "ms"
+  },
+  "ttft_ms_summary": {
+    "median": 121.2,
+    "unit": "ms"
+  },
+  "workload_profile": "fake-server-smoke"
+}

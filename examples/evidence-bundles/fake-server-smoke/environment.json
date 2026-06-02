@@ -1,0 +1,16 @@
+{
+  "capture_type": "synthetic-fixture",
+  "captured_at": "2026-06-01T00:00:02Z",
+  "gpu": {
+    "available": false,
+    "gpu_count": 0,
+    "gpu_model": null,
+    "synthetic": true
+  },
+  "notes": [
+    "Environment values are intentionally synthetic placeholders for fixture validation.",
+    "No GPU, model server, vLLM runtime, or external API was used for this packaged example."
+  ],
+  "platform": "synthetic-fixture",
+  "python_version": "not-captured-synthetic-fixture"
+}

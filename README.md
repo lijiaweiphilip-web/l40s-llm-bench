@@ -202,6 +202,10 @@ python scripts/build_run_manifest.py --run-id workload-profiles-dry-run
 
 See `docs/run_manifest.md` for details.
 
+For the publication-ready artifact layout and checklist, see
+`docs/reproducibility-evidence-bundle.md` and
+`docs/evidence-bundle-checklist.md`.
+
 For a single guided path that ties dry runs, fake-server validation, summaries,
 and manifests together, see `docs/ten_minute_smoke_run.md`.
 
