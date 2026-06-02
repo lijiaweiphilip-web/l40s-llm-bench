@@ -224,6 +224,8 @@ and manifests together, see `docs/ten_minute_smoke_run.md`.
 
 For the first vLLM/L40S smoke-run profile and its dry-validation path, see
 `docs/vllm-l40s-smoke-run.md`.
+For the next backend sequencing decision, see
+`docs/backend-decision-llama-cpp.md`.
 
 ## Project Structure
 

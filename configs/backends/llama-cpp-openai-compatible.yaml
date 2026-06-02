@@ -1,0 +1,29 @@
+backend: llama.cpp
+endpoint_type: openai-compatible
+default_endpoint: http://127.0.0.1:8080/v1/chat/completions
+server_command_example:
+  - llama-server
+  - -m
+  - <small-model>.gguf
+  - --host
+  - 127.0.0.1
+  - --port
+  - "8080"
+required_run_metadata:
+  - llama_cpp_commit_or_release
+  - model_file
+  - model_source
+  - quantization
+  - server_command
+  - endpoint
+  - prompt_and_output_targets
+  - hardware_mode
+  - gpu_metrics_if_gpu_used
+result_boundary: >
+  This backend decision prepares a future llama.cpp smoke path. It does not add
+  real benchmark results or backend performance claims.
+deferred_backend:
+  name: TensorRT-LLM
+  reason: >
+    Defer until the first vLLM/L40S evidence bundle and GPU metrics workflow are
+    stable enough to support a more setup-intensive NVIDIA-optimized path.
