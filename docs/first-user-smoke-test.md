@@ -72,6 +72,10 @@ You can use either:
 
 - the GitHub issue form named `Smoke-run feedback`
 - `docs/feedback-request-template.md` as a copyable prompt
+- public issue #12 if you want to leave a short comment instead of opening a
+  new issue
+
+Maintainers triage public feedback with `docs/feedback-triage-policy.md`.
 
 ## Stop Here
 

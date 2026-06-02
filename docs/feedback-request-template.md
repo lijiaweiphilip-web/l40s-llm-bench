@@ -34,7 +34,7 @@ Thank you, and no pressure if now is not a good time.
 
 ## Chinese Outreach Text
 
-主题：想请你帮忙做一次 `l40s-llm-bench` 的干跑反馈
+Subject: 想请你帮忙做一次 `l40s-llm-bench` 的 dry-run 反馈
 
 你好 [name]，
 
