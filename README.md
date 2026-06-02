@@ -93,6 +93,9 @@ affect throughput or latency.
 Do not publish private cluster paths, hostnames, usernames, job IDs, API keys,
 or internal data.
 
+For GPU telemetry fields and artifact placement, see `docs/gpu-metrics.md`.
+DCGM is optional; see `docs/dcgm-metrics.md` for the expected optional fields.
+
 ## Quickstart
 
 Start here if you have 10 minutes and want to check the harness before using
