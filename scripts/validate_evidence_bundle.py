@@ -116,7 +116,9 @@ def discover_bundle_dirs(inputs: Sequence[str | Path]) -> list[Path]:
             candidates = [path]
         elif path.is_dir():
             candidates = sorted(
-                child for child in path.iterdir() if child.is_dir()
+                child
+                for child in path.iterdir()
+                if child.is_dir() and (child / "manifest.json").exists()
             )
         else:
             raise FileNotFoundError(path)

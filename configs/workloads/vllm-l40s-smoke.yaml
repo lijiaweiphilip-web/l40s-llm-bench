@@ -1,0 +1,21 @@
+defaults:
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  timeout_seconds: 120
+  repeats: 1
+
+cases:
+  - case_id: vllm_l40s_smoke_short_stream
+    framework: vllm
+    model: vllm-l40s-smoke-model
+    prompt_tokens: 128
+    output_tokens: 32
+    batch_size: 1
+    concurrency: 1
+
+  - case_id: vllm_l40s_smoke_concurrent_stream
+    framework: vllm
+    model: vllm-l40s-smoke-model
+    prompt_tokens: 256
+    output_tokens: 64
+    batch_size: 1
+    concurrency: 2

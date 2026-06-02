@@ -221,6 +221,9 @@ and manifests together, see `docs/ten_minute_smoke_run.md`.
   and environment notes.
 - First mode: dry run before real GPU runs.
 
+For the first vLLM/L40S smoke-run profile and its dry-validation path, see
+`docs/vllm-l40s-smoke-run.md`.
+
 ## Project Structure
 
 ```text

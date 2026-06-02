@@ -62,6 +62,17 @@ jobs:
             examples/gpu-metrics/nvidia-smi-sample.csv \
             --output results/tables/gpu_metrics_summary.json
 
+      - name: Dry-validate vLLM L40S smoke profile
+        run: |
+          python scripts/bench_openai_compatible.py \
+            --config configs/workloads/vllm-l40s-smoke.yaml \
+            --models-config configs/models.yaml \
+            --dry-run \
+            --stream \
+            --run-id ci-vllm-l40s-profile \
+            --output results/raw/vllm_l40s_profile_dry_run.jsonl
+          python scripts/validate_result.py results/raw/vllm_l40s_profile_dry_run.jsonl
+
       - name: Run local fake-server sanity checks
         run: |
           python scripts/run_sanity_checks.py \
@@ -76,6 +87,7 @@ jobs:
           name: ci-quality-reports
           path: |
             results/raw/ci_dry_run.jsonl
+            results/raw/vllm_l40s_profile_dry_run.jsonl
             results/raw/sanity_checks.jsonl
             results/tables/*.csv
             results/tables/*.json
