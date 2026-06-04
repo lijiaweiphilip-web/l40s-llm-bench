@@ -117,6 +117,16 @@ validation, summary tables, and run manifests, see
 If any step behaves unexpectedly, use
 `docs/first_run_troubleshooting.md` before escalating to a real server run.
 
+## Codespaces
+
+For documentation, tests, dry runs, and reviewer-proof maintenance work, this
+repository can now be opened in GitHub Codespaces with the checked-in
+`.devcontainer/devcontainer.json` configuration. The Codespaces path is useful
+for reducing local machine load during CPU-only work, but it does not replace
+the real-hardware requirement for issue `#17`.
+
+See `docs/codespaces.md` for the intended Codespaces workflow.
+
 For early usability feedback on the dry-run and fake-server path, see
 `docs/first-user-smoke-test.md`, `docs/feedback-request-template.md`, and
 `docs/feedback-triage-policy.md`.

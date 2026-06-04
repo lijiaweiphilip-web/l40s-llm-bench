@@ -1,0 +1,29 @@
+{
+  "name": "l40s-llm-bench",
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "16gb"
+  },
+  "postCreateCommand": "python -m pip install --upgrade pip && python -m pip install -r requirements-dev.txt",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ],
+      "settings": {
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestArgs": [
+          "tests"
+        ]
+      }
+    }
+  },
+  "codespaces": {
+    "openFiles": [
+      "README.md",
+      "docs/maintenance/current-maintainer-readiness.md"
+    ]
+  }
+}
