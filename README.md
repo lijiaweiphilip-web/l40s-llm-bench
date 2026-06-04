@@ -308,6 +308,8 @@ external feedback, or real L40S/vLLM artifact bundle are claimed yet.
 
 For the current maintainer-readiness snapshot, see
 `docs/maintenance/current-maintainer-readiness.md`.
+For a short application-oriented copy-and-paste pack, see
+`docs/maintenance/application-submission-kit.md`.
 
 ## Next Steps
 
