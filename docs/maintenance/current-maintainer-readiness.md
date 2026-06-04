@@ -75,3 +75,5 @@ is true:
   `docs/maintenance/codex-for-oss-evidence.md`
 - Reviewer proof:
   `docs/maintenance/reviewer-smoke-proof.md`
+- Submission kit:
+  `docs/maintenance/application-submission-kit.md`
