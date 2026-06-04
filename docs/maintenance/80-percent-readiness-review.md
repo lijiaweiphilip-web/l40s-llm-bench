@@ -29,7 +29,8 @@ signal appears:
 - G1 reproducibility evidence bundle: complete via PR #14; issue #2 closed.
 - G2 GPU metrics guide: complete via PR #15; issue #4 closed.
 - G3 vLLM/L40S smoke profile: complete via PR #16; issue #3 closed.
-- G4 `v0.1.2` release: complete; published on 2026-06-02.
+- G4 current maintenance release: complete; `v0.1.3` was published on
+  2026-06-04.
 - G5 evidence packet and scorecard: complete via PR #18 and refreshed
   maintenance docs.
 - G6 profile signal: previously completed through the public profile update.

@@ -284,20 +284,29 @@ borrowed ideas, and small experiments to run before spending GPU time.
 
 ## Current Status
 
-The scaffold now supports dry runs, streaming sanity checks, workload profiles,
-summary reports, regression comparison, error taxonomy counts, and JSONL
-compatibility checks. It can also create workload profile reports for review.
-Run manifests tie those artifacts together, and `docs/ten_minute_smoke_run.md`
-now provides a 10-minute public entrypoint. The `v0.1.0` release is the initial
-OSS readiness baseline, with CPU-only GitHub Actions and scoped `v0.2.0`
-roadmap issues. No real GPU benchmark results are claimed yet.
+The scaffold now supports dry runs, fake-server streaming sanity checks,
+workload profiles, summary reports, regression comparison, error taxonomy
+counts, JSONL compatibility checks, run manifests, reproducibility evidence
+bundle validation, GPU metrics sample parsing, and a dry-validatable
+vLLM/L40S smoke profile. A reviewer-oriented CPU-only proof pack is also
+available through `scripts/run_reviewer_smoke_pack.py` and GitHub Actions.
+
+The current public maintenance release is `v0.1.3`, which packages the
+reviewer smoke proof path after the earlier `v0.1.2` reproducibility,
+telemetry, and profile work. No real GPU benchmark results, independent
+external feedback, or real L40S/vLLM artifact bundle are claimed yet.
+
+For the current maintainer-readiness snapshot, see
+`docs/maintenance/current-maintainer-readiness.md`.
 
 ## Next Steps
 
-- Harden the v0.2 reproducibility evidence bundle.
-- Add a real vLLM server smoke-run profile for a small open model.
-- Add GPU metric capture around real runs.
-- Decide the next backend path after vLLM.
+- Obtain one genuinely independent public tester interaction on issue `#12`.
+- Convert one real L40S/vLLM smoke run into a public artifact bundle for issue
+  `#17`.
+- Keep the CPU-only reviewer proof path green while the first real artifact is
+  prepared.
+- Continue the next backend path with `llama.cpp` after the first vLLM path.
 
 ## Limitations
 
