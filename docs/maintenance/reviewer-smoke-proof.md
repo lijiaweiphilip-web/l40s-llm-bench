@@ -68,7 +68,7 @@ sample summary, and a top-level reviewer report in both JSON and Markdown.
 
 ## Related Public Links
 
-- Latest release: https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.2
+- Latest release: https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.3
 - Early tester issue: https://github.com/lijiaweiphilip-web/l40s-llm-bench/issues/12
 - Hardware-needed issue: https://github.com/lijiaweiphilip-web/l40s-llm-bench/issues/17
 

@@ -23,7 +23,7 @@ maintainer responsibility for other projects or ecosystems.
 ## Current Public Evidence
 
 - Repository: https://github.com/lijiaweiphilip-web/l40s-llm-bench
-- Latest release: `v0.1.2`
+- Latest release: `v0.1.3`
 - PR #14 added a reproducibility evidence bundle contract, synthetic
   fake-server evidence bundle, validator, tests, and CI validation. It closed
   issue #2.
@@ -38,7 +38,10 @@ maintainer responsibility for other projects or ecosystems.
   clearer first-user outreach path.
 - PR #20 documented the next backend sequence (`llama.cpp` after vLLM) and
   closed issue #5.
-- Main CI succeeded on commit `2c8843b`.
+- PR #21 added the reviewer smoke proof pack and led to the `v0.1.3`
+  maintenance release.
+- Main CI and the reviewer smoke proof workflow succeeded after the `v0.1.3`
+  proof-pack update.
 - A dedicated reviewer smoke proof workflow and one-shot script now generate a
   CPU-only verification bundle with logs, raw JSONL, summaries, manifests, GPU
   sample parsing, vLLM profile dry validation, and sanity checks.
@@ -102,7 +105,7 @@ It is world contact:
   needed.
 
 The application can be framed as strong early-stage maintainer evidence after
-`v0.1.2`, but an honest "~80% readiness" framing should wait for either G9 or
+`v0.1.3`, but an honest "~80% readiness" framing should wait for either G9 or
 G10.
 
 ## 150-Word English Form Text
