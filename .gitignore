@@ -17,3 +17,4 @@ results/tables/*.md
 results/env/*.json
 results/manifests/*.json
 results/manifests/*.md
+results/reviewer-smoke-proof/

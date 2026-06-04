@@ -120,6 +120,9 @@ If any step behaves unexpectedly, use
 For early usability feedback on the dry-run and fake-server path, see
 `docs/first-user-smoke-test.md`, `docs/feedback-request-template.md`, and
 `docs/feedback-triage-policy.md`.
+For a reviewer-oriented CPU-only proof pack that bundles tests, dry-run
+artifacts, validators, and logs into one artifact set, see
+`docs/maintenance/reviewer-smoke-proof.md`.
 
 ## Local Measurement Check
 

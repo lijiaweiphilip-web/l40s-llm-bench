@@ -1,21 +1,26 @@
 # 80-Readiness Review
 
-Date: 2026-06-02
+Date: 2026-06-04
 
 Repository: https://github.com/lijiaweiphilip-web/l40s-llm-bench
 
 ## Summary
 
-The Codex-executable part of the 80-readiness plan is now largely complete:
-issues #2, #3, and #4 were closed through PRs #14, #16, and #15, respectively,
-with CI-backed changes. The repository is stronger than a template-only
-application because it now has validators, sample artifacts, issue-linked PRs,
-and conservative public asks for feedback and hardware evidence.
+The Codex-executable part of the readiness plan is now essentially complete.
+The repository is stronger than a template-only application because it has:
 
-It is still not honest to claim full "~80% readiness" unless one hard external
+- issue-linked merged PRs,
+- public releases,
+- CI-backed validators,
+- synthetic and fake-server evidence examples,
+- GPU telemetry preparation,
+- a dry-validatable vLLM/L40S smoke profile, and
+- a reviewer-oriented CPU-only proof pack.
+
+It is still not honest to claim full "~80% readiness" unless one real outside
 signal appears:
 
-- two real public tester comments/issues/PRs, or
+- one independently confirmed public tester interaction, or
 - one real L40S/vLLM smoke artifact bundle with raw events, summary, manifest,
   environment notes, and GPU metrics.
 
@@ -24,35 +29,46 @@ signal appears:
 - G1 reproducibility evidence bundle: complete via PR #14; issue #2 closed.
 - G2 GPU metrics guide: complete via PR #15; issue #4 closed.
 - G3 vLLM/L40S smoke profile: complete via PR #16; issue #3 closed.
+- G4 `v0.1.2` release: complete; published on 2026-06-02.
+- G5 evidence packet and scorecard: complete via PR #18 and refreshed
+  maintenance docs.
 - G6 profile signal: previously completed through the public profile update.
 - G7 public tester/hardware asks: issue #12 invites testers; issue #17 asks for
   the first real L40S/vLLM artifact.
-- G8 conservative claims: maintained across docs and PR bodies.
+- G8 conservative claims: maintained across docs, releases, and PR bodies.
+- G11 reviewer smoke proof pack: complete via
+  `scripts/run_reviewer_smoke_pack.py` and the dedicated workflow.
 
 ## Pending
 
-- G4 v0.1.2 release: pending until the release/evidence PR merges and final
-  main CI is green.
-- G5 evidence packet and scorecard: updated in this PR.
-- G9 external feedback: missing; issue #12 currently has no external comments.
-- G10 real hardware artifact: missing; issue #17 is only the public ask.
+- G9 external feedback: missing; no independently confirmed public tester
+  interaction is available to claim yet.
+- G10 real hardware artifact: missing; issue #17 is still the public ask, not
+  the artifact itself.
+
+Public comments from maintainer-controlled accounts can still be useful as
+readability probes, but they should not be counted as independent external
+feedback.
 
 ## Current Estimate
 
-Subjective application-readiness zone after v0.1.2, without G9 or G10:
-**65%-72%**.
+Subjective application-readiness zone after the current proof-pack upgrade,
+without G9 or G10: **70%-76%**.
 
-With two real public tester interactions: **72%-80%**.
+With one independent public tester interaction: **76%-82%**.
 
-With one real L40S/vLLM artifact: **73%-82%**.
+With one real L40S/vLLM artifact: **78%-84%**.
 
-With both: **78%-85%**.
+With both: **82%-88%**.
 
 These are planning estimates, not official odds.
 
 ## Recommendation
 
-Apply after `v0.1.2` if the framing is "strong early-stage maintainer package."
-Wait if the goal is specifically the "~80%" framing. The next highest-value
-manual action is to ask 5-10 real people to comment on issue #12, or provide
-access to a real L40S/vLLM environment so issue #17 can become an artifact PR.
+Apply now if the framing is "strong early-stage maintainer package with public
+reproducibility proof." Wait if the goal is specifically the "~80%" framing.
+The next highest-value step is no longer more internal cleanup. It is one real
+outside signal:
+
+- a genuinely independent public tester interaction on issue #12, or
+- access to real L40S/vLLM hardware so issue #17 can become an artifact PR.
