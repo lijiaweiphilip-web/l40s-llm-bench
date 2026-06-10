@@ -4,6 +4,9 @@ This checklist is for maintainers and contributors reviewing a benchmark-result
 issue. It keeps result review scoped to reproducibility evidence rather than
 broad benchmark claims.
 
+If you want the shortest maintainer path first, start with
+`docs/result_review_quickstart.md`.
+
 ## Fast Path
 
 If the submission artifacts are available locally, generate a review note first:

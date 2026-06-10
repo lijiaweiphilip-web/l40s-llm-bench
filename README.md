@@ -155,6 +155,8 @@ For the verdict matrix behind those replies, see
 `docs/result_review_response_templates.md`.
 For example maintainer review replies that read like real GitHub threads, see
 `docs/result_review_examples.md`.
+For the shortest maintainer handling path for benchmark-result issues, see
+`docs/result_review_quickstart.md`.
 For a reviewer-oriented CPU-only proof pack that bundles tests, dry-run
 artifacts, validators, and logs into one artifact set, see
 `docs/maintenance/reviewer-smoke-proof.md`.

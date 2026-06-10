@@ -109,6 +109,8 @@ best short answer is:
   `docs/result_review_response_templates.md`
 - Result review examples:
   `docs/result_review_examples.md`
+- Result review quickstart:
+  `docs/result_review_quickstart.md`
 - Final answer pack:
   `docs/maintenance/application-final-answers.md`
 - Submission checklist:

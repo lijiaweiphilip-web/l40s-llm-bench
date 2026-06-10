@@ -95,3 +95,5 @@ is true:
   `docs/result_review_response_templates.md`
 - Result review examples:
   `docs/result_review_examples.md`
+- Result review quickstart:
+  `docs/result_review_quickstart.md`

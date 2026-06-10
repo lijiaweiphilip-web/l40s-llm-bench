@@ -3,6 +3,9 @@
 This page is for maintainers who want a quick, public-facing response after
 reviewing a benchmark-result issue.
 
+If you need the shortest handling sequence before choosing a public reply, use
+`docs/result_review_quickstart.md`.
+
 The repository now supports two layers:
 
 - `scripts/review_result_submission.py` for artifact consistency checks

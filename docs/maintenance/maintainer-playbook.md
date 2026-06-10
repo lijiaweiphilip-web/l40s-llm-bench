@@ -74,6 +74,9 @@ Interpretation rules:
 
 ## Benchmark Submission Handling
 
+If you need the shortest version first, start with
+`docs/result_review_quickstart.md`.
+
 For every benchmark-result issue or PR, require:
 
 - repository commit;
@@ -116,6 +119,8 @@ The first command generates a structured review summary. The second turns the
 same review state into a maintainer-style public comment draft that can be
 edited before posting on the GitHub issue.
 For concrete tone and structure examples, use `docs/result_review_examples.md`.
+For the shortest end-to-end handling path, use
+`docs/result_review_quickstart.md`.
 
 If the artifact set is technically reviewable but the public post still needs a
 different maintainer conclusion, use:
