@@ -1,0 +1,54 @@
+{
+  "artifacts": [
+    {
+      "bytes": 292,
+      "exists": true,
+      "label": "benchmark_config",
+      "path": "configs\\fake_server_matrix.yaml",
+      "required": true,
+      "sha256": "238d9382d9f974118eceeb72f8426bd7dc9196e0ccfc5246732b19e3ad283d37"
+    },
+    {
+      "bytes": 1491,
+      "exists": true,
+      "label": "raw_jsonl",
+      "path": "examples\\results\\fake-server-synthetic\\raw.jsonl",
+      "required": true,
+      "sha256": "fa49241df3f6d1eed73e7108d77011e529b22ae24a57055d89786dc3900b6bef"
+    },
+    {
+      "bytes": 498,
+      "exists": true,
+      "label": "summary_csv",
+      "path": "examples\\results\\fake-server-synthetic\\summary.csv",
+      "required": true,
+      "sha256": "9ca0949aa34da6349ec53a5f3f881f17bd382a1da39a3774c5d42b49e030d1cc"
+    },
+    {
+      "bytes": 767,
+      "exists": true,
+      "label": "summary_markdown",
+      "path": "examples\\results\\fake-server-synthetic\\summary.md",
+      "required": false,
+      "sha256": "73274fa3d640ba5838a1b42ffddff1797f51ec7e74ed41b513cdab794fb64bb5"
+    },
+    {
+      "exists": false,
+      "label": "workload_profile_report",
+      "path": "results\\tables\\workload_profile_report.md",
+      "required": false
+    },
+    {
+      "exists": false,
+      "label": "environment_report",
+      "path": "results\\env\\environment.json",
+      "required": false
+    }
+  ],
+  "created_utc": "2026-06-10T07:20:45+00:00",
+  "missing_required_artifacts": [],
+  "run_id": "synthetic-fake-server-example",
+  "schema_version": "0.1",
+  "scope_note": "This manifest records local benchmark artifacts. It does not prove general model, server, framework, or GPU performance.",
+  "status": "complete"
+}
