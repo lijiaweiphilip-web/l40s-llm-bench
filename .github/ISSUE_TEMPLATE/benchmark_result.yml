@@ -7,6 +7,10 @@ body:
     attributes:
       value: |
         This project is early-stage. Please frame results as reproducibility evidence, not broad performance claims. Redact secrets and private infrastructure details.
+        
+        Before posting:
+        - Read `docs/result_submission_example.md` for a small filled-out example.
+        - Use `docs/result_review_checklist.md` to see how maintainers review result issues.
   - type: textarea
     id: summary
     attributes:

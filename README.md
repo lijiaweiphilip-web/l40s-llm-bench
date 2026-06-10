@@ -225,6 +225,8 @@ For the publication-ready artifact layout and checklist, see
 
 For a small filled-out result-submission example using the existing synthetic
 fake-server fixture, see `docs/result_submission_example.md`.
+For a maintainer-facing review rubric for benchmark-result issues, see
+`docs/result_review_checklist.md`.
 
 For a single guided path that ties dry runs, fake-server validation, summaries,
 and manifests together, see `docs/ten_minute_smoke_run.md`.
