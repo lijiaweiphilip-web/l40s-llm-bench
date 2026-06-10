@@ -85,6 +85,8 @@ When reviewing a real result submission, check these first:
 
 ## Related Files
 
+- Starter doc: `docs/result_submission_starter.md`
+- Starter script: `scripts/init_result_submission.py`
 - Issue template: `.github/ISSUE_TEMPLATE/benchmark_result.yml`
 - Example bundle: `examples/results/fake-server-synthetic/`
 - Manifest notes: `docs/run_manifest.md`

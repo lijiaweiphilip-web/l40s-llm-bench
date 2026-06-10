@@ -1,5 +1,9 @@
 # l40s-llm-bench
 
+[![CI](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml)
+[![Reviewer smoke proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml)
+[![Latest release](https://img.shields.io/github/v/release/lijiaweiphilip-web/l40s-llm-bench)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4)
+
 Minimal scaffold for reproducible LLM inference benchmark experiments on L40S
 and similar single-GPU setups.
 
@@ -7,6 +11,15 @@ This repository is intentionally starting with the parts that can be built and
 verified without GPU access: configuration, dry-run execution, raw result
 schemas, summarization, environment capture, fake-server validation, and tests.
 It does not claim real GPU benchmark results yet.
+
+## Quick Links
+
+- Latest release: `v0.1.4`
+- Reviewer proof path: `docs/maintenance/reviewer-smoke-proof.md`
+- Current maintainer readiness: `docs/maintenance/current-maintainer-readiness.md`
+- Application pack: `docs/maintenance/application-final-answers.md`
+- Result submission starter: `docs/result_submission_starter.md`
+- Result submission example: `docs/result_submission_example.md`
 
 ## Purpose
 
@@ -130,6 +143,9 @@ See `docs/codespaces.md` for the intended Codespaces workflow.
 For early usability feedback on the dry-run and fake-server path, see
 `docs/first-user-smoke-test.md`, `docs/feedback-request-template.md`, and
 `docs/feedback-triage-policy.md`.
+For a ready-to-fill benchmark artifact starter directory, see
+`docs/result_submission_starter.md` and
+`scripts/init_result_submission.py`.
 For a reviewer-oriented CPU-only proof pack that bundles tests, dry-run
 artifacts, validators, and logs into one artifact set, see
 `docs/maintenance/reviewer-smoke-proof.md`.
@@ -292,7 +308,8 @@ Suggested wording:
 For questions, result reports, or requests for missing metadata, see
 `docs/community-feedback.md`.
 The GitHub issue chooser also points new contributors to the smoke-run guide,
-result submission example, and current maintainer-readiness docs.
+result submission starter, result submission example, and current
+maintainer-readiness docs.
 
 ## Experiment Roadmap
 
@@ -311,9 +328,10 @@ available through `scripts/run_reviewer_smoke_pack.py` and GitHub Actions.
 The current public maintenance release is `v0.1.4`, which packages the newer
 community-entry work after the earlier `v0.1.3` reviewer smoke proof update.
 The repository now also includes a result-submission example bundle, a result
-review checklist, and an issue chooser that points contributors toward the
-right first docs and templates. No real GPU benchmark results, independent
-external feedback, or real L40S/vLLM artifact bundle are claimed yet.
+review checklist, a starter-kit generator for new artifact submissions, and an
+issue chooser that points contributors toward the right first docs and
+templates. No real GPU benchmark results, independent external feedback, or
+real L40S/vLLM artifact bundle are claimed yet.
 
 For the current maintainer-readiness snapshot, see
 `docs/maintenance/current-maintainer-readiness.md`.

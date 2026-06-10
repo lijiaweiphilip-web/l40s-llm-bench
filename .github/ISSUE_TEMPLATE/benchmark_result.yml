@@ -9,6 +9,8 @@ body:
         This project is early-stage. Please frame results as reproducibility evidence, not broad performance claims. Redact secrets and private infrastructure details.
         
         Before posting:
+        - Use `python scripts/init_result_submission.py --run-id <your-run-id>` if you want a starter directory with issue text and artifact paths.
+        - Read `docs/result_submission_starter.md` for the intended starter-kit workflow.
         - Read `docs/result_submission_example.md` for a small filled-out example.
         - Use `docs/result_review_checklist.md` to see how maintainers review result issues.
   - type: textarea
