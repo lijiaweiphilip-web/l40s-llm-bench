@@ -16,6 +16,8 @@ remembering filenames one by one.
   `docs/maintenance/reviewer-smoke-proof.md`
 - Feedback-triage proof pack:
   `docs/maintenance/feedback-triage-proof.md`
+- Submission-review proof pack:
+  `docs/maintenance/submission-review-proof.md`
 
 ## Benchmark-Result Review
 
@@ -50,6 +52,8 @@ remembering filenames one by one.
   `docs/community-feedback.md`
 - Starter generator:
   `scripts/init_result_submission.py`
+- Submission-review proof pack:
+  `docs/maintenance/submission-review-proof.md`
 
 ## Release And Proof
 

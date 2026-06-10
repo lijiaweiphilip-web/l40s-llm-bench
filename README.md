@@ -4,6 +4,7 @@
 [![Reviewer smoke proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml)
 [![Contributor self-check](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml)
 [![Feedback triage proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml)
+[![Submission review proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml)
 [![Latest release](https://img.shields.io/github/v/release/lijiaweiphilip-web/l40s-llm-bench)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4)
 
 Minimal scaffold for reproducible LLM inference benchmark experiments on L40S
@@ -162,6 +163,9 @@ For a maintainer-style public reply draft after that review, see
 For a one-shot maintainer proof pack covering the full issue `#12` triage path,
 see `docs/maintenance/feedback-triage-proof.md` and
 `scripts/run_feedback_triage_proof.py`.
+For a one-shot maintainer proof pack covering the benchmark-result submission
+and review path, see `docs/maintenance/submission-review-proof.md` and
+`scripts/run_submission_review_proof.py`.
 For a ready-to-fill benchmark artifact starter directory, see
 `docs/result_submission_starter.md` and
 `scripts/init_result_submission.py`.
