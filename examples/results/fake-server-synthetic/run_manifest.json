@@ -9,28 +9,28 @@
       "sha256": "238d9382d9f974118eceeb72f8426bd7dc9196e0ccfc5246732b19e3ad283d37"
     },
     {
-      "bytes": 1491,
+      "bytes": 1489,
       "exists": true,
       "label": "raw_jsonl",
       "path": "examples\\results\\fake-server-synthetic\\raw.jsonl",
       "required": true,
-      "sha256": "fa49241df3f6d1eed73e7108d77011e529b22ae24a57055d89786dc3900b6bef"
+      "sha256": "f688da42225a69429f6d1be96cc986f0772bb50bed9243735b47470ce3c79f4e"
     },
     {
-      "bytes": 498,
+      "bytes": 495,
       "exists": true,
       "label": "summary_csv",
       "path": "examples\\results\\fake-server-synthetic\\summary.csv",
       "required": true,
-      "sha256": "9ca0949aa34da6349ec53a5f3f881f17bd382a1da39a3774c5d42b49e030d1cc"
+      "sha256": "63c91c4093294788c2c1d2230609e2c6c20c3621647d05d650355ab7130f1e5d"
     },
     {
-      "bytes": 767,
+      "bytes": 763,
       "exists": true,
       "label": "summary_markdown",
       "path": "examples\\results\\fake-server-synthetic\\summary.md",
       "required": false,
-      "sha256": "73274fa3d640ba5838a1b42ffddff1797f51ec7e74ed41b513cdab794fb64bb5"
+      "sha256": "e99d4eb6e70b94035e123ebb6f90c1d1371beff4d69efba21103040cc76019cb"
     },
     {
       "exists": false,
@@ -45,7 +45,7 @@
       "required": false
     }
   ],
-  "created_utc": "2026-06-10T07:20:45+00:00",
+  "created_utc": "2026-06-10T08:54:09+00:00",
   "missing_required_artifacts": [],
   "run_id": "synthetic-fake-server-example",
   "schema_version": "0.1",
