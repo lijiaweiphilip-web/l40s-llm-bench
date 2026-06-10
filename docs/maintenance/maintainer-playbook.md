@@ -116,6 +116,13 @@ The first command generates a structured review summary. The second turns the
 same review state into a maintainer-style public comment draft that can be
 edited before posting on the GitHub issue.
 
+If the artifact set is technically reviewable but the public post still needs a
+different maintainer conclusion, use:
+
+```powershell
+python scripts\build_result_review_comment.py --submission-dir results\submissions\<run-id> --override-verdict "needs claim rewrite"
+```
+
 ## Release Checklist
 
 Use `docs/release-checklist.md` as the source of truth for release-specific

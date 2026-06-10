@@ -54,3 +54,16 @@ def test_comment_cli_writes_comment_and_summary(tmp_path: Path) -> None:
     assert summary_output.exists()
     assert "ready for review" in comment_output.read_text(encoding="utf-8")
     assert "Result Review Summary" in summary_output.read_text(encoding="utf-8")
+
+
+def test_override_verdict_adds_manual_claim_rewrite_language() -> None:
+    report = make_ready_report()
+
+    from scripts.build_result_review_comment import apply_override_verdict
+
+    overridden = apply_override_verdict(report, "needs claim rewrite")
+    comment = build_comment(overridden)
+
+    assert overridden.verdict == "needs claim rewrite"
+    assert any("public wording should be narrowed" in issue for issue in overridden.issues)
+    assert "Please keep the claim tied to the exact setup" in comment

@@ -91,3 +91,5 @@ is true:
   `scripts/review_result_submission.py`
 - Result review comment draft:
   `scripts/build_result_review_comment.py`
+- Result review response templates:
+  `docs/result_review_response_templates.md`

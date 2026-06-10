@@ -18,6 +18,14 @@ from scripts.review_result_submission import (
 )
 
 
+VERDICT_CHOICES = (
+    "ready for review",
+    "needs missing artifact",
+    "needs redaction",
+    "needs claim rewrite",
+    "exploratory only, not ready for benchmark discussion",
+)
+
 VERDICT_INTROS = {
     "ready for review": (
         "Thanks for sharing this result. I ran the repository-side review helper, "
@@ -33,6 +41,37 @@ VERDICT_INTROS = {
         "Thanks for sharing this result. I ran the repository-side review helper, "
         "and this currently reads as an exploratory artifact set rather than a "
         "ready-for-discussion benchmark submission."
+    ),
+    "needs redaction": (
+        "Thanks for sharing this result. I ran the repository-side review helper, "
+        "and before maintainers can discuss the measurement itself, the public "
+        "artifact set needs redaction."
+    ),
+    "needs claim rewrite": (
+        "Thanks for sharing this result. I ran the repository-side review helper, "
+        "and the artifact chain is useful, but the current public framing needs "
+        "to be narrowed before maintainers treat it as a benchmark discussion."
+    ),
+}
+
+VERDICT_NOTES = {
+    "ready for review": (
+        "- This means the artifact chain is reviewable, not that the repository is endorsing a broad benchmark claim yet.",
+        "- Any performance interpretation still needs to stay tied to the submitted hardware, software stack, and stated limitations.",
+    ),
+    "needs missing artifact": (
+        "- Until the missing pieces are filled in, this should be treated as a local observation or draft submission rather than a benchmark claim.",
+    ),
+    "needs redaction": (
+        "- Public review should pause until secrets, private endpoints, hostnames, job IDs, or other confidential infrastructure details are removed.",
+        "- After redaction, the submission can be re-checked with the same review helper before discussing the result itself.",
+    ),
+    "needs claim rewrite": (
+        "- The concern here is wording discipline rather than whether the repository can parse the artifact chain.",
+        "- Please keep the claim tied to the exact setup and avoid implying leaderboard rank, broad hardware superiority, or adoption evidence.",
+    ),
+    "exploratory only, not ready for benchmark discussion": (
+        "- Until the points above are addressed, this should be treated as a local observation or draft submission rather than a benchmark claim.",
     ),
 }
 
@@ -55,6 +94,11 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--review-summary-output",
         help="Optional path for also writing the structured review summary markdown.",
+    )
+    parser.add_argument(
+        "--override-verdict",
+        choices=VERDICT_CHOICES,
+        help="Force the public reply template to use a specific maintainer verdict.",
     )
     return parser.parse_args(argv)
 
@@ -104,25 +148,38 @@ def build_comment(report: ReviewReport) -> str:
     lines.extend(f"- {item}" for item in report.manual_checks)
     lines.append("")
 
-    if report.verdict == "ready for review":
-        lines.extend(
-            [
-                "Current maintainer note:",
-                "",
-                "- This means the artifact chain is reviewable, not that the repository is endorsing a broad benchmark claim yet.",
-                "- Any performance interpretation still needs to stay tied to the submitted hardware, software stack, and stated limitations.",
-            ]
-        )
-    else:
-        lines.extend(
-            [
-                "Current maintainer note:",
-                "",
-                "- Until the points above are addressed, this should be treated as a local observation or draft submission rather than a benchmark claim.",
-            ]
-        )
+    lines.extend(["Current maintainer note:", ""])
+    lines.extend(VERDICT_NOTES.get(report.verdict, VERDICT_NOTES["needs missing artifact"]))
     lines.append("")
     return "\n".join(lines)
+
+
+def apply_override_verdict(report: ReviewReport, verdict: str | None) -> ReviewReport:
+    if verdict is None or verdict == report.verdict:
+        return report
+
+    extra_issues: tuple[str, ...] = ()
+    if verdict == "needs redaction":
+        extra_issues = (
+            "public artifacts or issue text still need redaction before maintainers should discuss the number itself",
+        )
+    elif verdict == "needs claim rewrite":
+        extra_issues = (
+            "public wording should be narrowed so the post does not imply broader conclusions than the attached evidence supports",
+        )
+
+    issues = report.issues + tuple(
+        item for item in extra_issues if item not in report.issues
+    )
+    return ReviewReport(
+        verdict=verdict,
+        run_id=report.run_id,
+        raw_records=report.raw_records,
+        summary_rows=report.summary_rows,
+        checks_passed=report.checks_passed,
+        issues=issues,
+        manual_checks=report.manual_checks,
+    )
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -142,6 +199,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 2
 
     report = review_submission(inputs)
+    report = apply_override_verdict(report, args.override_verdict)
     comment_output = ensure_parent(default_output_path(args))
     comment_output.write_text(build_comment(report), encoding="utf-8")
     print(f"wrote review comment draft to {display_path(comment_output)}")

@@ -151,6 +151,8 @@ consistency, see `docs/result_review_checklist.md` and
 `scripts/review_result_submission.py`.
 For a maintainer response draft that can be adapted into a GitHub issue reply,
 see `scripts/build_result_review_comment.py`.
+For the verdict matrix behind those replies, see
+`docs/result_review_response_templates.md`.
 For a reviewer-oriented CPU-only proof pack that bundles tests, dry-run
 artifacts, validators, and logs into one artifact set, see
 `docs/maintenance/reviewer-smoke-proof.md`.

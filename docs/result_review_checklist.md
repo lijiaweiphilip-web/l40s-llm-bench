@@ -30,6 +30,15 @@ python scripts/build_result_review_comment.py \
   --submission-dir results/submissions/<run-id>
 ```
 
+If the artifact chain is fine but the public wording still needs a narrower
+maintainer verdict:
+
+```bash
+python scripts/build_result_review_comment.py \
+  --submission-dir results/submissions/<run-id> \
+  --override-verdict "needs claim rewrite"
+```
+
 The helper does not replace human review. It only checks artifact presence,
 schema validity, summary consistency, and manifest consistency before the
 maintainer evaluates redaction, hardware disclosure, and claim wording.
