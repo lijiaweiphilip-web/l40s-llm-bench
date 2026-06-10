@@ -93,3 +93,5 @@ is true:
   `scripts/build_result_review_comment.py`
 - Result review response templates:
   `docs/result_review_response_templates.md`
+- Result review examples:
+  `docs/result_review_examples.md`

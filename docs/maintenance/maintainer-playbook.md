@@ -115,6 +115,7 @@ python scripts\build_result_review_comment.py --submission-dir results\submissio
 The first command generates a structured review summary. The second turns the
 same review state into a maintainer-style public comment draft that can be
 edited before posting on the GitHub issue.
+For concrete tone and structure examples, use `docs/result_review_examples.md`.
 
 If the artifact set is technically reviewable but the public post still needs a
 different maintainer conclusion, use:

@@ -7,6 +7,7 @@ The repository now supports two layers:
 
 - `scripts/review_result_submission.py` for artifact consistency checks
 - `scripts/build_result_review_comment.py` for a maintainer-style reply draft
+- `docs/result_review_examples.md` for example public issue replies
 
 ## Fastest Path
 
@@ -64,3 +65,5 @@ artifact set does not yet support even narrow benchmark discussion.
   not only on artifact consistency.
 - Keep every public reply tied to the exact hardware, software stack, and
   stated limitations of the submission.
+- Before posting, compare the draft against `docs/result_review_examples.md` if
+  you want a quick tone check.

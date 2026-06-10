@@ -107,6 +107,8 @@ best short answer is:
   `scripts/build_result_review_comment.py`
 - Result review response templates:
   `docs/result_review_response_templates.md`
+- Result review examples:
+  `docs/result_review_examples.md`
 - Final answer pack:
   `docs/maintenance/application-final-answers.md`
 - Submission checklist:

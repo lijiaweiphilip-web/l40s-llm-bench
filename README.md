@@ -153,6 +153,8 @@ For a maintainer response draft that can be adapted into a GitHub issue reply,
 see `scripts/build_result_review_comment.py`.
 For the verdict matrix behind those replies, see
 `docs/result_review_response_templates.md`.
+For example maintainer review replies that read like real GitHub threads, see
+`docs/result_review_examples.md`.
 For a reviewer-oriented CPU-only proof pack that bundles tests, dry-run
 artifacts, validators, and logs into one artifact set, see
 `docs/maintenance/reviewer-smoke-proof.md`.

@@ -42,6 +42,7 @@ python scripts/build_result_review_comment.py \
 The helper does not replace human review. It only checks artifact presence,
 schema validity, summary consistency, and manifest consistency before the
 maintainer evaluates redaction, hardware disclosure, and claim wording.
+For full example replies, see `docs/result_review_examples.md`.
 
 ## Before Reviewing The Number
 
