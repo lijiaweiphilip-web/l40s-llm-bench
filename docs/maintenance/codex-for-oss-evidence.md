@@ -1,6 +1,6 @@
 # Codex for Open Source Evidence Packet
 
-Date: 2026-06-04
+Date: 2026-06-10
 
 Repository: https://github.com/lijiaweiphilip-web/l40s-llm-bench
 
@@ -23,7 +23,7 @@ maintainer responsibility for other projects or ecosystems.
 ## Current Public Evidence
 
 - Repository: https://github.com/lijiaweiphilip-web/l40s-llm-bench
-- Latest release: `v0.1.3`
+- Latest release: `v0.1.4`
 - PR #14 added a reproducibility evidence bundle contract, synthetic
   fake-server evidence bundle, validator, tests, and CI validation. It closed
   issue #2.
@@ -40,8 +40,11 @@ maintainer responsibility for other projects or ecosystems.
   closed issue #5.
 - PR #21 added the reviewer smoke proof pack and led to the `v0.1.3`
   maintenance release.
-- Main CI and the reviewer smoke proof workflow succeeded after the `v0.1.3`
-  proof-pack update.
+- Direct `main` updates after `v0.1.3` added a result-submission example
+  bundle, a result-review checklist, and GitHub issue-chooser routing for new
+  contributors; those changes are packaged in `v0.1.4`.
+- Main CI and the reviewer smoke proof workflow succeeded after the `v0.1.4`
+  community-entry update.
 - A dedicated reviewer smoke proof workflow and one-shot script now generate a
   CPU-only verification bundle with logs, raw JSONL, summaries, manifests, GPU
   sample parsing, vLLM profile dry validation, and sanity checks.
@@ -78,6 +81,8 @@ GPU claims.
   manifests.
 - A dedicated reviewer smoke proof pack for reviewer-oriented CPU-only
   verification.
+- A result-submission example bundle and result-review checklist that show how
+  benchmark-result issues should be posted and reviewed.
 - Maintainer playbook, contribution/support/security/conduct docs, and issue
   templates.
 - A public early-tester issue and a public hardware-needed issue.
@@ -105,7 +110,7 @@ It is world contact:
   needed.
 
 The application can be framed as strong early-stage maintainer evidence after
-`v0.1.3`, but an honest "~80% readiness" framing should wait for either G9 or
+`v0.1.4`, but an honest "~80% readiness" framing should wait for either G9 or
 G10.
 
 ## 150-Word English Form Text

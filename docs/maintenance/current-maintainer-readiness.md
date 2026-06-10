@@ -1,11 +1,11 @@
 # Current Maintainer Readiness
 
-Date: 2026-06-04
+Date: 2026-06-10
 
 Repository: https://github.com/lijiaweiphilip-web/l40s-llm-bench
 
 This note is the short public-facing status summary for `l40s-llm-bench` after
-the `v0.1.3` maintenance release. It is written for teachers, reviewers, or
+the `v0.1.4` maintenance release. It is written for teachers, reviewers, or
 program staff who need a quick, honest snapshot of what exists today.
 
 ## One-Paragraph Summary
@@ -15,13 +15,16 @@ reproducible LLM inference experiments on L40S-like single-GPU setups and
 OpenAI-compatible endpoints. The repository now has public releases, passing
 CPU-only CI, issue-linked merged PRs, a reproducibility evidence bundle
 validator, GPU metrics preparation, a dry-validatable vLLM/L40S smoke profile,
-and a reviewer-oriented CPU-only proof pack. It does not claim real GPU
-benchmark results, independent community adoption, or a real L40S artifact yet.
+and a reviewer-oriented CPU-only proof pack. It also now includes a result
+submission example bundle, a result review checklist, and issue-chooser links
+that guide first-time contributors into the right docs and templates. It does
+not claim real GPU benchmark results, independent community adoption, or a real
+L40S artifact yet.
 
 ## Public State
 
-- Latest release: `v0.1.3`
-- Latest maintenance upgrade: reviewer smoke proof pack
+- Latest release: `v0.1.4`
+- Latest maintenance upgrade: community submission and review entry path
 - Public repo hygiene: license, contribution guide, code of conduct, security
   policy, support file, issue templates, and maintainer docs
 - Open issues are now mostly narrowed to the remaining real-world gaps:
@@ -37,7 +40,10 @@ benchmark results, independent community adoption, or a real L40S artifact yet.
 - GPU metrics guide, sample telemetry, and summarizer coverage
 - vLLM/L40S smoke-run profile that can be dry-validated without GPU access
 - Reviewer smoke proof workflow and one-shot local pack
-- Public release trail through `v0.1.0`, `v0.1.1`, `v0.1.2`, and `v0.1.3`
+- Result-submission example bundle with raw JSONL, summary, and run manifest
+- Result-review checklist and issue-chooser routing for new contributors
+- Public release trail through `v0.1.0`, `v0.1.1`, `v0.1.2`, `v0.1.3`, and
+  `v0.1.4`
 
 ## Honest Gaps
 
@@ -68,7 +74,7 @@ is true:
 - Repository:
   https://github.com/lijiaweiphilip-web/l40s-llm-bench
 - Latest release:
-  https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.3
+  https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4
 - Current scorecard:
   `docs/maintenance/application-readiness-scorecard.md`
 - Evidence packet:
@@ -77,3 +83,5 @@ is true:
   `docs/maintenance/reviewer-smoke-proof.md`
 - Submission kit:
   `docs/maintenance/application-submission-kit.md`
+- Result review checklist:
+  `docs/result_review_checklist.md`

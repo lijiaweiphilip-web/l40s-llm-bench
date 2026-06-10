@@ -308,9 +308,11 @@ bundle validation, GPU metrics sample parsing, and a dry-validatable
 vLLM/L40S smoke profile. A reviewer-oriented CPU-only proof pack is also
 available through `scripts/run_reviewer_smoke_pack.py` and GitHub Actions.
 
-The current public maintenance release is `v0.1.3`, which packages the
-reviewer smoke proof path after the earlier `v0.1.2` reproducibility,
-telemetry, and profile work. No real GPU benchmark results, independent
+The current public maintenance release is `v0.1.4`, which packages the newer
+community-entry work after the earlier `v0.1.3` reviewer smoke proof update.
+The repository now also includes a result-submission example bundle, a result
+review checklist, and an issue chooser that points contributors toward the
+right first docs and templates. No real GPU benchmark results, independent
 external feedback, or real L40S/vLLM artifact bundle are claimed yet.
 
 For the current maintainer-readiness snapshot, see

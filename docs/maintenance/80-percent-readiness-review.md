@@ -1,6 +1,6 @@
 # 80-Readiness Review
 
-Date: 2026-06-04
+Date: 2026-06-10
 
 Repository: https://github.com/lijiaweiphilip-web/l40s-llm-bench
 
@@ -15,7 +15,9 @@ The repository is stronger than a template-only application because it has:
 - synthetic and fake-server evidence examples,
 - GPU telemetry preparation,
 - a dry-validatable vLLM/L40S smoke profile, and
-- a reviewer-oriented CPU-only proof pack.
+- a reviewer-oriented CPU-only proof pack, and
+- a community submission/review path with example artifacts and review
+  guidance.
 
 It is still not honest to claim full "~80% readiness" unless one real outside
 signal appears:
@@ -29,8 +31,8 @@ signal appears:
 - G1 reproducibility evidence bundle: complete via PR #14; issue #2 closed.
 - G2 GPU metrics guide: complete via PR #15; issue #4 closed.
 - G3 vLLM/L40S smoke profile: complete via PR #16; issue #3 closed.
-- G4 current maintenance release: complete; `v0.1.3` was published on
-  2026-06-04.
+- G4 current maintenance release: complete; `v0.1.4` was published on
+  2026-06-10.
 - G5 evidence packet and scorecard: complete via PR #18 and refreshed
   maintenance docs.
 - G6 profile signal: previously completed through the public profile update.
@@ -39,6 +41,8 @@ signal appears:
 - G8 conservative claims: maintained across docs, releases, and PR bodies.
 - G11 reviewer smoke proof pack: complete via
   `scripts/run_reviewer_smoke_pack.py` and the dedicated workflow.
+- G12 community submission path: complete via the result-submission example
+  bundle, result-review checklist, and issue chooser.
 
 ## Pending
 
