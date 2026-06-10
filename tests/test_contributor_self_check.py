@@ -23,6 +23,7 @@ def test_build_report_tracks_artifacts_and_pass_state(tmp_path: Path) -> None:
 
     assert report["status"] == "PASS"
     assert "docs/result_submission_starter.md" in report["next_docs"]
+    assert "docs/smoke_feedback_starter.md" in report["next_docs"]
     assert any(
         artifact["path"].endswith("contributor_dry_run.jsonl")
         for artifact in report["artifacts"]

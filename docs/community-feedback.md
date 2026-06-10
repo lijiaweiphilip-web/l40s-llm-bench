@@ -7,7 +7,7 @@ metadata before GPU time is spent.
 If you are not sure where to start:
 
 - first-time dry-run or fake-server feedback: use the smoke-run feedback issue
-  template
+  template or `scripts/init_smoke_feedback.py`
 - result review or artifact submission: use the benchmark-result issue template
 - before posting a result: read `docs/result_submission_example.md`
 - when reviewing a submitted result: use `docs/result_review_checklist.md` and

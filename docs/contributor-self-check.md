@@ -15,6 +15,7 @@ The contributor self-check pack runs:
 - the fake-server sanity checks
 - example evidence-bundle validation
 - example result-review helper output
+- starter-directory generation for first-user smoke feedback
 - starter-directory generation for a future benchmark submission
 
 Everything stays CPU-only.
@@ -35,6 +36,7 @@ Key generated files:
 - `results/contributor-self-check/contributor_self_check.json`
 - `results/contributor-self-check/review/example_result_review.md`
 - `results/contributor-self-check/review/example_result_comment.md`
+- `results/contributor-self-check/smoke-feedback-starter/README.md`
 - `results/contributor-self-check/submission-starter/README.md`
 
 ## What A Pass Means
@@ -58,6 +60,7 @@ A passing pack means:
 After the pack passes, the best next docs are:
 
 - `docs/first-user-smoke-test.md`
+- `docs/smoke_feedback_starter.md`
 - `docs/result_submission_starter.md`
 - `docs/result_review_quickstart.md`
 - `docs/evidence_bundle_quickstart.md`

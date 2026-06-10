@@ -43,6 +43,7 @@ artifact yet.
 - vLLM/L40S smoke-run profile that can be dry-validated without GPU access
 - Reviewer smoke proof workflow and one-shot local pack
 - Contributor self-check workflow and one-shot local pack
+- Structured smoke-feedback starter for early usability reports
 - Result-submission example bundle with raw JSONL, summary, and run manifest
 - Result-review checklist, reviewer helper, maintainer response draft helper,
   and issue-chooser routing for new contributors

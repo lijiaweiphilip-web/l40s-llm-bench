@@ -29,6 +29,7 @@ WHAT_IT_DOES_NOT_PROVE = [
 
 NEXT_DOCS = [
     "docs/first-user-smoke-test.md",
+    "docs/smoke_feedback_starter.md",
     "docs/result_submission_starter.md",
     "docs/result_review_quickstart.md",
     "docs/evidence_bundle_quickstart.md",
@@ -103,6 +104,7 @@ def build_steps(output_dir: Path) -> list[StepSpec]:
     tables_dir = output_dir / "tables"
     review_dir = output_dir / "review"
     starter_dir = output_dir / "submission-starter"
+    feedback_dir = output_dir / "smoke-feedback-starter"
 
     dry_raw = raw_dir / "contributor_dry_run.jsonl"
     summary_csv = tables_dir / "summary.csv"
@@ -221,6 +223,25 @@ def build_steps(output_dir: Path) -> list[StepSpec]:
                 str(example_summary),
             ],
             (example_comment, example_summary),
+        ),
+        StepSpec(
+            "init_smoke_feedback",
+            "Create starter directory for first-user smoke feedback",
+            [
+                python,
+                "scripts/init_smoke_feedback.py",
+                "--feedback-id",
+                "contributor-self-check",
+                "--smoke-path",
+                "both",
+                "--output-dir",
+                str(feedback_dir),
+            ],
+            (
+                feedback_dir / "README.md",
+                feedback_dir / "issue_body.md",
+                feedback_dir / "commands.sh",
+            ),
         ),
         StepSpec(
             "init_submission_starter",

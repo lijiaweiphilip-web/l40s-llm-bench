@@ -38,6 +38,8 @@ remembering filenames one by one.
   `docs/result_submission_example.md`
 - Contributor self-check pack:
   `docs/contributor-self-check.md`
+- Smoke-feedback starter:
+  `docs/smoke_feedback_starter.md`
 - Community entry expectations:
   `docs/community-feedback.md`
 - Starter generator:

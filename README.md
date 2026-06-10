@@ -149,6 +149,9 @@ For a Codespaces-friendly contributor-entry validation pack, see
 For early usability feedback on the dry-run and fake-server path, see
 `docs/first-user-smoke-test.md`, `docs/feedback-request-template.md`, and
 `docs/feedback-triage-policy.md`.
+For a structured local starter that helps a first-time user prepare a clean
+smoke-feedback report, see `docs/smoke_feedback_starter.md` and
+`scripts/init_smoke_feedback.py`.
 For a ready-to-fill benchmark artifact starter directory, see
 `docs/result_submission_starter.md` and
 `scripts/init_result_submission.py`.

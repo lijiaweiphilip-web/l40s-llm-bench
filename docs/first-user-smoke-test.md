@@ -71,6 +71,8 @@ includes:
 You can use either:
 
 - the GitHub issue form named `Smoke-run feedback`
+- `scripts/init_smoke_feedback.py --feedback-id <your-feedback-id> --smoke-path both`
+  if you want a prefilled local starter directory first
 - `docs/feedback-request-template.md` as a copyable prompt
 - public issue #12 if you want to leave a short comment instead of opening a
   new issue
