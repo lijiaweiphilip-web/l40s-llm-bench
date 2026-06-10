@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Start with the 10-minute smoke run
+    url: https://github.com/lijiaweiphilip-web/l40s-llm-bench/blob/main/docs/ten_minute_smoke_run.md
+    about: Use this if you want the shortest guided path before opening an issue.
+  - name: Result submission example
+    url: https://github.com/lijiaweiphilip-web/l40s-llm-bench/blob/main/docs/result_submission_example.md
+    about: See a small filled-out benchmark result example before posting a result issue.
+  - name: Community feedback expectations
+    url: https://github.com/lijiaweiphilip-web/l40s-llm-bench/blob/main/docs/community-feedback.md
+    about: Review what feedback is most useful and what claims this project does not make yet.
+  - name: Current maintainer readiness
+    url: https://github.com/lijiaweiphilip-web/l40s-llm-bench/blob/main/docs/maintenance/current-maintainer-readiness.md
+    about: See the current public project state, scope, and remaining honest gaps.

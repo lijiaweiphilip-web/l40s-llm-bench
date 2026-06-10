@@ -4,6 +4,13 @@ This project is early-stage. Feedback is most useful when it improves
 reproducibility, makes benchmark claims harder to overstate, or catches missing
 metadata before GPU time is spent.
 
+If you are not sure where to start:
+
+- first-time dry-run or fake-server feedback: use the smoke-run feedback issue
+  template
+- result review or artifact submission: use the benchmark-result issue template
+- before posting a result: read `docs/result_submission_example.md`
+
 ## Useful Feedback
 
 - A smoke-run result that includes commands, raw JSONL, summaries, and a run

@@ -289,6 +289,8 @@ Suggested wording:
 
 For questions, result reports, or requests for missing metadata, see
 `docs/community-feedback.md`.
+The GitHub issue chooser also points new contributors to the smoke-run guide,
+result submission example, and current maintainer-readiness docs.
 
 ## Experiment Roadmap
 
