@@ -75,3 +75,7 @@ checklist，以及更清晰的 GitHub issue 入口。它目前还没有真实 L4
   `docs/maintenance/application-submission-kit.md`
 - Final answers:
   `docs/maintenance/application-final-answers.md`
+- Submission checklist:
+  `docs/maintenance/application-submission-checklist.md`
+- Teacher / reviewer draft:
+  `docs/maintenance/teacher-reviewer-draft.md`

@@ -102,6 +102,10 @@ best short answer is:
   `docs/result_review_checklist.md`
 - Final answer pack:
   `docs/maintenance/application-final-answers.md`
+- Submission checklist:
+  `docs/maintenance/application-submission-checklist.md`
+- Teacher / reviewer draft:
+  `docs/maintenance/teacher-reviewer-draft.md`
 
 ## Remaining Gap
 
