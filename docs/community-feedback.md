@@ -10,7 +10,8 @@ If you are not sure where to start:
   template
 - result review or artifact submission: use the benchmark-result issue template
 - before posting a result: read `docs/result_submission_example.md`
-- when reviewing a submitted result: use `docs/result_review_checklist.md`
+- when reviewing a submitted result: use `docs/result_review_checklist.md` and
+  `scripts/review_result_submission.py`
 
 ## Useful Feedback
 

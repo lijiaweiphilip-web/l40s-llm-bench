@@ -4,6 +4,29 @@ This checklist is for maintainers and contributors reviewing a benchmark-result
 issue. It keeps result review scoped to reproducibility evidence rather than
 broad benchmark claims.
 
+## Fast Path
+
+If the submission artifacts are available locally, generate a review note first:
+
+```bash
+python scripts/review_result_submission.py \
+  --raw examples/results/fake-server-synthetic/raw.jsonl \
+  --summary examples/results/fake-server-synthetic/summary.csv \
+  --manifest examples/results/fake-server-synthetic/run_manifest.json
+```
+
+If the contributor used the starter-kit directory layout, review the whole
+submission directory directly:
+
+```bash
+python scripts/review_result_submission.py \
+  --submission-dir results/submissions/<run-id>
+```
+
+The helper does not replace human review. It only checks artifact presence,
+schema validity, summary consistency, and manifest consistency before the
+maintainer evaluates redaction, hardware disclosure, and claim wording.
+
 ## Before Reviewing The Number
 
 Check the submission shape first:
