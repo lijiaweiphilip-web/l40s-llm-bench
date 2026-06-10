@@ -46,6 +46,7 @@ artifact yet.
 - Structured smoke-feedback starter for early usability reports
 - Maintainer-side smoke-feedback review helper and filled example packet
 - Maintainer-side smoke-feedback reply draft helper
+- Feedback-triage proof workflow and one-shot local pack
 - Result-submission example bundle with raw JSONL, summary, and run manifest
 - Result-review checklist, reviewer helper, maintainer response draft helper,
   and issue-chooser routing for new contributors

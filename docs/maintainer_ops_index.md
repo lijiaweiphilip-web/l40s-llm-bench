@@ -14,6 +14,8 @@ remembering filenames one by one.
   `docs/maintenance/maintainer-playbook.md`
 - Reviewer-oriented proof pack:
   `docs/maintenance/reviewer-smoke-proof.md`
+- Feedback-triage proof pack:
+  `docs/maintenance/feedback-triage-proof.md`
 
 ## Benchmark-Result Review
 
