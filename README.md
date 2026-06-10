@@ -3,6 +3,7 @@
 [![CI](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml)
 [![Reviewer smoke proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml)
 [![Contributor self-check](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml)
+[![Community entry proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/community-entry-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/community-entry-proof.yml)
 [![Feedback triage proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml)
 [![Submission review proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml)
 [![OSS readiness proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/oss-readiness-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/oss-readiness-proof.yml)
@@ -20,6 +21,7 @@ It does not claim real GPU benchmark results yet.
 
 - Latest release: `v0.1.4`
 - Reviewer proof path: `docs/maintenance/reviewer-smoke-proof.md`
+- Community entry proof path: `docs/maintenance/community-entry-proof.md`
 - Maintainer ops index: `docs/maintainer_ops_index.md`
 - Current maintainer readiness: `docs/maintenance/current-maintainer-readiness.md`
 - Application pack: `docs/maintenance/application-final-answers.md`
@@ -164,6 +166,10 @@ For a maintainer-style public reply draft after that review, see
 For a one-shot maintainer proof pack covering the full issue `#12` triage path,
 see `docs/maintenance/feedback-triage-proof.md` and
 `scripts/run_feedback_triage_proof.py`.
+For a one-shot community-entry proof pack covering README routing, issue
+chooser links, starter generators, and example review helpers, see
+`docs/maintenance/community-entry-proof.md` and
+`scripts/run_community_entry_proof.py`.
 For a one-shot maintainer proof pack covering the benchmark-result submission
 and review path, see `docs/maintenance/submission-review-proof.md` and
 `scripts/run_submission_review_proof.py`.
@@ -366,8 +372,9 @@ The scaffold now supports dry runs, fake-server streaming sanity checks,
 workload profiles, summary reports, regression comparison, error taxonomy
 counts, JSONL compatibility checks, run manifests, reproducibility evidence
 bundle validation, GPU metrics sample parsing, and a dry-validatable
-vLLM/L40S smoke profile. A reviewer-oriented CPU-only proof pack is also
-available through `scripts/run_reviewer_smoke_pack.py` and GitHub Actions.
+vLLM/L40S smoke profile. Reviewer-oriented, contributor-oriented, and
+community-entry CPU-only proof packs are also available through checked-in
+scripts and GitHub Actions.
 
 The current public maintenance release is `v0.1.4`, which packages the newer
 community-entry work after the earlier `v0.1.3` reviewer smoke proof update.

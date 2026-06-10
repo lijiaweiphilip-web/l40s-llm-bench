@@ -1,4 +1,4 @@
-name: OSS readiness proof
+name: Community entry proof
 
 on:
   push:
@@ -10,10 +10,10 @@ permissions:
   contents: read
 
 jobs:
-  oss-readiness-proof:
-    name: OSS readiness proof pack
+  community-entry-proof:
+    name: Community entry proof pack
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
       - name: Check out repository
@@ -30,13 +30,13 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements-dev.txt
 
-      - name: Generate OSS readiness proof pack
-        run: python scripts/run_oss_readiness_proof.py
+      - name: Generate community entry proof pack
+        run: python scripts/run_community_entry_proof.py
 
-      - name: Upload OSS readiness proof pack
+      - name: Upload community entry proof pack
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: oss-readiness-proof-pack
-          path: results/oss-readiness-proof
+          name: community-entry-proof-pack
+          path: results/community-entry-proof
           if-no-files-found: error

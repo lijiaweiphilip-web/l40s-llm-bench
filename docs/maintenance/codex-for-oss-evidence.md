@@ -43,11 +43,14 @@ maintainer responsibility for other projects or ecosystems.
 - Direct `main` updates after `v0.1.3` added a result-submission example
   bundle, a result-review checklist, and GitHub issue-chooser routing for new
   contributors; those changes are packaged in `v0.1.4`.
-- Main CI and the reviewer smoke proof workflow succeeded after the `v0.1.4`
-  community-entry update.
-- A dedicated reviewer smoke proof workflow and one-shot script now generate a
-  CPU-only verification bundle with logs, raw JSONL, summaries, manifests, GPU
-  sample parsing, vLLM profile dry validation, and sanity checks.
+- Main CI plus the reviewer smoke proof, contributor self-check,
+  community-entry proof, feedback-triage proof, submission-review proof, and
+  OSS-readiness proof workflows succeeded after the `v0.1.4` community-entry
+  update.
+- Dedicated reviewer smoke proof, contributor self-check, community-entry
+  proof, feedback-triage proof, submission-review proof, and top-level
+  OSS-readiness scripts now generate CPU-only verification bundles for
+  different parts of the public maintainer flow.
 - Issue #12 publicly invites early testers to try the 10-minute dry-run and
   fake-server smoke path.
 - Issue #17 publicly asks for the first real L40S/vLLM evidence bundle.
@@ -81,6 +84,8 @@ GPU claims.
   manifests.
 - A dedicated reviewer smoke proof pack for reviewer-oriented CPU-only
   verification.
+- A dedicated community-entry proof pack for README routing, issue chooser
+  links, starter generators, and example review helpers.
 - A result-submission example bundle and result-review checklist that show how
   benchmark-result issues should be posted and reviewed.
 - Maintainer playbook, contribution/support/security/conduct docs, and issue
@@ -120,8 +125,9 @@ early-stage open source scaffold for reproducible LLM inference benchmark
 experiments on L40S-like single-GPU setups and OpenAI-compatible endpoints. The
 repository has public releases, passing CPU-only GitHub Actions, governance
 docs, issue triage, a reproducibility evidence bundle validator, GPU metrics
-guidance, a dry-validatable vLLM/L40S smoke profile, and a reviewer-oriented
-CPU-only proof pack. It does not claim real GPU benchmark results or
+guidance, a dry-validatable vLLM/L40S smoke profile, and reviewer-oriented,
+community-entry, feedback-triage, submission-review, and top-level CPU-only
+proof packs. It does not claim real GPU benchmark results or
 independent external adoption yet. Its contribution is the evidence chain
 around future benchmark claims: exact commands, configs, raw JSONL, summary
 artifacts, manifests, environment notes, telemetry, and limitations. Codex
@@ -149,7 +155,9 @@ The project now has public releases, passing CPU-only GitHub Actions,
 contribution and security docs, scoped issues, and merged PRs that added a
 reproducibility evidence bundle validator, synthetic fake-server bundle, GPU
 metrics guide, sample telemetry summarizer, dry-validatable vLLM/L40S smoke
-profile, and a reviewer-oriented CPU-only proof pack. I am the primary
+profile, and a family of CPU-only proof packs covering reviewer checks,
+community entry, feedback triage, submission review, and top-level OSS
+readiness. I am the primary
 maintainer responsible for keeping the harness, documentation, tests, result
 schema, and future result claims honest.
 
@@ -186,8 +194,9 @@ collection guidance, a vLLM/L40S smoke-run profile, feedback-path hardening,
 and backend sequencing. The project now includes a bundle validator, synthetic
 fake-server evidence bundle, artifact review rubric, `nvidia-smi` metrics
 helper, sample telemetry summarizer, optional DCGM notes, a vLLM smoke profile
-that can be dry-validated without GPU access, and a reviewer-oriented CPU-only
-proof pack that packages the public validation path into one artifact set.
+that can be dry-validated without GPU access, and CPU-only proof packs that
+package reviewer checks, community entry, feedback triage, submission review,
+and top-level OSS readiness into public artifact sets.
 
 Codex would help me convert the project from a prepared scaffold into a
 maintained open source workflow. The work is practical and reviewable: close

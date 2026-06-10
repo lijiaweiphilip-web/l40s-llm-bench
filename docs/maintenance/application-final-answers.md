@@ -13,12 +13,13 @@ I am applying with `l40s-llm-bench`, an early-stage open source scaffold for
 reproducible LLM inference benchmark experiments on L40S-like single-GPU
 setups and OpenAI-compatible endpoints. The project now has public releases
 through `v0.1.4`, passing CPU-only CI, a reviewer smoke proof workflow,
-reproducibility validators, GPU metrics preparation, a dry-validatable
-vLLM/L40S smoke profile, and a small community submission/review path with
-example artifacts and review guidance. It does not claim real GPU benchmark
-results or independent public adoption yet. Its contribution is the evidence
-chain around future benchmark claims: exact commands, configs, raw JSONL,
-summaries, manifests, telemetry, and explicit limitations.
+contributor self-check and community-entry proof workflows, reproducibility
+validators, GPU metrics preparation, a dry-validatable vLLM/L40S smoke
+profile, and a small community submission/review path with example artifacts,
+review guidance, and maintainer proof packs. It does not claim real GPU
+benchmark results or independent public adoption yet. Its contribution is the
+evidence chain around future benchmark claims: exact commands, configs, raw
+JSONL, summaries, manifests, telemetry, and explicit limitations.
 
 ## 200-Word English Version
 
@@ -33,11 +34,12 @@ configs, raw JSONL records, summary artifacts, run manifests, environment
 notes, GPU telemetry preparation, and explicit limitations.
 
 The project now has public releases through `v0.1.4`, passing CPU-only GitHub
-Actions, a reviewer smoke proof workflow, a dry-validatable vLLM/L40S smoke
-profile, and maintainership artifacts such as contribution/security docs,
-issue templates, a result-submission example bundle, a result-review checklist,
-a reviewer helper that checks raw/summary/manifest consistency, and a GitHub
-issue chooser that routes contributors toward the right entry path.
+Actions, reviewer smoke proof, contributor self-check, community-entry proof,
+feedback-triage proof, submission-review proof, a dry-validatable vLLM/L40S
+smoke profile, and maintainership artifacts such as contribution/security
+docs, issue templates, a result-submission example bundle, a result-review
+checklist, review helpers, and a GitHub issue chooser that routes contributors
+toward the right entry path.
 
 This is enough to present the repository as a strong early-stage maintainer
 package with public reproducibility proof. The remaining gap is one real
@@ -71,6 +73,8 @@ checklist、review helper、maintainer comment draft，以及更清晰的 GitHub
   https://github.com/lijiaweiphilip-web/l40s-llm-bench
 - Latest release:
   https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4
+- Community-entry proof:
+  `docs/maintenance/community-entry-proof.md`
 - Submission kit:
   `docs/maintenance/application-submission-kit.md`
 - Final answers:

@@ -14,6 +14,8 @@ remembering filenames one by one.
   `docs/maintenance/maintainer-playbook.md`
 - Reviewer-oriented proof pack:
   `docs/maintenance/reviewer-smoke-proof.md`
+- Community-entry proof pack:
+  `docs/maintenance/community-entry-proof.md`
 - Feedback-triage proof pack:
   `docs/maintenance/feedback-triage-proof.md`
 - Submission-review proof pack:
@@ -50,6 +52,8 @@ remembering filenames one by one.
   `docs/smoke_feedback_review.md`
 - Smoke-feedback response templates:
   `docs/smoke_feedback_response_templates.md`
+- Community-entry proof pack:
+  `docs/maintenance/community-entry-proof.md`
 - Community entry expectations:
   `docs/community-feedback.md`
 - Starter generator:
@@ -63,6 +67,8 @@ remembering filenames one by one.
   `docs/release-checklist.md`
 - Reviewer smoke proof notes:
   `docs/maintenance/reviewer-smoke-proof.md`
+- Community-entry proof notes:
+  `docs/maintenance/community-entry-proof.md`
 - Real artifact bundle quickstart:
   `docs/evidence_bundle_quickstart.md`
 - End-to-end artifact capture runbook:
@@ -78,6 +84,8 @@ remembering filenames one by one.
 
 - Top-level OSS-readiness proof:
   `docs/maintenance/oss-readiness-proof.md`
+- Community-entry proof:
+  `docs/maintenance/community-entry-proof.md`
 - Submission kit:
   `docs/maintenance/application-submission-kit.md`
 - Final answer pack:

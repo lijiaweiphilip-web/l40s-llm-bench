@@ -8,13 +8,13 @@ def test_build_report_tracks_nested_proof_artifacts(tmp_path: Path) -> None:
     output_dir.mkdir()
     results = [
         StepResult(
-            step_id="feedback_triage_proof",
-            label="Generate feedback triage proof pack",
+            step_id="community_entry_proof",
+            label="Generate community entry proof pack",
             status="passed",
-            command="python scripts/run_feedback_triage_proof.py",
-            log_path="results/oss-readiness-proof/logs/feedback_triage_proof.log",
+            command="python scripts/run_community_entry_proof.py",
+            log_path="results/oss-readiness-proof/logs/community_entry_proof.log",
             duration_seconds=1.2,
-            artifacts=("results/oss-readiness-proof/packs/feedback-triage-proof/feedback_triage_proof.md",),
+            artifacts=("results/oss-readiness-proof/packs/community-entry-proof/community_entry_proof.md",),
             output_excerpt=("PASS",),
         )
     ]
@@ -23,8 +23,9 @@ def test_build_report_tracks_nested_proof_artifacts(tmp_path: Path) -> None:
 
     assert report["status"] == "PASS"
     assert "docs/maintenance/current-maintainer-readiness.md" in report["next_docs"]
+    assert "docs/maintenance/community-entry-proof.md" in report["next_docs"]
     assert any(
-        artifact["path"].endswith("feedback_triage_proof.md")
+        artifact["path"].endswith("community_entry_proof.md")
         for artifact in report["artifacts"]
     )
     assert any(

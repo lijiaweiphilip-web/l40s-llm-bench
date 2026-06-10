@@ -22,6 +22,7 @@ Key generated files:
 - `results/oss-readiness-proof/oss_readiness_proof.md`
 - `results/oss-readiness-proof/oss_readiness_proof.json`
 - `results/oss-readiness-proof/packs/reviewer-smoke-proof/reviewer_smoke_proof.md`
+- `results/oss-readiness-proof/packs/community-entry-proof/community_entry_proof.md`
 - `results/oss-readiness-proof/packs/feedback-triage-proof/feedback_triage_proof.md`
 - `results/oss-readiness-proof/packs/submission-review-proof/submission_review_proof.md`
 
@@ -30,6 +31,7 @@ Key generated files:
 A passing pack means:
 
 - the repo can generate a reviewer-oriented reproducibility proof pack
+- the repo can generate a community-entry proof pack for README routing, issue chooser links, and starter flows
 - the repo can generate a maintainer-oriented feedback-triage proof pack
 - the repo can generate a maintainer-oriented submission-review proof pack
 - all of those flows can be packaged into one top-level public evidence bundle
@@ -50,6 +52,7 @@ claims.
 ## Related Docs
 
 - `docs/maintenance/reviewer-smoke-proof.md`
+- `docs/maintenance/community-entry-proof.md`
 - `docs/maintenance/feedback-triage-proof.md`
 - `docs/maintenance/submission-review-proof.md`
 - `docs/maintenance/current-maintainer-readiness.md`

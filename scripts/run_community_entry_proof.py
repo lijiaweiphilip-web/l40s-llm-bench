@@ -16,23 +16,22 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULTS_ROOT = ROOT / "results"
 
 WHAT_IT_PROVES = [
-    "The repository can produce a reviewer-oriented reproducibility proof pack without GPU access.",
-    "The repository can package the public newcomer/community entry path into a public proof artifact.",
-    "The repository can package the full issue #12 smoke-feedback maintainer flow into a public proof artifact.",
-    "The repository can package the benchmark-result submission/review maintainer flow into a public proof artifact.",
+    "The public newcomer path is wired across README, issue chooser links, starter generators, and maintainer-facing readiness docs.",
+    "The repository can scaffold both first-user smoke feedback and a future result-submission path without GPU access.",
+    "The maintainer-side review helpers accept the checked-in example packets for the two main community-facing routes.",
 ]
 
 WHAT_IT_DOES_NOT_PROVE = [
-    "This pack does not create real GPU benchmark evidence or complete issue #17.",
-    "This pack does not create genuinely independent external feedback or complete G9.",
-    "The nested proof packs remain CPU-only maintainer workflow evidence, not adoption proof by themselves.",
+    "This pack does not create independent public tester feedback or complete G9.",
+    "This pack does not create a real L40S or vLLM artifact bundle or complete G10.",
+    "A passing pack is public entry-path evidence, not benchmark adoption evidence.",
 ]
 
 NEXT_DOCS = [
-    "docs/maintenance/reviewer-smoke-proof.md",
-    "docs/maintenance/community-entry-proof.md",
-    "docs/maintenance/feedback-triage-proof.md",
-    "docs/maintenance/submission-review-proof.md",
+    "docs/ten_minute_smoke_run.md",
+    "docs/contributor-self-check.md",
+    "docs/smoke_feedback_starter.md",
+    "docs/result_submission_starter.md",
     "docs/maintenance/current-maintainer-readiness.md",
 ]
 
@@ -101,11 +100,10 @@ def reset_output_dir(output_dir: Path) -> None:
 def build_steps(output_dir: Path) -> list[StepSpec]:
     python = sys.executable
     env_json = output_dir / "env" / "environment.json"
-    nested_dir = output_dir / "packs"
-    reviewer_dir = nested_dir / "reviewer-smoke-proof"
-    community_dir = nested_dir / "community-entry-proof"
-    feedback_dir = nested_dir / "feedback-triage-proof"
-    submission_dir = nested_dir / "submission-review-proof"
+    audit_dir = output_dir / "audit"
+    review_dir = output_dir / "review"
+    feedback_dir = output_dir / "smoke-feedback-starter"
+    submission_dir = output_dir / "submission-starter"
 
     return [
         StepSpec(
@@ -115,73 +113,99 @@ def build_steps(output_dir: Path) -> list[StepSpec]:
             (env_json,),
         ),
         StepSpec(
-            "pytest_readiness_packs",
-            "Run proof-pack tests",
+            "pytest_community_entry",
+            "Run community-entry tests",
             [
                 python,
                 "-m",
                 "pytest",
                 "-q",
-                "tests/test_reviewer_smoke_pack.py",
-                "tests/test_feedback_triage_proof.py",
-                "tests/test_submission_review_proof.py",
+                "tests/test_community_entry_audit.py",
+                "tests/test_init_smoke_feedback.py",
+                "tests/test_result_submission_starter.py",
+                "tests/test_review_smoke_feedback.py",
+                "tests/test_result_review_helper.py",
             ],
         ),
         StepSpec(
-            "reviewer_smoke_proof",
-            "Generate reviewer smoke proof pack",
+            "audit_community_entry",
+            "Audit README and issue-chooser newcomer routes",
             [
                 python,
-                "scripts/run_reviewer_smoke_pack.py",
+                "scripts/audit_community_entry.py",
                 "--output-dir",
-                str(reviewer_dir),
+                str(audit_dir),
             ],
             (
-                reviewer_dir / "reviewer_smoke_proof.md",
-                reviewer_dir / "reviewer_smoke_proof.json",
+                audit_dir / "community_entry_audit.md",
+                audit_dir / "community_entry_audit.json",
             ),
         ),
         StepSpec(
-            "community_entry_proof",
-            "Generate community entry proof pack",
+            "init_smoke_feedback",
+            "Create starter directory for first-user smoke feedback",
             [
                 python,
-                "scripts/run_community_entry_proof.py",
-                "--output-dir",
-                str(community_dir),
-            ],
-            (
-                community_dir / "community_entry_proof.md",
-                community_dir / "community_entry_proof.json",
-            ),
-        ),
-        StepSpec(
-            "feedback_triage_proof",
-            "Generate feedback triage proof pack",
-            [
-                python,
-                "scripts/run_feedback_triage_proof.py",
+                "scripts/init_smoke_feedback.py",
+                "--feedback-id",
+                "community-entry-proof",
+                "--smoke-path",
+                "both",
                 "--output-dir",
                 str(feedback_dir),
             ],
             (
-                feedback_dir / "feedback_triage_proof.md",
-                feedback_dir / "feedback_triage_proof.json",
+                feedback_dir / "README.md",
+                feedback_dir / "issue_body.md",
+                feedback_dir / "commands.sh",
             ),
         ),
         StepSpec(
-            "submission_review_proof",
-            "Generate submission review proof pack",
+            "review_example_smoke_feedback",
+            "Review example smoke-feedback packet",
             [
                 python,
-                "scripts/run_submission_review_proof.py",
+                "scripts/review_smoke_feedback.py",
+                "--feedback-dir",
+                "examples/feedback/first-user-sample",
+                "--output",
+                str(review_dir / "example_smoke_feedback_review.md"),
+            ],
+            (review_dir / "example_smoke_feedback_review.md",),
+        ),
+        StepSpec(
+            "init_submission_starter",
+            "Create starter directory for a future benchmark submission",
+            [
+                python,
+                "scripts/init_result_submission.py",
+                "--run-id",
+                "community-entry-proof",
                 "--output-dir",
                 str(submission_dir),
             ],
             (
-                submission_dir / "submission_review_proof.md",
-                submission_dir / "submission_review_proof.json",
+                submission_dir / "README.md",
+                submission_dir / "issue_body.md",
+                submission_dir / "commands.sh",
             ),
+        ),
+        StepSpec(
+            "review_example_submission",
+            "Review example benchmark-result packet",
+            [
+                python,
+                "scripts/review_result_submission.py",
+                "--raw",
+                "examples/results/fake-server-synthetic/raw.jsonl",
+                "--summary",
+                "examples/results/fake-server-synthetic/summary.csv",
+                "--manifest",
+                "examples/results/fake-server-synthetic/run_manifest.json",
+                "--output",
+                str(review_dir / "example_result_review.md"),
+            ],
+            (review_dir / "example_result_review.md",),
         ),
     ]
 
@@ -237,8 +261,8 @@ def build_report(output_dir: Path, results: list[StepResult]) -> dict[str, Any]:
             if artifact and artifact not in seen:
                 seen.add(artifact)
                 artifacts.append({"path": artifact, "from_step": result.step_id})
-    report_json = repo_relative(output_dir / "oss_readiness_proof.json")
-    report_md = repo_relative(output_dir / "oss_readiness_proof.md")
+    report_json = repo_relative(output_dir / "community_entry_proof.json")
+    report_md = repo_relative(output_dir / "community_entry_proof.md")
     for path, source in ((report_json, "report"), (report_md, "report")):
         if path not in seen:
             artifacts.append({"path": path, "from_step": source})
@@ -269,13 +293,13 @@ def build_report(output_dir: Path, results: list[StepResult]) -> dict[str, Any]:
 
 def report_to_markdown(report: dict[str, Any]) -> str:
     lines = [
-        "# OSS Readiness Proof Pack",
+        "# Community Entry Proof Pack",
         "",
         f"Status: `{report['status']}`",
         f"Generated: `{report['generated_utc']}`",
         f"Output directory: `{report['output_dir']}`",
         "",
-        "This is the top-level maintainer-oriented CPU-only proof pack for the public OSS readiness story in `l40s-llm-bench`.",
+        "This is a community-facing CPU-only proof pack for the public newcomer route in `l40s-llm-bench`.",
         "",
         "## What This Proves",
         "",
@@ -320,7 +344,7 @@ def report_to_markdown(report: dict[str, Any]) -> str:
             "",
             "## Notes",
             "",
-            "- A passing pack strengthens the top-level maintainer evidence story, but it still does not complete G9 or G10 without real outside signals.",
+            "- A passing pack strengthens the public newcomer story, but it still does not replace independent feedback or a real hardware artifact.",
         ]
     )
     failed_steps = [step for step in report["steps"] if step["status"] == "failed"]
@@ -338,8 +362,8 @@ def report_to_markdown(report: dict[str, Any]) -> str:
 
 
 def write_report_files(output_dir: Path, report: dict[str, Any]) -> tuple[Path, Path]:
-    report_json = output_dir / "oss_readiness_proof.json"
-    report_md = output_dir / "oss_readiness_proof.md"
+    report_json = output_dir / "community_entry_proof.json"
+    report_md = output_dir / "community_entry_proof.md"
     report_json.write_text(json.dumps(report, indent=2), encoding="utf-8")
     report_md.write_text(report_to_markdown(report), encoding="utf-8")
     return report_json, report_md
@@ -349,8 +373,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--output-dir",
-        default="results/oss-readiness-proof",
-        help="Directory where the OSS readiness proof pack should be written.",
+        default="results/community-entry-proof",
+        help="Directory where the community-entry proof pack should be written.",
     )
     return parser.parse_args()
 
@@ -381,8 +405,8 @@ def main() -> int:
 
     report = build_report(output_dir, results)
     report_json, report_md = write_report_files(output_dir, report)
-    print(f"wrote OSS readiness proof report to {repo_relative(report_md)}")
-    print(f"wrote OSS readiness proof metadata to {repo_relative(report_json)}")
+    print(f"wrote community entry proof report to {repo_relative(report_md)}")
+    print(f"wrote community entry proof metadata to {repo_relative(report_json)}")
     return 1 if failure_seen else 0
 
 

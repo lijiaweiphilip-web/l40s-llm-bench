@@ -28,11 +28,11 @@ Hello,
 
 I have continued improving `l40s-llm-bench` as a public, reviewable, and
 application-ready open-source project. The repository now has public releases
-through `v0.1.4`, passing CPU-only CI, a reviewer smoke proof workflow,
-reproducibility validators, GPU metrics preparation, a dry-validatable
-vLLM/L40S smoke profile, and a clearer community submission/review path with a
-result-submission example bundle, a result-review checklist, and a GitHub
-issue chooser.
+through `v0.1.4`, passing CPU-only CI, reviewer smoke proof, contributor
+self-check, community-entry proof, reproducibility validators, GPU metrics
+preparation, a dry-validatable vLLM/L40S smoke profile, and a clearer
+community submission/review path with a result-submission example bundle, a
+result-review checklist, and a GitHub issue chooser.
 
 I am not presenting it as a repository with real GPU benchmark results or
 independent external validation yet. The more accurate framing is: a strong

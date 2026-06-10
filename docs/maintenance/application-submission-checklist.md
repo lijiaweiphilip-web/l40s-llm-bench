@@ -12,6 +12,11 @@ project to a teacher, reviewer, or program contact.
 - [ ] Latest public release notes are visible
 - [ ] `main` branch CI is green
 - [ ] `Reviewer smoke proof` workflow is green
+- [ ] `Contributor self-check` workflow is green
+- [ ] `Community entry proof` workflow is green
+- [ ] `Feedback triage proof` workflow is green
+- [ ] `Submission review proof` workflow is green
+- [ ] `OSS readiness proof` workflow is green
 - [ ] Open issues are still focused on the remaining real-world gaps only
 
 ## Positioning Discipline
@@ -27,6 +32,11 @@ project to a teacher, reviewer, or program contact.
 - [ ] public releases through `v0.1.4`
 - [ ] passing CPU-only CI
 - [ ] reviewer smoke proof workflow
+- [ ] contributor self-check workflow
+- [ ] community-entry proof workflow
+- [ ] feedback-triage proof workflow
+- [ ] submission-review proof workflow
+- [ ] OSS-readiness proof workflow
 - [ ] reproducibility evidence bundle validator
 - [ ] GPU metrics preparation
 - [ ] dry-validatable vLLM/L40S smoke profile
