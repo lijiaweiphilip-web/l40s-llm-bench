@@ -78,6 +78,8 @@ open-source support。
   https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.5
 - Community-entry proof:
   `docs/maintenance/community-entry-proof.md`
+- 500-char form answers:
+  `docs/maintenance/codex-for-oss-form-500char.md`
 - Submission kit:
   `docs/maintenance/application-submission-kit.md`
 - Final answers:

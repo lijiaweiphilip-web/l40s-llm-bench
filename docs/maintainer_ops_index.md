@@ -92,6 +92,8 @@ remembering filenames one by one.
   `docs/maintenance/application-final-answers.md`
 - Submission checklist:
   `docs/maintenance/application-submission-checklist.md`
+- 500-char form answers:
+  `docs/maintenance/codex-for-oss-form-500char.md`
 - Teacher / reviewer draft:
   `docs/maintenance/teacher-reviewer-draft.md`
 - Application scorecard:
