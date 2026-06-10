@@ -70,11 +70,19 @@ python scripts/validate_evidence_bundle.py examples/evidence-bundles/fake-server
 
 The validator checks the required files, manifest fields, file references, raw
 JSONL schema, synthetic fake-server markers, and request counts. For synthetic
-bundles, every raw record must include:
+fake-server bundles, every raw record must include:
 
 ```text
 synthetic: true
 server: "fake-server"
+benchmark_claim: false
+```
+
+For synthetic dry-run bundles, every raw record should keep:
+
+```text
+synthetic: true
+dry_run: true
 benchmark_claim: false
 ```
 

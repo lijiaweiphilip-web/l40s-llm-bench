@@ -109,3 +109,5 @@ opening a PR with real data.
 If the raw run artifacts already exist, use
 `docs/evidence_bundle_quickstart.md` and `scripts/build_evidence_bundle.py` to
 package them into a reviewable bundle for issue `#17`.
+If you want one bounded shell path that runs the smoke profile and packages the
+resulting artifact bundle, use `scripts/run_l40s_artifact_capture.sh`.

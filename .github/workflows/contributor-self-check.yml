@@ -1,0 +1,42 @@
+name: Contributor self-check
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contributor-self-check:
+    name: Contributor self-check pack
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Generate contributor self-check pack
+        run: python scripts/run_contributor_self_check.py
+
+      - name: Upload contributor self-check pack
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contributor-self-check-pack
+          path: results/contributor-self-check
+          if-no-files-found: error

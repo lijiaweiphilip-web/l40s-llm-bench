@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml)
 [![Reviewer smoke proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml)
+[![Contributor self-check](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml)
 [![Latest release](https://img.shields.io/github/v/release/lijiaweiphilip-web/l40s-llm-bench)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4)
 
 Minimal scaffold for reproducible LLM inference benchmark experiments on L40S
@@ -130,6 +131,8 @@ validation, summary tables, and run manifests, see
 `docs/ten_minute_smoke_run.md`.
 If any step behaves unexpectedly, use
 `docs/first_run_troubleshooting.md` before escalating to a real server run.
+For a one-shot contributor-oriented CPU-only entry pack, see
+`docs/contributor-self-check.md` and `scripts/run_contributor_self_check.py`.
 
 ## Codespaces
 
@@ -140,6 +143,8 @@ for reducing local machine load during CPU-only work, but it does not replace
 the real-hardware requirement for issue `#17`.
 
 See `docs/codespaces.md` for the intended Codespaces workflow.
+For a Codespaces-friendly contributor-entry validation pack, see
+`docs/contributor-self-check.md`.
 
 For early usability feedback on the dry-run and fake-server path, see
 `docs/first-user-smoke-test.md`, `docs/feedback-request-template.md`, and
@@ -164,6 +169,9 @@ For the shortest path to package a real L40S/vLLM smoke artifact bundle, see
 For a reviewer-oriented CPU-only proof pack that bundles tests, dry-run
 artifacts, validators, and logs into one artifact set, see
 `docs/maintenance/reviewer-smoke-proof.md`.
+For a contributor-oriented CPU-only self-check that packages the newcomer path,
+example review outputs, and a starter submission directory, see
+`docs/contributor-self-check.md`.
 
 ## Local Measurement Check
 

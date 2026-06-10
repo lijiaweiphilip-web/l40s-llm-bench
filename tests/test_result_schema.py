@@ -26,6 +26,8 @@ def test_dry_run_record_matches_schema() -> None:
 
     validate_result(record)
     assert record["dry_run"] is True
+    assert record["synthetic"] is True
+    assert record["benchmark_claim"] is False
     assert record["status"] == "ok"
     assert record["concurrency"] == 1
     assert record["request_index"] == 0

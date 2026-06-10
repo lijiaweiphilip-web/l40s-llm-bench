@@ -158,6 +158,39 @@ def compare_count(
         )
 
 
+def validate_synthetic_bundle_markers(
+    records: list[dict[str, Any]],
+    bundle: Path,
+    backend: str | None,
+) -> list[BundleIssue]:
+    issues: list[BundleIssue] = []
+    if backend == "fake-openai-compatible":
+        return issues
+    for index, record in enumerate(records, start=1):
+        if record.get("synthetic") is not True:
+            issues.append(
+                BundleIssue(
+                    bundle,
+                    f"raw record {index} must set synthetic=true for synthetic dry-run bundles",
+                )
+            )
+        if record.get("benchmark_claim") is not False:
+            issues.append(
+                BundleIssue(
+                    bundle,
+                    f"raw record {index} must set benchmark_claim=false for synthetic dry-run bundles",
+                )
+            )
+        if record.get("dry_run") is not True:
+            issues.append(
+                BundleIssue(
+                    bundle,
+                    f"raw record {index} must set dry_run=true for synthetic dry-run bundles",
+                )
+            )
+    return issues
+
+
 def validate_bundle(path: str | Path) -> BundleReport:
     bundle = Path(path)
     issues: list[BundleIssue] = []
@@ -219,16 +252,17 @@ def validate_bundle(path: str | Path) -> BundleReport:
         else bundle / "raw-events.jsonl"
     )
     synthetic = bool(nested_get(manifest, "hardware.synthetic"))
+    backend = manifest.get("backend") if isinstance(manifest.get("backend"), str) else None
     if not raw_path.is_file():
         return BundleReport((bundle,), tuple(issues))
     raw_report = validate_file(
         raw_path,
-        require_synthetic_fake_server=synthetic,
+        require_synthetic_fake_server=synthetic and backend == "fake-openai-compatible",
     )
     for raw_issue in raw_report.issues:
         issues.append(BundleIssue(bundle, raw_issue.format()))
 
-    counts = count_records(
+    raw_records = (
         []
         if raw_report.issues
         else [
@@ -237,6 +271,10 @@ def validate_bundle(path: str | Path) -> BundleReport:
             if line.strip()
         ]
     )
+    if synthetic and backend != "fake-openai-compatible":
+        issues.extend(validate_synthetic_bundle_markers(raw_records, bundle, backend))
+
+    counts = count_records(raw_records)
     if not raw_report.issues:
         for key, expected in counts.items():
             compare_count(issues, bundle, "manifest", manifest, key, expected)

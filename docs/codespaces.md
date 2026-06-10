@@ -30,6 +30,7 @@ codespace is ready, these are the most useful first checks:
 
 ```bash
 python -m pytest -q
+python scripts/run_contributor_self_check.py
 python scripts/run_reviewer_smoke_pack.py
 ```
 
@@ -40,3 +41,6 @@ This lowers reviewer and maintainer friction:
 - less local memory pressure for documentation and validation work
 - a more repeatable cloud environment for CPU-only checks
 - a clearer handoff path for future contributors
+
+For the bounded newcomer-oriented proof path, see
+`docs/contributor-self-check.md`.

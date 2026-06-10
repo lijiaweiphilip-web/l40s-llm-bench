@@ -36,6 +36,8 @@ remembering filenames one by one.
   `docs/result_submission_starter.md`
 - Filled example:
   `docs/result_submission_example.md`
+- Contributor self-check pack:
+  `docs/contributor-self-check.md`
 - Community entry expectations:
   `docs/community-feedback.md`
 - Starter generator:
@@ -49,6 +51,8 @@ remembering filenames one by one.
   `docs/maintenance/reviewer-smoke-proof.md`
 - Real artifact bundle quickstart:
   `docs/evidence_bundle_quickstart.md`
+- End-to-end artifact capture runbook:
+  `scripts/run_l40s_artifact_capture.sh`
 - Evidence bundle packager:
   `scripts/build_evidence_bundle.py`
 - Evidence bundle guide:

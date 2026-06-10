@@ -8,7 +8,8 @@ without overclaiming.
 
 If you already have real raw JSONL, config, environment notes, and optional GPU
 metrics files, use `scripts/build_evidence_bundle.py` to package them into a
-bundle that matches this expected shape.
+bundle that matches this expected shape. If you want the shortest end-to-end
+capture path starting from a live run, use `scripts/run_l40s_artifact_capture.sh`.
 
 ## Required Files
 

@@ -1,1 +1,2 @@
 examples/results/fake-server-synthetic/* text eol=lf
+scripts/*.sh text eol=lf
