@@ -6,6 +6,10 @@ No real L40S/vLLM artifact exists in the repository yet. This document records
 the expected artifact shape so future contributors can provide useful evidence
 without overclaiming.
 
+If you already have real raw JSONL, config, environment notes, and optional GPU
+metrics files, use `scripts/build_evidence_bundle.py` to package them into a
+bundle that matches this expected shape.
+
 ## Required Files
 
 ```text

@@ -47,6 +47,10 @@ remembering filenames one by one.
   `docs/release-checklist.md`
 - Reviewer smoke proof notes:
   `docs/maintenance/reviewer-smoke-proof.md`
+- Real artifact bundle quickstart:
+  `docs/evidence_bundle_quickstart.md`
+- Evidence bundle packager:
+  `scripts/build_evidence_bundle.py`
 - Evidence bundle guide:
   `docs/reproducibility-evidence-bundle.md`
 - Run manifest notes:

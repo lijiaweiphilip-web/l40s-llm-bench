@@ -106,3 +106,6 @@ Before sharing real L40S/vLLM numbers, publish an evidence bundle that includes:
 
 Use `docs/reproducibility-evidence-bundle.md` and `docs/gpu-metrics.md` before
 opening a PR with real data.
+If the raw run artifacts already exist, use
+`docs/evidence_bundle_quickstart.md` and `scripts/build_evidence_bundle.py` to
+package them into a reviewable bundle for issue `#17`.

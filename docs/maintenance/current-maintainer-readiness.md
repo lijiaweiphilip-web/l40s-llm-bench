@@ -44,6 +44,8 @@ real L40S artifact yet.
 - Result-submission example bundle with raw JSONL, summary, and run manifest
 - Result-review checklist, reviewer helper, maintainer response draft helper,
   and issue-chooser routing for new contributors
+- Evidence-bundle quickstart and packager for the future first real L40S/vLLM
+  artifact path
 - Public release trail through `v0.1.0`, `v0.1.1`, `v0.1.2`, `v0.1.3`, and
   `v0.1.4`
 
@@ -99,3 +101,7 @@ is true:
   `docs/result_review_examples.md`
 - Result review quickstart:
   `docs/result_review_quickstart.md`
+- Evidence bundle quickstart:
+  `docs/evidence_bundle_quickstart.md`
+- Evidence bundle packager:
+  `scripts/build_evidence_bundle.py`

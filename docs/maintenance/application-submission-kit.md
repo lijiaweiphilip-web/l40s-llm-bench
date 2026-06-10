@@ -113,6 +113,10 @@ best short answer is:
   `docs/result_review_examples.md`
 - Result review quickstart:
   `docs/result_review_quickstart.md`
+- Evidence bundle quickstart:
+  `docs/evidence_bundle_quickstart.md`
+- Evidence bundle packager:
+  `scripts/build_evidence_bundle.py`
 - Final answer pack:
   `docs/maintenance/application-final-answers.md`
 - Submission checklist:
