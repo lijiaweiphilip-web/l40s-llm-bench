@@ -18,6 +18,8 @@ remembering filenames one by one.
   `docs/maintenance/feedback-triage-proof.md`
 - Submission-review proof pack:
   `docs/maintenance/submission-review-proof.md`
+- Top-level OSS-readiness proof pack:
+  `docs/maintenance/oss-readiness-proof.md`
 
 ## Benchmark-Result Review
 
@@ -74,6 +76,8 @@ remembering filenames one by one.
 
 ## Application / Teacher / Reviewer Sharing
 
+- Top-level OSS-readiness proof:
+  `docs/maintenance/oss-readiness-proof.md`
 - Submission kit:
   `docs/maintenance/application-submission-kit.md`
 - Final answer pack:
