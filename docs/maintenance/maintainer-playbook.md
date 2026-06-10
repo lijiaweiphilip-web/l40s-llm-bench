@@ -105,6 +105,17 @@ Reject or rewrite language that claims leaderboard rank, broad hardware
 performance, model superiority, ecosystem adoption, or production readiness
 without direct evidence in the submitted artifacts.
 
+Useful maintainer shortcuts:
+
+```powershell
+python scripts\review_result_submission.py --submission-dir results\submissions\<run-id>
+python scripts\build_result_review_comment.py --submission-dir results\submissions\<run-id>
+```
+
+The first command generates a structured review summary. The second turns the
+same review state into a maintainer-style public comment draft that can be
+edited before posting on the GitHub issue.
+
 ## Release Checklist
 
 Use `docs/release-checklist.md` as the source of truth for release-specific

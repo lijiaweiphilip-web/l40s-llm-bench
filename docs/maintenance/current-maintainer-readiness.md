@@ -17,10 +17,10 @@ CPU-only CI, issue-linked merged PRs, a reproducibility evidence bundle
 validator, GPU metrics preparation, a dry-validatable vLLM/L40S smoke profile,
 and a reviewer-oriented CPU-only proof pack. It also now includes a result
 submission example bundle, a result review checklist, a small reviewer-side
-artifact review helper, and issue-chooser links that guide first-time
-contributors into the right docs and templates. It does not claim real GPU
-benchmark results, independent community adoption, or a real L40S artifact
-yet.
+artifact review helper, a maintainer response-draft helper, and issue-chooser
+links that guide first-time contributors into the right docs and templates. It
+does not claim real GPU benchmark results, independent community adoption, or a
+real L40S artifact yet.
 
 ## Public State
 
@@ -42,8 +42,8 @@ yet.
 - vLLM/L40S smoke-run profile that can be dry-validated without GPU access
 - Reviewer smoke proof workflow and one-shot local pack
 - Result-submission example bundle with raw JSONL, summary, and run manifest
-- Result-review checklist, reviewer helper, and issue-chooser routing for new
-  contributors
+- Result-review checklist, reviewer helper, maintainer response draft helper,
+  and issue-chooser routing for new contributors
 - Public release trail through `v0.1.0`, `v0.1.1`, `v0.1.2`, `v0.1.3`, and
   `v0.1.4`
 
@@ -89,3 +89,5 @@ is true:
   `docs/result_review_checklist.md`
 - Result review helper:
   `scripts/review_result_submission.py`
+- Result review comment draft:
+  `scripts/build_result_review_comment.py`

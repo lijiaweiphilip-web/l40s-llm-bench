@@ -149,6 +149,8 @@ For a ready-to-fill benchmark artifact starter directory, see
 For a maintainer-side review helper that checks raw/summary/manifest
 consistency, see `docs/result_review_checklist.md` and
 `scripts/review_result_submission.py`.
+For a maintainer response draft that can be adapted into a GitHub issue reply,
+see `scripts/build_result_review_comment.py`.
 For a reviewer-oriented CPU-only proof pack that bundles tests, dry-run
 artifacts, validators, and logs into one artifact set, see
 `docs/maintenance/reviewer-smoke-proof.md`.

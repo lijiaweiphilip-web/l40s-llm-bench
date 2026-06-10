@@ -23,6 +23,13 @@ python scripts/review_result_submission.py \
   --submission-dir results/submissions/<run-id>
 ```
 
+If you want a maintainer-style issue reply draft after that check:
+
+```bash
+python scripts/build_result_review_comment.py \
+  --submission-dir results/submissions/<run-id>
+```
+
 The helper does not replace human review. It only checks artifact presence,
 schema validity, summary consistency, and manifest consistency before the
 maintainer evaluates redaction, hardware disclosure, and claim wording.
