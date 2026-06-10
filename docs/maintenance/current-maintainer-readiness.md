@@ -77,6 +77,8 @@ is true:
   https://github.com/lijiaweiphilip-web/l40s-llm-bench
 - Latest release:
   https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4
+- Maintainer ops index:
+  `docs/maintainer_ops_index.md`
 - Current scorecard:
   `docs/maintenance/application-readiness-scorecard.md`
 - Evidence packet:

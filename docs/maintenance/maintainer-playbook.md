@@ -4,6 +4,9 @@ This playbook is for routine maintenance of `l40s-llm-bench`. It keeps the
 project focused on reproducible evidence rather than unsupported benchmark or
 adoption claims.
 
+For a single-page map of the maintainer-facing docs and scripts, use
+`docs/maintainer_ops_index.md`.
+
 ## Weekly Triage
 
 1. Review new issues and pull requests.

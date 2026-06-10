@@ -91,6 +91,8 @@ best short answer is:
   https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4
 - Current maintainer readiness:
   `docs/maintenance/current-maintainer-readiness.md`
+- Maintainer ops index:
+  `docs/maintainer_ops_index.md`
 - Application scorecard:
   `docs/maintenance/application-readiness-scorecard.md`
 - Evidence packet:

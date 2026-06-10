@@ -16,6 +16,7 @@ It does not claim real GPU benchmark results yet.
 
 - Latest release: `v0.1.4`
 - Reviewer proof path: `docs/maintenance/reviewer-smoke-proof.md`
+- Maintainer ops index: `docs/maintainer_ops_index.md`
 - Current maintainer readiness: `docs/maintenance/current-maintainer-readiness.md`
 - Application pack: `docs/maintenance/application-final-answers.md`
 - Result submission starter: `docs/result_submission_starter.md`
