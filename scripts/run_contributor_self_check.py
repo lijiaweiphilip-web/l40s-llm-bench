@@ -106,6 +106,8 @@ def build_steps(output_dir: Path) -> list[StepSpec]:
     starter_dir = output_dir / "submission-starter"
     feedback_dir = output_dir / "smoke-feedback-starter"
     feedback_review = review_dir / "example_smoke_feedback_review.md"
+    feedback_comment = review_dir / "example_smoke_feedback_comment.md"
+    feedback_comment_summary = review_dir / "example_smoke_feedback_review_summary.md"
 
     dry_raw = raw_dir / "contributor_dry_run.jsonl"
     summary_csv = tables_dir / "summary.csv"
@@ -256,6 +258,21 @@ def build_steps(output_dir: Path) -> list[StepSpec]:
                 str(feedback_review),
             ],
             (feedback_review,),
+        ),
+        StepSpec(
+            "draft_example_smoke_feedback_comment",
+            "Draft example maintainer comment for smoke feedback",
+            [
+                python,
+                "scripts/build_smoke_feedback_comment.py",
+                "--feedback-dir",
+                "examples/feedback/first-user-sample",
+                "--output",
+                str(feedback_comment),
+                "--review-summary-output",
+                str(feedback_comment_summary),
+            ],
+            (feedback_comment, feedback_comment_summary),
         ),
         StepSpec(
             "init_submission_starter",
