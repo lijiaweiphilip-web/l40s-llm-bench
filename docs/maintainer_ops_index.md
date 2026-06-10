@@ -40,6 +40,8 @@ remembering filenames one by one.
   `docs/contributor-self-check.md`
 - Smoke-feedback starter:
   `docs/smoke_feedback_starter.md`
+- Smoke-feedback review helper:
+  `docs/smoke_feedback_review.md`
 - Community entry expectations:
   `docs/community-feedback.md`
 - Starter generator:

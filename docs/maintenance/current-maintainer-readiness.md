@@ -44,6 +44,7 @@ artifact yet.
 - Reviewer smoke proof workflow and one-shot local pack
 - Contributor self-check workflow and one-shot local pack
 - Structured smoke-feedback starter for early usability reports
+- Maintainer-side smoke-feedback review helper and filled example packet
 - Result-submission example bundle with raw JSONL, summary, and run manifest
 - Result-review checklist, reviewer helper, maintainer response draft helper,
   and issue-chooser routing for new contributors
@@ -90,6 +91,8 @@ is true:
   `docs/maintenance/codex-for-oss-evidence.md`
 - Reviewer proof:
   `docs/maintenance/reviewer-smoke-proof.md`
+- Smoke-feedback review helper:
+  `docs/smoke_feedback_review.md`
 - Submission kit:
   `docs/maintenance/application-submission-kit.md`
 - Result review checklist:

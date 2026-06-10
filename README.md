@@ -152,6 +152,9 @@ For early usability feedback on the dry-run and fake-server path, see
 For a structured local starter that helps a first-time user prepare a clean
 smoke-feedback report, see `docs/smoke_feedback_starter.md` and
 `scripts/init_smoke_feedback.py`.
+For a maintainer-side review helper that checks smoke-feedback completeness,
+scope, and obvious redaction risks, see `docs/smoke_feedback_review.md` and
+`scripts/review_smoke_feedback.py`.
 For a ready-to-fill benchmark artifact starter directory, see
 `docs/result_submission_starter.md` and
 `scripts/init_result_submission.py`.

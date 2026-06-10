@@ -36,6 +36,7 @@ Key generated files:
 - `results/contributor-self-check/contributor_self_check.json`
 - `results/contributor-self-check/review/example_result_review.md`
 - `results/contributor-self-check/review/example_result_comment.md`
+- `results/contributor-self-check/review/example_smoke_feedback_review.md`
 - `results/contributor-self-check/smoke-feedback-starter/README.md`
 - `results/contributor-self-check/submission-starter/README.md`
 
