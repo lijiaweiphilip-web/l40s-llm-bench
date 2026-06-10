@@ -7,11 +7,11 @@ Date: 2026-06-10
 老师您好，
 
 我最近把 `l40s-llm-bench` 继续往“可公开展示、可复查、可申请”的方向推进了一步。
-这个仓库现在已经有公开 release 到 `v0.1.4`、通过的 CPU-only CI、reviewer
-smoke proof、reproducibility validator、GPU metrics 准备、可 dry-validate 的
-vLLM/L40S smoke profile，以及更完整的社区提交/审核入口，包括
-result-submission example bundle、result-review checklist 和 GitHub issue
-chooser。
+这个仓库现在已经有公开 release 到 `v0.1.5`、通过的 CPU-only CI、reviewer
+smoke proof、contributor self-check、community-entry proof、
+reproducibility validator、GPU metrics 准备、可 dry-validate 的 vLLM/L40S
+smoke profile，以及更完整的社区提交/审核入口，包括 result-submission
+example bundle、result-review checklist 和 GitHub issue chooser。
 
 我目前不会把它描述成“已经有真实 GPU benchmark 结果”或者“已经有独立社区验证”，
 因为这两点在公开证据上还没有完成。更准确的说法是：它已经形成了一个 strong
@@ -28,7 +28,7 @@ Hello,
 
 I have continued improving `l40s-llm-bench` as a public, reviewable, and
 application-ready open-source project. The repository now has public releases
-through `v0.1.4`, passing CPU-only CI, reviewer smoke proof, contributor
+through `v0.1.5`, passing CPU-only CI, reviewer smoke proof, contributor
 self-check, community-entry proof, reproducibility validators, GPU metrics
 preparation, a dry-validatable vLLM/L40S smoke profile, and a clearer
 community submission/review path with a result-submission example bundle, a

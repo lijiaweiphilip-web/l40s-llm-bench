@@ -7,7 +7,7 @@
 [![Feedback triage proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml)
 [![Submission review proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml)
 [![OSS readiness proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/oss-readiness-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/oss-readiness-proof.yml)
-[![Latest release](https://img.shields.io/github/v/release/lijiaweiphilip-web/l40s-llm-bench)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4)
+[![Latest release](https://img.shields.io/github/v/release/lijiaweiphilip-web/l40s-llm-bench)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.5)
 
 Minimal scaffold for reproducible LLM inference benchmark experiments on L40S
 and similar single-GPU setups.
@@ -19,7 +19,7 @@ It does not claim real GPU benchmark results yet.
 
 ## Quick Links
 
-- Latest release: `v0.1.4`
+- Latest release: `v0.1.5`
 - Reviewer proof path: `docs/maintenance/reviewer-smoke-proof.md`
 - Community entry proof path: `docs/maintenance/community-entry-proof.md`
 - Maintainer ops index: `docs/maintainer_ops_index.md`
@@ -376,13 +376,13 @@ vLLM/L40S smoke profile. Reviewer-oriented, contributor-oriented, and
 community-entry CPU-only proof packs are also available through checked-in
 scripts and GitHub Actions.
 
-The current public maintenance release is `v0.1.4`, which packages the newer
-community-entry work after the earlier `v0.1.3` reviewer smoke proof update.
-The repository now also includes a result-submission example bundle, a result
-review checklist, a starter-kit generator for new artifact submissions, and an
-issue chooser that points contributors toward the right first docs and
-templates. No real GPU benchmark results, independent external feedback, or
-real L40S/vLLM artifact bundle are claimed yet.
+The current public maintenance release is `v0.1.5`, which packages the newer
+proof-pack and community-entry hardening work after the earlier `v0.1.4`
+submission/review path update. The repository now also includes contributor
+self-check, smoke-feedback starter/review/reply helpers, feedback-triage
+proof, submission-review proof, a top-level OSS-readiness proof, and a
+community-entry proof pack. No real GPU benchmark results, independent
+external feedback, or real L40S/vLLM artifact bundle are claimed yet.
 
 For the current maintainer-readiness snapshot, see
 `docs/maintenance/current-maintainer-readiness.md`.

@@ -23,7 +23,7 @@ maintainer responsibility for other projects or ecosystems.
 ## Current Public Evidence
 
 - Repository: https://github.com/lijiaweiphilip-web/l40s-llm-bench
-- Latest release: `v0.1.4`
+- Latest release: `v0.1.5`
 - PR #14 added a reproducibility evidence bundle contract, synthetic
   fake-server evidence bundle, validator, tests, and CI validation. It closed
   issue #2.
@@ -40,12 +40,13 @@ maintainer responsibility for other projects or ecosystems.
   closed issue #5.
 - PR #21 added the reviewer smoke proof pack and led to the `v0.1.3`
   maintenance release.
-- Direct `main` updates after `v0.1.3` added a result-submission example
-  bundle, a result-review checklist, and GitHub issue-chooser routing for new
-  contributors; those changes are packaged in `v0.1.4`.
+- Direct `main` updates after `v0.1.4` added contributor self-check,
+  smoke-feedback starter/review/reply helpers, feedback-triage proof,
+  submission-review proof, OSS-readiness proof, and community-entry proof;
+  those changes are packaged in `v0.1.5`.
 - Main CI plus the reviewer smoke proof, contributor self-check,
   community-entry proof, feedback-triage proof, submission-review proof, and
-  OSS-readiness proof workflows succeeded after the `v0.1.4` community-entry
+  OSS-readiness proof workflows succeeded after the `v0.1.5` maintainer-proof
   update.
 - Dedicated reviewer smoke proof, contributor self-check, community-entry
   proof, feedback-triage proof, submission-review proof, and top-level
@@ -115,7 +116,7 @@ It is world contact:
   needed.
 
 The application can be framed as strong early-stage maintainer evidence after
-`v0.1.4`, but an honest "~80% readiness" framing should wait for either G9 or
+`v0.1.5`, but an honest "~80% readiness" framing should wait for either G9 or
 G10.
 
 ## 150-Word English Form Text

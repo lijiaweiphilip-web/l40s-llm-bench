@@ -10,7 +10,7 @@ real GPU benchmark results.
 | --- | ---: | --- | --- |
 | Project clarity | 5/5 | README, smoke-run docs, contributor self-check, community-entry proof, troubleshooting, result policy, evidence bundle docs, GPU metrics guide, and vLLM smoke-profile docs explain the scope and non-claims clearly. | Add one real public artifact bundle after hardware access exists. |
 | Maintainer role | 5/5 | Public releases, issue-linked PRs, maintainer playbook, release notes, and evidence docs show active scoped stewardship. | Continue handling issue-linked follow-ups and keep limitations explicit. |
-| Release cadence | 5/5 | `v0.1.0`, `v0.1.1`, `v0.1.2`, `v0.1.3`, and `v0.1.4` are published. `v0.1.4` is the current public release. | Publish the next release only after a real new signal lands. |
+| Release cadence | 5/5 | `v0.1.0`, `v0.1.1`, `v0.1.2`, `v0.1.3`, `v0.1.4`, and `v0.1.5` are published. `v0.1.5` is the current public release. | Tie the next release to either a real outside signal or another material maintainer-workflow improvement. |
 | CI and quality | 5/5 | Main CI plus the reviewer smoke proof, contributor self-check, community-entry proof, feedback-triage proof, submission-review proof, and OSS-readiness proof workflows keep the public maintainer story executable on CPU-only infrastructure. | Keep public workflows CPU-only unless a safe public GPU runner exists. |
 | Issue triage | 5/5 | Issues #2, #3, #4, #5, #6, and #7 were closed through merged PRs. Open issues are now focused on the remaining real-world gaps: #12 and #17. | Convert the next real feedback or hardware artifact into one follow-up PR. |
 | Reproducibility | 5/5 | Evidence bundle checklist/rubric, synthetic bundle, validator, run manifests, GPU metrics guide, vLLM profile, reviewer smoke proof pack, community-entry proof pack, feedback-triage proof pack, submission-review proof pack, and result-submission example bundle create a strong public reproducibility trail. | Add one real artifact bundle when hardware exists. |
@@ -39,7 +39,7 @@ plan:
   bundle, a result-review checklist, GitHub issue-chooser routing for new
   contributors, contributor self-check, community-entry proof, feedback-triage
   proof, submission-review proof, and a top-level OSS-readiness proof path,
-  which are packaged in `v0.1.4`.
+  which are packaged in `v0.1.5`.
 - The repo now has reviewer-oriented, community-entry, feedback-triage,
   submission-review, and top-level OSS-readiness artifact paths for CI-backed
   CPU-only verification.
@@ -51,7 +51,7 @@ independent public feedback or one real hardware artifact bundle.
 ## Recommended Evidence Links
 
 - Repository: https://github.com/lijiaweiphilip-web/l40s-llm-bench
-- Latest release: https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4
+- Latest release: https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.5
 - Reproducibility bundle PR: https://github.com/lijiaweiphilip-web/l40s-llm-bench/pull/14
 - GPU metrics PR: https://github.com/lijiaweiphilip-web/l40s-llm-bench/pull/15
 - vLLM/L40S profile PR: https://github.com/lijiaweiphilip-web/l40s-llm-bench/pull/16
@@ -76,7 +76,7 @@ independent public feedback or one real hardware artifact bundle.
 | G1 reproducibility evidence bundle | Complete | PR #14, issue #2 closed |
 | G2 GPU metrics guide | Complete | PR #15, issue #4 closed |
 | G3 vLLM/L40S smoke profile | Complete | PR #16, issue #3 closed |
-| G4 current maintenance release | Complete | `v0.1.4` published on 2026-06-10 |
+| G4 current maintenance release | Complete | `v0.1.5` published on 2026-06-10 |
 | G5 evidence packet and scorecard | Complete | PR #18 and current maintenance docs |
 | G6 GitHub profile signal | Complete | Public profile foregrounds `l40s-llm-bench` |
 | G7 hardware/tester ask | Complete | Issues #12 and #17 |

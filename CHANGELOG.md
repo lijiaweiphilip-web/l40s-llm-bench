@@ -2,6 +2,98 @@
 
 All notable release preparation notes for this project are recorded here.
 
+## [0.1.5] - 2026-06-10
+
+Maintenance release focused on public maintainer proof packs, newcomer-entry
+hardening, and release-facing application alignment.
+
+### Added
+
+- Contributor self-check workflow, one-shot local proof pack, and CPU-only
+  artifact capture runbook.
+- Smoke-feedback starter generator, smoke-feedback review helper, filled
+  example packet, and maintainer-style reply draft helper for the issue `#12`
+  path.
+- Submission-review proof pack, feedback-triage proof pack, top-level
+  OSS-readiness proof pack, and community-entry proof pack.
+- Maintainer operations index plus refreshed application, evidence, and
+  readiness docs that align the public repo story with the current proof-pack
+  surface.
+- Evidence-bundle packager and quickstart path for future real L40S/vLLM
+  artifact capture.
+
+### Validation
+
+- GitHub Actions on release commit `9f642cd` all passed:
+  - CI
+  - Contributor self-check
+  - Community entry proof
+  - Reviewer smoke proof
+  - Feedback triage proof
+  - Submission review proof
+  - OSS readiness proof
+- Local validation while preparing `v0.1.5`:
+  - `python -m pytest -q tests/test_community_entry_audit.py tests/test_community_entry_proof.py tests/test_oss_readiness_proof.py tests/test_init_smoke_feedback.py tests/test_result_submission_starter.py tests/test_review_smoke_feedback.py tests/test_result_review_helper.py` -> 15 passed
+  - `python scripts/run_community_entry_proof.py` -> PASS
+  - `python scripts/run_oss_readiness_proof.py` -> PASS
+
+### Known limitations
+
+- This release still does not include a real L40S, vLLM, model-server, or GPU
+  benchmark artifact.
+- Maintainer-controlled alternate-account comments still do not count as
+  independent external feedback.
+- Issue `#12` remains a public usability-feedback invitation, not adoption
+  evidence.
+- Issue `#17` still requests a real hardware-backed artifact, but does not
+  itself satisfy that gate.
+
+## [0.1.4] - 2026-06-10
+
+Maintenance release focused on the community submission and review entry path.
+
+### Added
+
+- Result-submission example bundle using the synthetic fake-server fixture.
+- Result-review checklist for benchmark-result issues.
+- GitHub issue chooser links that route first-time users toward the smoke-run
+  guide, submission example, and maintainer-readiness docs.
+- Refreshed maintainer-readiness and application materials to match the then
+  current public repo state.
+
+### Validation
+
+- GitHub release `v0.1.4 - community submission and review path` published on
+  2026-06-10.
+- Main branch CI and reviewer smoke proof were green on the release commit.
+
+### Known limitations
+
+- This release did not add real L40S/vLLM benchmark evidence.
+- This release did not add independent external feedback.
+
+## [0.1.3] - 2026-06-04
+
+Maintenance release focused on reviewer-facing proof and maintainer readiness
+updates.
+
+### Added
+
+- Clarified the external-feedback triage path.
+- Documented the `llama.cpp` backend sequencing decision after the vLLM path.
+- Added the reviewer smoke proof pack for a reviewer-oriented CPU-only public
+  verification path.
+
+### Validation
+
+- GitHub release `v0.1.3 - reviewer smoke proof and maintainer readiness update`
+  published on 2026-06-04.
+
+### Known limitations
+
+- This release did not add real GPU benchmark evidence.
+- This release did not add independently confirmed external adoption.
+
 ## [0.1.2] - 2026-06-02
 
 Maintenance patch focused on reproducibility evidence, GPU telemetry

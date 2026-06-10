@@ -5,7 +5,7 @@ Date: 2026-06-10
 Repository: https://github.com/lijiaweiphilip-web/l40s-llm-bench
 
 This note is the short public-facing status summary for `l40s-llm-bench` after
-the `v0.1.4` maintenance release. It is written for teachers, reviewers, or
+the `v0.1.5` maintenance release. It is written for teachers, reviewers, or
 program staff who need a quick, honest snapshot of what exists today.
 
 ## One-Paragraph Summary
@@ -25,7 +25,7 @@ artifact yet.
 
 ## Public State
 
-- Latest release: `v0.1.4`
+- Latest release: `v0.1.5`
 - Latest maintenance upgrade: community submission and review entry path
 - Public repo hygiene: license, contribution guide, code of conduct, security
   policy, support file, issue templates, and maintainer docs
@@ -55,8 +55,8 @@ artifact yet.
   and issue-chooser routing for new contributors
 - Evidence-bundle quickstart and packager for the future first real L40S/vLLM
   artifact path
-- Public release trail through `v0.1.0`, `v0.1.1`, `v0.1.2`, `v0.1.3`, and
-  `v0.1.4`
+- Public release trail through `v0.1.0`, `v0.1.1`, `v0.1.2`, `v0.1.3`,
+  `v0.1.4`, and `v0.1.5`
 
 ## Honest Gaps
 
@@ -87,7 +87,7 @@ is true:
 - Repository:
   https://github.com/lijiaweiphilip-web/l40s-llm-bench
 - Latest release:
-  https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.4
+  https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.5
 - Maintainer ops index:
   `docs/maintainer_ops_index.md`
 - Current scorecard:

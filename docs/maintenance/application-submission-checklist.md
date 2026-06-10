@@ -8,7 +8,7 @@ project to a teacher, reviewer, or program contact.
 ## Repository State
 
 - [ ] Repository link opens correctly
-- [ ] Latest public release is `v0.1.4`
+- [ ] Latest public release is `v0.1.5`
 - [ ] Latest public release notes are visible
 - [ ] `main` branch CI is green
 - [ ] `Reviewer smoke proof` workflow is green
@@ -29,7 +29,7 @@ project to a teacher, reviewer, or program contact.
 
 ## Best Evidence To Mention
 
-- [ ] public releases through `v0.1.4`
+- [ ] public releases through `v0.1.5`
 - [ ] passing CPU-only CI
 - [ ] reviewer smoke proof workflow
 - [ ] contributor self-check workflow
