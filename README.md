@@ -19,14 +19,20 @@ It does not claim real GPU benchmark results yet.
 
 ## Quick Links
 
-- Latest release: `v0.1.5`
-- Reviewer proof path: `docs/maintenance/reviewer-smoke-proof.md`
-- Community entry proof path: `docs/maintenance/community-entry-proof.md`
-- Maintainer ops index: `docs/maintainer_ops_index.md`
-- Current maintainer readiness: `docs/maintenance/current-maintainer-readiness.md`
-- Application pack: `docs/maintenance/application-final-answers.md`
-- Result submission starter: `docs/result_submission_starter.md`
-- Result submission example: `docs/result_submission_example.md`
+- Latest release: [GitHub releases](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases)
+- Ten-minute CPU-only smoke run: [`docs/ten_minute_smoke_run.md`](docs/ten_minute_smoke_run.md)
+- Result schema: [`docs/result-schema.md`](docs/result-schema.md)
+- Reproducibility contract: [`docs/reproducibility-evidence-bundle.md`](docs/reproducibility-evidence-bundle.md)
+- Real hardware run plan: [`docs/vllm-l40s-smoke-run.md`](docs/vllm-l40s-smoke-run.md)
+- Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+
+## Current hardware status
+
+This repository currently contains a tested CPU-only harness and synthetic/fake-server
+validation paths. It does **not** yet contain a real L40S/vLLM benchmark result.
+Any future hardware-backed result must include the model revision, GPU and software
+versions, serving flags, raw JSONL, failed cases, repeated-run policy and a hash-verified
+manifest before it is described as a benchmark result.
 
 ## Purpose
 
