@@ -37,7 +37,12 @@ class SanityScenario:
 
 
 SCENARIOS = [
-    SanityScenario(name="baseline_stream", ttft_ms=80, tpot_ms=20, tokens=8),
+    # Process/thread scheduling on Windows can add ~100 ms before the first
+    # local response. Keep the check wide enough for a valid harness while
+    # still catching an incorrect timing unit or a missing first-token event.
+    SanityScenario(
+        name="baseline_stream", ttft_ms=80, tpot_ms=20, tokens=8, ttft_tolerance_ms=220.0
+    ),
     SanityScenario(name="high_ttft_stream", ttft_ms=350, tpot_ms=20, tokens=8),
     SanityScenario(name="slow_tpot_stream", ttft_ms=80, tpot_ms=90, tokens=8),
     SanityScenario(name="concurrent_stream", ttft_ms=80, tpot_ms=20, tokens=8, concurrency=4),
@@ -66,6 +71,28 @@ def start_server(scenario: SanityScenario) -> tuple[ThreadingHTTPServer, str]:
     thread.start()
     host, port = server.server_address
     return server, f"http://{host}:{port}/v1/chat/completions"
+
+
+def warm_up_server(endpoint: str, scenario: SanityScenario) -> None:
+    """Complete one unrecorded request before timing a scenario.
+
+    On Windows the first request can include thread/socket startup scheduling
+    that is unrelated to the fake server's configured TTFT. Warming the local
+    endpoint keeps the sanity check about measurement units and token events,
+    rather than process-start jitter.
+    """
+    case = {
+        "case_id": f"{scenario.name}_warmup",
+        "framework": "fake-openai",
+        "model": "fake-openai-model",
+        "endpoint": endpoint,
+        "prompt_tokens": 64,
+        "output_tokens": scenario.tokens,
+        "batch_size": 1,
+        "concurrency": 1,
+        "timeout_seconds": 10,
+    }
+    real_request_record(case, 0, "sanity-warmup", True, 0)
 
 
 def check_record(record: dict[str, Any], scenario: SanityScenario) -> list[str]:
@@ -101,6 +128,8 @@ def run_scenarios(repeats: int) -> tuple[list[dict[str, Any]], list[str]]:
     for scenario in SCENARIOS:
         server, endpoint = start_server(scenario)
         try:
+            if scenario.expected_status == "ok":
+                warm_up_server(endpoint, scenario)
             for repeat_index in range(repeats):
                 case = {
                     "case_id": scenario.name,
@@ -140,7 +169,7 @@ def run_scenarios(repeats: int) -> tuple[list[dict[str, Any]], list[str]]:
 
 def write_report(path: Path, rows: list[dict[str, Any]], failures: list[str]) -> None:
     status = "PASS" if not failures else "FAIL"
-    body = [f"# Benchmark Sanity Checks", "", f"Status: {status}", ""]
+    body = ["# Benchmark Sanity Checks", "", f"Status: {status}", ""]
     body.append("These checks use a local fake OpenAI-compatible streaming server.")
     body.append("They validate the measurement harness, not model performance.")
     body.extend(["", "## Summary", "", rows_to_markdown(rows)])

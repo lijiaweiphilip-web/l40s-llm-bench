@@ -12,6 +12,17 @@ dev = [
   "pytest>=8.0",
 ]
 
+[tool.setuptools]
+packages = ["l40s_bench"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F"]
+ignore = ["E402", "E501"]
