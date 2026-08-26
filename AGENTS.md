@@ -80,8 +80,7 @@ generated artifacts.
 
 Do not touch or inspect these areas unless the user explicitly asks:
 
-- Sibling repositories or private projects under
-  `C:\Users\56491\OneDrive\文档\学术`.
+- Sibling repositories or private projects outside this repository.
 - Zotero libraries, PDFs, BibTeX exports, or paper drafts outside this repo.
 - NTU GPU scripts, cluster paths, queue state, credentials, and private
   datasets outside this repo.
