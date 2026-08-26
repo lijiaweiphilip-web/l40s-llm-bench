@@ -1,131 +1,24 @@
 # l40s-llm-bench
 
 [![CI](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml)
-[![Reviewer smoke proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml)
-[![Contributor self-check](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml)
-[![Community entry proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/community-entry-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/community-entry-proof.yml)
-[![Feedback triage proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml)
-[![Submission review proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml)
-[![OSS readiness proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/oss-readiness-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/oss-readiness-proof.yml)
-[![Latest release](https://img.shields.io/github/v/release/lijiaweiphilip-web/l40s-llm-bench)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.5)
-
-Minimal scaffold for reproducible LLM inference benchmark experiments on L40S
-and similar single-GPU setups.
-
-This repository is intentionally starting with the parts that can be built and
-verified without GPU access: configuration, dry-run execution, raw result
-schemas, summarization, environment capture, fake-server validation, and tests.
-It does not claim real GPU benchmark results yet.
-
-## Quick Links
-
-- Latest release: [GitHub releases](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases)
-- Ten-minute CPU-only smoke run: [`docs/ten_minute_smoke_run.md`](docs/ten_minute_smoke_run.md)
-- Result schema: [`docs/result-schema.md`](docs/result-schema.md)
-- Reproducibility contract: [`docs/reproducibility-evidence-bundle.md`](docs/reproducibility-evidence-bundle.md)
-- Real hardware run plan: [`docs/vllm-l40s-smoke-run.md`](docs/vllm-l40s-smoke-run.md)
-- Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md)
-
-## Current hardware status
-
-This repository currently contains a tested CPU-only harness and synthetic/fake-server
-validation paths. It does **not** yet contain a real L40S/vLLM benchmark result.
-Any future hardware-backed result must include the model revision, GPU and software
-versions, serving flags, raw JSONL, failed cases, repeated-run policy and a hash-verified
-manifest before it is described as a benchmark result.
+[![Latest release](https://img.shields.io/github/v/release/lijiaweiphilip-web/l40s-llm-bench)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Purpose
 
-- Run small LLM inference benchmark experiments against OpenAI-compatible
-  servers.
-- Record raw JSONL logs for each request and benchmark case.
-- Summarize latency, throughput, errors, and environment metadata.
-- Keep benchmark claims tied to reproducible commands and versioned configs.
+`l40s-llm-bench` is a small, reproducible harness for measuring request-level
+latency and throughput of OpenAI-compatible LLM servers on local GPU or CPU
+setups. It keeps the command, workload, raw JSONL, summary and environment
+metadata together so a result can be checked instead of reduced to one number.
 
-## Why This Exists
+## Current status
 
-LLM benchmark posts often compress too much context into one number. Hardware,
-driver versions, serving flags, prompt shapes, concurrency, streaming behavior,
-and failed requests can change the story. This project exists to make small
-local measurements easier to repeat and harder to overstate.
+The public repository contains a tested CPU-only and fake-server path. It does
+**not** yet contain a real NVIDIA L40S/vLLM benchmark result. A hardware-backed
+result will be added only with an exact model revision, GPU/software disclosure,
+serving flags, repeated runs, failures and a hash-verified manifest.
 
-The first goal is not to crown a winner. The first goal is a public, inspectable
-path from config to raw JSONL to summary table to run manifest.
-
-See `docs/project-rationale.md` for the longer rationale and audience.
-
-## Who It Helps
-
-- Practitioners checking whether their local L40S inference setup is behaving
-  as expected.
-- Researchers who need benchmark artifacts that can be audited after the fact.
-- Maintainers comparing changes to a benchmark harness before spending GPU
-  time.
-- Readers of benchmark results who want enough context to reproduce or question
-  a claim.
-
-This is not a leaderboard, hosted benchmark service, or adoption signal for any
-model, framework, or hardware vendor.
-
-## Reproducibility Contract
-
-Any shared result should include:
-
-- the command used to run the benchmark
-- benchmark config and model config
-- raw JSONL output
-- summary CSV or Markdown
-- run manifest with artifact hashes
-- hardware, driver, CUDA, framework, and model revision notes
-- repeated-run policy, including failed, skipped, timeout, or OOM cases
-
-If one of those items is missing, treat the result as a local observation rather
-than a benchmark claim.
-
-## What Is Measured
-
-The current scaffold records request-level harness data:
-
-- total request latency
-- streaming time to first token, when streaming is enabled
-- streaming time per output token, when token events are observed
-- output token event count for streaming responses
-- output tokens per second as calculated from the observed request
-- status, HTTP status, and error category
-- prompt and output token targets from the benchmark case
-- concurrency, repeat index, and request index
-
-See `docs/result-schema.md` for the current raw JSONL schema.
-
-## What Is Not Measured Yet
-
-- No real GPU benchmark results are included in this repository.
-- Dry-run numbers are synthetic and test only the pipeline.
-- The fake server validates timing measurement mechanics, not model or GPU
-  performance.
-- GPU utilization, power draw, memory bandwidth, and scheduler effects are not
-  captured by the benchmark client yet.
-- Token counts are config-level targets, not tokenizer-verified counts.
-- No universal claims are made about L40S, vLLM, llama.cpp, or any model.
-
-## Hardware Disclosure
-
-Before sharing real numbers, replace placeholders in
-`configs/hardware.example.yaml` or attach equivalent notes. At minimum, disclose
-GPU model, GPU count, VRAM, CPU, system RAM, driver version, CUDA version,
-framework version, model identifier or revision, and any serving flags that
-affect throughput or latency.
-
-Do not publish private cluster paths, hostnames, usernames, job IDs, API keys,
-or internal data.
-
-For GPU telemetry fields and artifact placement, see `docs/gpu-metrics.md`.
-DCGM is optional; see `docs/dcgm-metrics.md` for the expected optional fields.
-
-## Quickstart
-
-Start here if you have 10 minutes and want to check the harness before using
-GPU time:
+## Quickstart (CPU-only, about ten minutes)
 
 ```bash
 python -m pip install -r requirements-dev.txt
@@ -134,278 +27,58 @@ python scripts/summarize_results.py --input results/raw/dry_run.jsonl --output-d
 python -m pytest
 ```
 
-The dry run writes synthetic records only. It does not contact a model server,
-download a model, or use a GPU.
-
-For the full guided path through dry-run records, fake-server streaming
-validation, summary tables, and run manifests, see
-`docs/ten_minute_smoke_run.md`.
-If any step behaves unexpectedly, use
-`docs/first_run_troubleshooting.md` before escalating to a real server run.
-For a one-shot contributor-oriented CPU-only entry pack, see
-`docs/contributor-self-check.md` and `scripts/run_contributor_self_check.py`.
-
-## Codespaces
-
-For documentation, tests, dry runs, and reviewer-proof maintenance work, this
-repository can now be opened in GitHub Codespaces with the checked-in
-`.devcontainer/devcontainer.json` configuration. The Codespaces path is useful
-for reducing local machine load during CPU-only work, but it does not replace
-the real-hardware requirement for issue `#17`.
-
-See `docs/codespaces.md` for the intended Codespaces workflow.
-For a Codespaces-friendly contributor-entry validation pack, see
-`docs/contributor-self-check.md`.
-
-For early usability feedback on the dry-run and fake-server path, see
-`docs/first-user-smoke-test.md`, `docs/feedback-request-template.md`, and
-`docs/feedback-triage-policy.md`.
-For a structured local starter that helps a first-time user prepare a clean
-smoke-feedback report, see `docs/smoke_feedback_starter.md` and
-`scripts/init_smoke_feedback.py`.
-For a maintainer-side review helper that checks smoke-feedback completeness,
-scope, and obvious redaction risks, see `docs/smoke_feedback_review.md` and
-`scripts/review_smoke_feedback.py`.
-For a maintainer-style public reply draft after that review, see
-`docs/smoke_feedback_response_templates.md` and
-`scripts/build_smoke_feedback_comment.py`.
-For a one-shot maintainer proof pack covering the full issue `#12` triage path,
-see `docs/maintenance/feedback-triage-proof.md` and
-`scripts/run_feedback_triage_proof.py`.
-For a one-shot community-entry proof pack covering README routing, issue
-chooser links, starter generators, and example review helpers, see
-`docs/maintenance/community-entry-proof.md` and
-`scripts/run_community_entry_proof.py`.
-For a one-shot maintainer proof pack covering the benchmark-result submission
-and review path, see `docs/maintenance/submission-review-proof.md` and
-`scripts/run_submission_review_proof.py`.
-For a top-level OSS-readiness pack that aggregates the main public proof flows,
-see `docs/maintenance/oss-readiness-proof.md` and
-`scripts/run_oss_readiness_proof.py`.
-For a ready-to-fill benchmark artifact starter directory, see
-`docs/result_submission_starter.md` and
-`scripts/init_result_submission.py`.
-For a maintainer-side review helper that checks raw/summary/manifest
-consistency, see `docs/result_review_checklist.md` and
-`scripts/review_result_submission.py`.
-For a maintainer response draft that can be adapted into a GitHub issue reply,
-see `scripts/build_result_review_comment.py`.
-For the verdict matrix behind those replies, see
-`docs/result_review_response_templates.md`.
-For example maintainer review replies that read like real GitHub threads, see
-`docs/result_review_examples.md`.
-For the shortest maintainer handling path for benchmark-result issues, see
-`docs/result_review_quickstart.md`.
-For the shortest path to package a real L40S/vLLM smoke artifact bundle, see
-`docs/evidence_bundle_quickstart.md` and
-`scripts/build_evidence_bundle.py`.
-For a reviewer-oriented CPU-only proof pack that bundles tests, dry-run
-artifacts, validators, and logs into one artifact set, see
-`docs/maintenance/reviewer-smoke-proof.md`.
-For a contributor-oriented CPU-only self-check that packages the newcomer path,
-example review outputs, and a starter submission directory, see
-`docs/contributor-self-check.md`.
-
-## Local Measurement Check
-
-Before spending GPU time, validate streaming TTFT/TPOT measurement against a
-controlled fake OpenAI-compatible server:
-
-```bash
-python scripts/fake_openai_server.py --port 18000 --ttft-ms 120 --tpot-ms 25 --tokens 8
-```
-
-In another terminal:
-
-```bash
-python scripts/bench_openai_compatible.py --config configs/fake_server_matrix.yaml --output results/raw/fake_server_streaming.jsonl --stream
-python scripts/summarize_results.py --input results/raw/fake_server_streaming.jsonl --output-dir results/tables
-```
-
-This checks the benchmark client, not model performance.
-
-For a multi-scenario harness check:
-
-```bash
-python scripts/run_sanity_checks.py
-```
-
-The sanity suite covers baseline streaming, concurrent streaming, high TTFT,
-slow TPOT, and HTTP error handling.
-
-## Workload Profiles
-
-Generate benchmark cases from reusable workload profiles:
-
-```bash
-python scripts/generate_matrix.py
-python scripts/bench_openai_compatible.py --config configs/generated_workload_matrix.yaml --dry-run --stream --output results/raw/workload_profiles_dry_run.jsonl
-```
-
-See `docs/workload_profiles.md` for the current profile set.
-
-Create a scenario-oriented report after summarization:
-
-```bash
-python scripts/report_workload_profiles.py --summary results/tables/summary.csv
-```
-
-See `docs/workload_profile_report.md` for details.
-
-## Regression Comparison
-
-Compare two summary CSV files and flag metric regressions:
-
-```bash
-python scripts/compare_summaries.py --baseline results/baselines/summary.csv --candidate results/tables/summary.csv
-```
-
-See `docs/regression_comparison.md` for details.
-
-## Error Taxonomy
-
-Failed requests are tagged with `error_kind` and summarized into HTTP, timeout,
-connection, URL-layer, and other error counts.
-
-See `docs/error_taxonomy.md` for details.
-See `docs/first_run_troubleshooting.md` for first-run failure patterns and how
-to interpret `status`, `error_kind`, `http_status`, `ttft_ms`, and `tpot_ms`.
-
-## JSONL Compatibility
-
-Check raw result logs for schema versions, missing fields, and invalid records:
-
-```bash
-python scripts/check_jsonl_compat.py --input results/raw
-```
-
-See `docs/jsonl_compatibility.md` for details.
-
-## Run Manifest
-
-Create a compact evidence bundle for one benchmark run:
-
-```bash
-python scripts/build_run_manifest.py --run-id workload-profiles-dry-run
-```
-
-See `docs/run_manifest.md` for details.
-
-For the publication-ready artifact layout and checklist, see
-`docs/reproducibility-evidence-bundle.md` and
-`docs/evidence-bundle-checklist.md`.
-
-For a small filled-out result-submission example using the existing synthetic
-fake-server fixture, see `docs/result_submission_example.md`.
-For a maintainer-facing review rubric for benchmark-result issues, see
-`docs/result_review_checklist.md`.
-
-For a single guided path that ties dry runs, fake-server validation, summaries,
-and manifests together, see `docs/ten_minute_smoke_run.md`.
-
-## MVP Scope
-
-- Framework path one: vLLM through an OpenAI-compatible endpoint.
-- Framework path two: llama.cpp after the vLLM path is working.
-- First model target: one small open model.
-- First metrics: latency, TTFT, TPOT, output tokens per second, error status,
-  and environment notes.
-- First mode: dry run before real GPU runs.
-
-For the first vLLM/L40S smoke-run profile and its dry-validation path, see
-`docs/vllm-l40s-smoke-run.md`.
-For the next backend sequencing decision, see
-`docs/backend-decision-llama-cpp.md`.
-
-## Project Structure
-
-```text
-l40s-llm-bench/
-|-- configs/
-|-- docs/
-|-- l40s_bench/
-|-- results/
-|-- scripts/
-`-- tests/
-```
-
-## Result Policy
-
-No benchmark number should be shown without:
-
-- model name and version
-- framework name and version
-- hardware and driver notes
-- config used for the run
-- raw log path
-- repeated-run policy
-
-Also include a run manifest when possible. It ties artifact paths to file sizes
-and SHA256 hashes so readers can tell which files supported a claim.
-
-## How To Cite Or Share Results
-
-This project is early-stage, so cite or share outputs as local measurements,
-not as canonical benchmark results. A useful result note should include:
-
-- repository commit or release reference
-- benchmark command and config paths
-- raw JSONL path and run manifest path
-- hardware and software disclosure
-- summary table
-- short caveat describing what the run does not prove
-
-Suggested wording:
-
-> Local measurement produced with `l40s-llm-bench` on the disclosed hardware and
-> software stack. Results are tied to the linked config, raw JSONL, and run
-> manifest, and should not be generalized beyond that setup.
-
-For questions, result reports, or requests for missing metadata, see
-`docs/community-feedback.md`.
-The GitHub issue chooser also points new contributors to the smoke-run guide,
-result submission starter, result submission example, and current
-maintainer-readiness docs.
-
-## Experiment Roadmap
-
-See `docs/benchmark_landscape.md` for the current list of reference projects,
-borrowed ideas, and small experiments to run before spending GPU time.
-
-## Current Status
-
-The scaffold now supports dry runs, fake-server streaming sanity checks,
-workload profiles, summary reports, regression comparison, error taxonomy
-counts, JSONL compatibility checks, run manifests, reproducibility evidence
-bundle validation, GPU metrics sample parsing, and a dry-validatable
-vLLM/L40S smoke profile. Reviewer-oriented, contributor-oriented, and
-community-entry CPU-only proof packs are also available through checked-in
-scripts and GitHub Actions.
-
-The current public maintenance release is `v0.1.5`, which packages the newer
-proof-pack and community-entry hardening work after the earlier `v0.1.4`
-submission/review path update. The repository now also includes contributor
-self-check, smoke-feedback starter/review/reply helpers, feedback-triage
-proof, submission-review proof, a top-level OSS-readiness proof, and a
-community-entry proof pack. No real GPU benchmark results, independent
-external feedback, or real L40S/vLLM artifact bundle are claimed yet.
-
-For the current maintainer-readiness snapshot, see
-`docs/maintenance/current-maintainer-readiness.md`.
-For a short application-oriented copy-and-paste pack, see
-`docs/maintenance/application-submission-kit.md`.
-
-## Next Steps
-
-- Obtain one genuinely independent public tester interaction on issue `#12`.
-- Convert one real L40S/vLLM smoke run into a public artifact bundle for issue
-  `#17`.
-- Keep the CPU-only reviewer proof path green while the first real artifact is
-  prepared.
-- Continue the next backend path with `llama.cpp` after the first vLLM path.
-
-## Limitations
-
-This is not yet a complete benchmark suite. Early results, when added, should
-be treated as local measurements rather than universal claims about any GPU,
-model, or inference framework.
+The dry run is synthetic validation: it does not contact a model server,
+download a model or measure GPU performance. For the complete local path see
+[`docs/ten_minute_smoke_run.md`](docs/ten_minute_smoke_run.md).
+
+## What is measured
+
+- total request latency and, for streaming endpoints, TTFT and TPOT;
+- output-token event count and derived output tokens per second;
+- HTTP status, error category, concurrency, repeat and request indices;
+- raw JSONL records, summary tables and a run manifest.
+
+Prompt/output token counts are configuration targets unless a tokenizer-backed
+measurement is explicitly supplied.
+
+## What is not measured
+
+- No real GPU, model-server or vLLM result is currently included.
+- Fake-server timings validate measurement mechanics, not model quality or GPU
+  performance.
+- GPU utilization, power, memory bandwidth and scheduler effects are outside
+  the current client scope.
+- This is not a leaderboard and makes no universal claim about a model,
+  framework or hardware vendor.
+
+## Reproducibility contract
+
+Shared measurements should include the benchmark command, versioned workload
+and model configuration, raw JSONL, a summary, hardware/software disclosure,
+repeat policy (including failures, timeouts and OOMs) and a run manifest with
+SHA-256 hashes. Missing fields make a result a local observation rather than a
+benchmark claim. See [`docs/reproducibility-evidence-bundle.md`](docs/reproducibility-evidence-bundle.md)
+and [`docs/result-schema.md`](docs/result-schema.md).
+
+## Hardware run plan
+
+The planned vLLM/L40S smoke profile is documented in
+[`docs/vllm-l40s-smoke-run.md`](docs/vllm-l40s-smoke-run.md). Before sharing
+real numbers, disclose GPU model and VRAM, CPU/RAM, driver, CUDA, framework,
+model identifier/revision, serving flags, prompt profile, concurrency, repeat
+policy and all failed cases. Redact private hostnames, usernames, job IDs,
+paths, keys and tokens.
+
+## Project map
+
+- `configs/` — workload, backend and hardware templates;
+- `l40s_bench/` and `scripts/` — benchmark, parsing and reporting code;
+- `tests/` — schema, fake-server and failure-path checks;
+- `results/` — synthetic examples and public-safe result schemas;
+- `docs/` — methodology, limitations, metrics and reproducibility notes.
+
+## Citation and license
+
+See [`LICENSE`](LICENSE) and the current [GitHub releases](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases)
+for versioned source snapshots. Cite a released repository version when sharing
+local measurements, and include the linked config, raw JSONL and manifest.
