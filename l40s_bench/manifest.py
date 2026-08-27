@@ -6,7 +6,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-
 DEFAULT_SCOPE_NOTE = (
     "This manifest records local benchmark artifacts. It does not prove general "
     "model, server, framework, or GPU performance."

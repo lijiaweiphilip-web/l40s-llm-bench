@@ -6,7 +6,6 @@ from typing import Any
 
 from l40s_bench.errors import ERROR_SUMMARY_COLUMNS
 
-
 RESULT_HEADERS = [
     "Profile",
     "Framework",
@@ -162,8 +161,10 @@ def workload_report_to_markdown(
         [
             "## Scope Note",
             "",
-            "This report compares workload shapes and local run summaries. It does not "
-            "prove that one model, server, or GPU is generally better than another.",
+            (
+                "This report compares workload shapes and local run summaries. It does not "
+                "prove that one model, server, or GPU is generally better than another."
+            ),
             "",
         ]
     )

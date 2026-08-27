@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: l40s-llm-bench
+authors:
+  - family-names: Li
+    given-names: Jiawei
+version: 0.1.5
+repository-code: https://github.com/lijiaweiphilip-web/l40s-llm-bench
+message: "If this research harness is useful, please cite this repository."
+license: MIT

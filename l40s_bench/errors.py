@@ -3,7 +3,6 @@ from __future__ import annotations
 import socket
 from typing import Any
 
-
 HTTP_ERROR = "http_error"
 TIMEOUT = "timeout"
 CONNECTION_ERROR = "connection_error"

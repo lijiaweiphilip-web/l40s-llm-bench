@@ -5,7 +5,6 @@ from typing import Any
 
 import yaml
 
-
 REQUIRED_CASE_FIELDS = {
     "case_id",
     "framework",
@@ -20,7 +19,7 @@ def load_yaml(path: str | Path) -> dict[str, Any]:
     with Path(path).open("r", encoding="utf-8") as handle:
         data = yaml.safe_load(handle) or {}
     if not isinstance(data, dict):
-        raise ValueError(f"{path} must contain a YAML mapping")
+        raise TypeError(f"{path} must contain a YAML mapping")
     return data
 
 
@@ -32,13 +31,13 @@ def load_benchmark_matrix(path: str | Path) -> dict[str, Any]:
 
     defaults = matrix.get("defaults") or {}
     if not isinstance(defaults, dict):
-        raise ValueError("'defaults' must be a mapping when provided")
+        raise TypeError("'defaults' must be a mapping when provided")
 
     normalized_cases: list[dict[str, Any]] = []
     seen_case_ids: set[str] = set()
     for raw_case in cases:
         if not isinstance(raw_case, dict):
-            raise ValueError("each benchmark case must be a mapping")
+            raise TypeError("each benchmark case must be a mapping")
         case = {**defaults, **raw_case}
         missing = REQUIRED_CASE_FIELDS - set(case)
         if missing:

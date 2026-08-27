@@ -5,7 +5,11 @@ from pathlib import Path
 from typing import Any
 
 from l40s_bench.io import read_jsonl
-from l40s_bench.schema import OPTIONAL_RESULT_FIELDS, REQUIRED_RESULT_FIELDS, validate_result
+from l40s_bench.schema import (
+    OPTIONAL_RESULT_FIELDS,
+    REQUIRED_RESULT_FIELDS,
+    validate_result,
+)
 
 
 def collect_jsonl_inputs(input_path: str | Path) -> list[Path]:

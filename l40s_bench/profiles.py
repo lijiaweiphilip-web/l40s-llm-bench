@@ -7,7 +7,6 @@ import yaml
 
 from l40s_bench.config import load_yaml
 
-
 REQUIRED_PROFILE_FIELDS = {
     "name",
     "prompt_tokens",
@@ -22,7 +21,7 @@ def load_workload_profiles(path: str | Path) -> dict[str, Any]:
     defaults = data.get("defaults") or {}
     profiles = data.get("profiles")
     if not isinstance(defaults, dict):
-        raise ValueError("workload profile defaults must be a mapping")
+        raise TypeError("workload profile defaults must be a mapping")
     if not isinstance(profiles, list) or not profiles:
         raise ValueError("workload profile config must contain a non-empty profiles list")
 
@@ -30,7 +29,7 @@ def load_workload_profiles(path: str | Path) -> dict[str, Any]:
     names: set[str] = set()
     for raw_profile in profiles:
         if not isinstance(raw_profile, dict):
-            raise ValueError("each workload profile must be a mapping")
+            raise TypeError("each workload profile must be a mapping")
         missing = REQUIRED_PROFILE_FIELDS - set(raw_profile)
         if missing:
             raise ValueError(f"profile missing required fields: {sorted(missing)}")
