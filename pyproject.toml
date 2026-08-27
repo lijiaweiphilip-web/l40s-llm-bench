@@ -16,6 +16,9 @@ dev = [
 [tool.setuptools]
 packages = ["l40s_bench"]
 
+[tool.ruff.lint.per-file-ignores]
+"scripts/run_sanity_checks.py" = ["I001"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
