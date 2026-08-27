@@ -18,7 +18,6 @@ for path in (ROOT, SCRIPT_DIR):
 
 from bench_openai_compatible import real_request_record
 from fake_openai_server import make_handler
-
 from l40s_bench.io import ensure_parent, write_jsonl
 from l40s_bench.schema import validate_result
 from l40s_bench.summary import rows_to_markdown, summarize_records
