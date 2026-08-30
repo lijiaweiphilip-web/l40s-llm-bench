@@ -40,10 +40,10 @@ def validate_contract(path: Path) -> dict[str, Any]:
         _fail("unsupported contract version")
     if contract.get("status") != "protocol_only":
         _fail("contract status must remain protocol_only")
-    if contract.get("model_id") == "":
-        _fail("model_id must be explicit, even for a protocol placeholder")
-    if contract.get("model_revision") == "":
-        _fail("model_revision must be explicit, even for a protocol placeholder")
+    for field in ("model_id", "model_revision"):
+        value = contract.get(field)
+        if not isinstance(value, str) or not value.strip():
+            _fail(f"{field} must be a non-empty string, even for a protocol placeholder")
     if _as_int(contract.get("warmup_repeats"), "warmup_repeats") != 1:
         _fail("warmup_repeats must be 1")
     if _as_int(contract.get("measured_repeats"), "measured_repeats") != 3:
@@ -65,6 +65,8 @@ def validate_contract(path: Path) -> dict[str, Any]:
         _fail("dry_run_is_benchmark_claim must stay false")
     if boundary["fake_server_is_hardware_evidence"] is not False:
         _fail("fake_server_is_hardware_evidence must stay false")
+    if boundary["no_universal_performance_claim"] is not True:
+        _fail("no_universal_performance_claim must stay true")
 
     defaults = document.get("defaults")
     cases = document.get("cases")
