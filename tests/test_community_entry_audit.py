@@ -15,7 +15,9 @@ def make_repo(tmp_path: Path) -> Path:
         "docs/result_submission_starter.md",
         "docs/result_submission_example.md",
         "docs/community-feedback.md",
+        "docs/maintenance/INDEX.md",
         "docs/maintenance/current-maintainer-readiness.md",
+        "CONTRIBUTING.md",
         ".github/ISSUE_TEMPLATE/smoke_run_feedback.yml",
         ".github/ISSUE_TEMPLATE/benchmark_result.yml",
     ):
@@ -31,6 +33,9 @@ def make_repo(tmp_path: Path) -> Path:
                 "docs/result_submission_starter.md",
                 "docs/community-feedback.md",
                 "docs/maintenance/current-maintainer-readiness.md",
+                "docs/ten_minute_smoke_run.md",
+                "CONTRIBUTING.md",
+                "docs/maintenance/INDEX.md",
             ]
         ),
         encoding="utf-8",
@@ -74,3 +79,47 @@ def test_markdown_mentions_public_limits(tmp_path: Path) -> None:
 
     assert report["status"] == "FAIL"
     assert "does not create independent public feedback" in markdown
+
+
+def test_research_first_readme_can_route_secondary_workflows_through_index(
+    tmp_path: Path,
+) -> None:
+    repo = make_repo(tmp_path)
+    (repo / "docs" / "maintenance" / "INDEX.md").write_text(
+        "# Maintenance index\n",
+        encoding="utf-8",
+    )
+    (repo / "README.md").write_text(
+        "\n".join(
+            [
+                "docs/ten_minute_smoke_run.md",
+                "CONTRIBUTING.md",
+                "docs/maintenance/INDEX.md",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    report = build_report(repo)
+
+    assert report["status"] == "PASS"
+    assert report["summary"]["failed_checks"] == 0
+
+
+def test_research_first_readme_must_keep_maintenance_index_discoverable(
+    tmp_path: Path,
+) -> None:
+    repo = make_repo(tmp_path)
+    (repo / "README.md").write_text(
+        "docs/ten_minute_smoke_run.md\nCONTRIBUTING.md\n",
+        encoding="utf-8",
+    )
+
+    report = build_report(repo)
+
+    assert report["status"] == "FAIL"
+    assert any(
+        check["label"] == "README references docs/maintenance/INDEX.md"
+        and check["status"] == "fail"
+        for check in report["checks"]
+    )
