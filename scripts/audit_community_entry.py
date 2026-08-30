@@ -40,11 +40,9 @@ ROUTE_DOCS = [
 ]
 
 README_REFERENCES = [
-    "docs/contributor-self-check.md",
-    "docs/smoke_feedback_starter.md",
-    "docs/result_submission_starter.md",
-    "docs/community-feedback.md",
-    "docs/maintenance/current-maintainer-readiness.md",
+    "docs/ten_minute_smoke_run.md",
+    "CONTRIBUTING.md",
+    "docs/maintenance/INDEX.md",
 ]
 
 REQUIRED_TEMPLATES = [
@@ -110,7 +108,7 @@ def build_report(repo_root: Path) -> dict[str, Any]:
             {
                 "label": f"README references {path}",
                 "status": "pass" if path in readme_text else "fail",
-                "details": "Newcomers should be able to discover this path from the README.",
+                "details": "The README should expose each primary public entry point; secondary workflows may be routed through the maintenance index.",
             }
         )
 
