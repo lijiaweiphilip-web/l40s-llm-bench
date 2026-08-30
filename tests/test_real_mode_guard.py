@@ -48,10 +48,18 @@ def test_fake_server_synthetic_model_remains_allowed() -> None:
 
 
 @pytest.mark.parametrize(
-    ("model", "message"),
+        ("model", "message"),
     [
         ({"source": "public", "model_revision": "rev-1"}, "model_id"),
         ({"source": "public", "model_id": "org/model"}, "revision"),
+        (
+            {
+                "source": "public",
+                "model_id": "org/model",
+                "model_revision": "replace-with-fixed-model-revision",
+            },
+            "placeholder",
+        ),
     ],
 )
 def test_vllm_real_mode_requires_fixed_model_provenance(

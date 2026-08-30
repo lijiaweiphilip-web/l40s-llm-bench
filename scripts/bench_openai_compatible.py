@@ -118,6 +118,11 @@ def ensure_real_mode_allowed(
         raw_revision = model.get("model_revision", model.get("revision"))
         if not isinstance(raw_revision, str) or not raw_revision.strip():
             raise ValueError("vllm real mode requires a fixed model revision")
+        revision = raw_revision.strip().lower()
+        if "replace-with-" in revision or revision in {"placeholder", "synthetic"}:
+            raise ValueError(
+                "vllm real mode requires a non-placeholder model revision"
+            )
 
 
 def real_request_record(
