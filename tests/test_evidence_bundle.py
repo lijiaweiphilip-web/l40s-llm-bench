@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 import shutil
 
+import pytest
+
 from scripts.bench_openai_compatible import dry_run_record
 from scripts.validate_evidence_bundle import main as evidence_bundle_main
 from scripts.validate_evidence_bundle import validate_bundle
@@ -61,6 +63,22 @@ def test_evidence_bundle_rejects_count_mismatch(tmp_path: Path) -> None:
 
     assert not report.ok
     assert any("manifest.request_count" in issue.message for issue in report.issues)
+
+
+@pytest.mark.parametrize("invalid_synthetic", ["false", 0, None, []])
+def test_evidence_bundle_rejects_non_boolean_synthetic_flag(
+    tmp_path: Path, invalid_synthetic: object
+) -> None:
+    bundle = copy_example_bundle(tmp_path)
+    manifest_path = bundle / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["hardware"]["synthetic"] = invalid_synthetic
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    report = validate_bundle(bundle)
+
+    assert not report.ok
+    assert any("hardware.synthetic" in issue.message for issue in report.issues)
 
 
 def test_synthetic_bundle_rejects_unmarked_raw_record(tmp_path: Path) -> None:

@@ -107,6 +107,26 @@ def nested_present(data: dict[str, Any], dotted_key: str) -> bool:
     return True
 
 
+def strict_bool(
+    data: dict[str, Any], dotted_key: str, issues: list[BundleIssue], bundle: Path
+) -> bool:
+    """Read a boolean without Python truthiness coercion.
+
+    JSON strings such as ``"false"`` are truthy in Python.  Treating them as
+    flags could reclassify a result bundle, so malformed values fail closed.
+    """
+
+    if not nested_present(data, dotted_key):
+        return False
+    value = nested_get(data, dotted_key)
+    if type(value) is not bool:
+        issues.append(
+            BundleIssue(bundle, f"manifest {dotted_key} must be a boolean")
+        )
+        return False
+    return value
+
+
 def discover_bundle_dirs(inputs: Sequence[str | Path]) -> list[Path]:
     bundles: list[Path] = []
     seen: set[Path] = set()
@@ -251,7 +271,7 @@ def validate_bundle(path: str | Path) -> BundleReport:
         if isinstance(raw_reference, str)
         else bundle / "raw-events.jsonl"
     )
-    synthetic = bool(nested_get(manifest, "hardware.synthetic"))
+    synthetic = strict_bool(manifest, "hardware.synthetic", issues, bundle)
     backend = manifest.get("backend") if isinstance(manifest.get("backend"), str) else None
     if not raw_path.is_file():
         return BundleReport((bundle,), tuple(issues))
@@ -283,10 +303,16 @@ def validate_bundle(path: str | Path) -> BundleReport:
 
     if summary is not None and summary.get("benchmark_claim") is True:
         issues.append(BundleIssue(bundle, "summary benchmark_claim must not be true"))
+    if summary is not None and "synthetic" in summary and type(summary["synthetic"]) is not bool:
+        issues.append(BundleIssue(bundle, "summary.synthetic must be a boolean"))
     if synthetic and summary is not None and summary.get("synthetic") is not True:
         issues.append(
             BundleIssue(bundle, "synthetic bundle summary must set synthetic=true")
         )
+    if environment is not None:
+        environment_synthetic = nested_get(environment, "gpu.synthetic")
+        if environment_synthetic is not None and type(environment_synthetic) is not bool:
+            issues.append(BundleIssue(bundle, "environment.gpu.synthetic must be a boolean"))
     if synthetic and environment is not None:
         env_synthetic = nested_get(environment, "gpu.synthetic")
         if env_synthetic is not True:
