@@ -27,6 +27,19 @@ def test_protocol_only_reference_config_is_rejected_in_real_mode() -> None:
         run_benchmark(_args("configs/workloads/l40s-vllm-reference-v1.yaml"))
 
 
+def test_protocol_guard_fails_before_any_network_io(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls: list[object] = []
+
+    def forbidden_urlopen(*args: object, **kwargs: object) -> None:
+        calls.append((args, kwargs))
+        raise AssertionError("network I/O should not be reached")
+
+    monkeypatch.setattr("urllib.request.urlopen", forbidden_urlopen)
+    with pytest.raises(ValueError, match="protocol_only"):
+        run_benchmark(_args("configs/workloads/l40s-vllm-reference-v1.yaml"))
+    assert calls == []
+
+
 def test_vllm_placeholder_model_is_rejected_in_real_mode() -> None:
     matrix = load_benchmark_matrix("configs/workloads/vllm-l40s-smoke.yaml")
     models = load_models("configs/models.yaml")
