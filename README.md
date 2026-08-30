@@ -1,13 +1,9 @@
 # l40s-llm-bench
 
 [![CI](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/ci.yml)
-[![Reviewer smoke proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/reviewer-smoke-proof.yml)
-[![Contributor self-check](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/contributor-self-check.yml)
-[![Community entry proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/community-entry-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/community-entry-proof.yml)
-[![Feedback triage proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/feedback-triage-proof.yml)
-[![Submission review proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/submission-review-proof.yml)
-[![OSS readiness proof](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/oss-readiness-proof.yml/badge.svg?branch=main)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/actions/workflows/oss-readiness-proof.yml)
 [![Latest release](https://img.shields.io/github/v/release/lijiaweiphilip-web/l40s-llm-bench)](https://github.com/lijiaweiphilip-web/l40s-llm-bench/releases/tag/v0.1.5)
+[![Python 3.10-3.12](https://img.shields.io/badge/python-3.10--3.12-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Minimal scaffold for reproducible LLM inference benchmark experiments on L40S
 and similar single-GPU setups.
@@ -23,6 +19,7 @@ It does not claim real GPU benchmark results yet.
 - Ten-minute CPU-only smoke run: [`docs/ten_minute_smoke_run.md`](docs/ten_minute_smoke_run.md)
 - Result schema: [`docs/result-schema.md`](docs/result-schema.md)
 - Reproducibility contract: [`docs/reproducibility-evidence-bundle.md`](docs/reproducibility-evidence-bundle.md)
+- Quality gates: [`docs/quality-gates.md`](docs/quality-gates.md)
 - Real hardware run plan: [`docs/vllm-l40s-smoke-run.md`](docs/vllm-l40s-smoke-run.md)
 - Contributing: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
@@ -128,7 +125,7 @@ Start here if you have 10 minutes and want to check the harness before using
 GPU time:
 
 ```bash
-python -m pip install -r requirements-dev.txt
+python -m pip install -e ".[dev]"
 python scripts/bench_openai_compatible.py --dry-run
 python scripts/summarize_results.py --input results/raw/dry_run.jsonl --output-dir results/tables
 python -m pytest

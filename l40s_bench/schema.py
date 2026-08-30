@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Any
 
-
 REQUIRED_RESULT_FIELDS = {
     "schema_version",
     "timestamp_utc",

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import math
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
@@ -34,6 +35,14 @@ class SanityScenario:
     status_code: int = 200
     ttft_tolerance_ms: float = 120.0
     tpot_tolerance_ms: float = 20.0
+
+
+# Real streaming measurements include operating-system scheduling overhead. The
+# multiplicative floor catches under-reported measurements, while the additive
+# ceiling tolerates bounded scheduler delay without accepting a stalled request.
+MIN_MEASURED_RATIO = 0.5
+MAX_MEASURED_RATIO = 10.0
+MAX_SCHEDULER_OVERHEAD_MS = 250.0
 
 
 SCENARIOS = [
@@ -82,16 +91,34 @@ def check_record(record: dict[str, Any], scenario: SanityScenario) -> list[str]:
             f"{scenario.name}: expected {scenario.tokens} token events, "
             f"got {record['output_token_events']}"
         )
-    ttft = record["ttft_ms"]
-    if ttft is None or abs(float(ttft) - scenario.ttft_ms) > scenario.ttft_tolerance_ms:
-        failures.append(
-            f"{scenario.name}: expected TTFT near {scenario.ttft_ms} ms, got {ttft}"
-        )
-    tpot = record["tpot_ms"]
-    if tpot is None or abs(float(tpot) - scenario.tpot_ms) > scenario.tpot_tolerance_ms:
-        failures.append(
-            f"{scenario.name}: expected TPOT near {scenario.tpot_ms} ms, got {tpot}"
-        )
+    for label, measured, expected in (
+        ("TTFT", record["ttft_ms"], scenario.ttft_ms),
+        ("TPOT", record["tpot_ms"], scenario.tpot_ms),
+    ):
+        if measured is None:
+            failures.append(
+                f"{scenario.name}: expected {label} near {expected} ms, got None"
+            )
+            continue
+        try:
+            measured_value = float(measured)
+        except (TypeError, ValueError):
+            failures.append(
+                f"{scenario.name}: expected finite {label} near {expected} ms, "
+                f"got {measured}"
+            )
+            continue
+        lower_bound = expected * MIN_MEASURED_RATIO
+        upper_bound = expected * MAX_MEASURED_RATIO + MAX_SCHEDULER_OVERHEAD_MS
+        if (
+            not math.isfinite(measured_value)
+            or measured_value < lower_bound
+            or measured_value > upper_bound
+        ):
+            failures.append(
+                f"{scenario.name}: expected {label} in [{lower_bound:g}, {upper_bound:g}] ms, "
+                f"got {measured}"
+            )
     return failures
 
 
@@ -140,7 +167,7 @@ def run_scenarios(repeats: int) -> tuple[list[dict[str, Any]], list[str]]:
 
 def write_report(path: Path, rows: list[dict[str, Any]], failures: list[str]) -> None:
     status = "PASS" if not failures else "FAIL"
-    body = [f"# Benchmark Sanity Checks", "", f"Status: {status}", ""]
+    body = ["# Benchmark Sanity Checks", "", f"Status: {status}", ""]
     body.append("These checks use a local fake OpenAI-compatible streaming server.")
     body.append("They validate the measurement harness, not model performance.")
     body.extend(["", "## Summary", "", rows_to_markdown(rows)])

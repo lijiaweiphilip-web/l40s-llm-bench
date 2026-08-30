@@ -10,7 +10,6 @@ from l40s_bench.errors import (
     OTHER_ERROR_SUMMARY_COLUMN,
 )
 
-
 GROUP_KEYS = (
     "case_id",
     "framework",

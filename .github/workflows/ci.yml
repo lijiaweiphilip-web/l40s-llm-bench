@@ -12,27 +12,37 @@ permissions:
 
 jobs:
   quality:
-    name: CPU quality checks
+    name: CPU quality checks (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
-          python-version: "3.10"
+          python-version: ${{ matrix.python-version }}
           cache: pip
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r requirements-dev.txt
+          python -m pip install -e ".[dev]"
 
       - name: Run tests
         run: python -m pytest -q
+
+      - name: Compile Python sources
+        run: python -m compileall -q l40s_bench scripts tests
+
+      - name: Run scoped Ruff gate
+        run: python -m ruff check l40s_bench scripts/run_sanity_checks.py tests/test_sanity_checks.py
 
       - name: Run CPU-only dry run
         run: |

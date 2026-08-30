@@ -1,6 +1,6 @@
 [project]
 name = "l40s-llm-bench"
-version = "0.1.0"
+version = "0.1.5"
 description = "Minimal scaffold for reproducible LLM inference benchmark experiments."
 requires-python = ">=3.10"
 dependencies = [
@@ -10,7 +10,14 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "pytest>=8.0",
+  "ruff>=0.8,<1",
 ]
+
+[tool.setuptools]
+packages = ["l40s_bench"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/run_sanity_checks.py" = ["I001"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
