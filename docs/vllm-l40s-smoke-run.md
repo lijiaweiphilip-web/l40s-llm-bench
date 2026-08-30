@@ -28,6 +28,23 @@ This uses `--dry-run --stream` and writes synthetic records under `results/`.
 The output validates config loading, result schema compatibility, summary
 generation, and the profile's request shape only. It is not real vLLM evidence.
 
+## Locked Reference Protocol
+
+`configs/workloads/l40s-vllm-reference-v1.yaml` is a result-free protocol for
+the first measured run. It fixes short (128/64) and medium (512/128) prompt
+targets at concurrency 1, 4, and 8, with one warmup and three measured repeats.
+The model identifier and revision remain explicit placeholders until a legal,
+available L40S session is selected. Validate the contract before any run:
+
+```bash
+python scripts/validate_l40s_contract.py \
+  configs/workloads/l40s-vllm-reference-v1.yaml
+```
+
+The validator only checks the protocol; it does not create hardware evidence.
+Dry-run and fake-server outputs remain synthetic and must not be reported as
+L40S measurements.
+
 ## Real vLLM Smoke Path
 
 Start a real vLLM OpenAI-compatible server with a small open model:
