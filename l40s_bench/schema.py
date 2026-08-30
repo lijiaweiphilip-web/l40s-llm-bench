@@ -55,6 +55,15 @@ def _strict_bool(value: Any, field: str) -> None:
         raise ValueError(f"{field} must be boolean")
 
 
+def _integer_value(value: Any, field: str, *, allow_none: bool = True) -> int | None:
+    numeric = _finite_number(value, field, allow_none=allow_none)
+    if numeric is None:
+        return None
+    if not numeric.is_integer():
+        raise ValueError(f"{field} must be an integer")
+    return int(numeric)
+
+
 def validate_result(record: dict[str, Any]) -> None:
     for key, value in OPTIONAL_RESULT_FIELDS.items():
         record.setdefault(key, value)
@@ -72,24 +81,24 @@ def validate_result(record: dict[str, Any]) -> None:
     if record["status"] not in VALID_STATUSES:
         raise ValueError(f"invalid status: {record['status']}")
     for key in ("prompt_tokens", "output_tokens", "batch_size", "repeat_index"):
-        _finite_number(record[key], key, allow_none=False)
-        if int(record[key]) < 0:
+        integer = _integer_value(record[key], key, allow_none=False)
+        if integer is not None and integer < 0:
             raise ValueError(f"{key} must be non-negative")
     for key in ("latency_ms", "ttft_ms", "tpot_ms", "output_tokens_per_second"):
         numeric = _finite_number(record[key], key)
         if numeric is not None and numeric < 0:
             raise ValueError(f"{key} must be non-negative or null")
     if record["output_token_events"] is not None:
-        _finite_number(record["output_token_events"], "output_token_events")
-        if int(record["output_token_events"]) < 0:
+        integer = _integer_value(record["output_token_events"], "output_token_events")
+        if integer is not None and integer < 0:
             raise ValueError("output_token_events must be non-negative or null")
-    _finite_number(record["concurrency"], "concurrency", allow_none=False)
-    if int(record["concurrency"]) <= 0:
+    concurrency = _integer_value(record["concurrency"], "concurrency", allow_none=False)
+    if concurrency is not None and concurrency <= 0:
         raise ValueError("concurrency must be positive")
-    _finite_number(record["request_index"], "request_index", allow_none=False)
-    if int(record["request_index"]) < 0:
+    request_index = _integer_value(record["request_index"], "request_index", allow_none=False)
+    if request_index is not None and request_index < 0:
         raise ValueError("request_index must be non-negative")
     if record["http_status"] is not None:
-        _finite_number(record["http_status"], "http_status")
-        if not (100 <= int(record["http_status"]) <= 599):
+        http_status = _integer_value(record["http_status"], "http_status")
+        if http_status is None or not (100 <= http_status <= 599):
             raise ValueError("http_status must be a valid HTTP status or null")

@@ -121,6 +121,42 @@ def test_result_validator_rejects_non_boolean_flags(
         validate_result(record)
 
 
+@pytest.mark.parametrize(
+    "field",
+    [
+        "prompt_tokens",
+        "output_tokens",
+        "batch_size",
+        "repeat_index",
+        "concurrency",
+        "request_index",
+        "output_token_events",
+        "http_status",
+    ],
+)
+def test_result_validator_rejects_fractional_integer_fields(field: str) -> None:
+    record = {
+        "schema_version": "0.1",
+        "timestamp_utc": "2026-05-31T00:00:00+00:00",
+        "run_id": "fractional",
+        "case_id": "case",
+        "framework": "vllm",
+        "model": "model",
+        "prompt_tokens": 128,
+        "output_tokens": 32,
+        "batch_size": 1,
+        "repeat_index": 0,
+        "dry_run": False,
+        "status": "ok",
+        "latency_ms": 10.0,
+        "output_tokens_per_second": 100.0,
+    }
+    record[field] = 1.5
+
+    with pytest.raises(ValueError, match="integer"):
+        validate_result(record)
+
+
 def test_synthetic_fake_server_example_validates() -> None:
     report = validate_paths([EXAMPLE_RESULT], require_synthetic_fake_server=True)
 
