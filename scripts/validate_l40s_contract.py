@@ -26,6 +26,12 @@ def _as_int(value: Any, field: str) -> int:
     return value
 
 
+def _as_positive_int(value: Any, field: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+        _fail(f"{field} must be a positive integer")
+    return value
+
+
 def validate_contract(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         document = yaml.safe_load(handle)
@@ -44,6 +50,18 @@ def validate_contract(path: Path) -> dict[str, Any]:
         value = contract.get(field)
         if not isinstance(value, str) or not value.strip():
             _fail(f"{field} must be a non-empty string, even for a protocol placeholder")
+    for field in ("dtype", "tokenizer"):
+        value = contract.get(field)
+        if not isinstance(value, str) or not value.strip():
+            _fail(f"{field} must be a non-empty string")
+    _as_positive_int(contract.get("max_model_len"), "max_model_len")
+    serving_flags = contract.get("serving_flags")
+    if not isinstance(serving_flags, list) or any(
+        not isinstance(flag, str) or not flag.strip() for flag in serving_flags
+    ):
+        _fail("serving_flags must be a list of non-empty strings")
+    _as_int(contract.get("prompt_seed"), "prompt_seed")
+    _as_positive_int(contract.get("timeout_seconds"), "timeout_seconds")
     if _as_int(contract.get("warmup_repeats"), "warmup_repeats") != 1:
         _fail("warmup_repeats must be 1")
     if _as_int(contract.get("measured_repeats"), "measured_repeats") != 3:

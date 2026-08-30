@@ -95,6 +95,29 @@ def test_reference_contract_rejects_universal_claim_boundary(tmp_path: Path) -> 
         validate_contract(invalid_path)
 
 
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("dtype", None),
+        ("max_model_len", True),
+        ("tokenizer", ""),
+        ("serving_flags", "--bad-shape"),
+        ("prompt_seed", True),
+        ("timeout_seconds", 0),
+    ],
+)
+def test_reference_contract_rejects_invalid_execution_metadata(
+    field: str, value: object, tmp_path: Path
+) -> None:
+    document = yaml.safe_load(Path("configs/workloads/l40s-vllm-reference-v1.yaml").read_text())
+    document["contract"][field] = value
+    invalid_path = tmp_path / f"invalid-{field}.yaml"
+    invalid_path.write_text(yaml.safe_dump(document))
+
+    with pytest.raises(ValueError, match=field):
+        validate_contract(invalid_path)
+
+
 def test_real_mode_guard_cli_is_concise_and_nonzero() -> None:
     result = subprocess.run(
         [
