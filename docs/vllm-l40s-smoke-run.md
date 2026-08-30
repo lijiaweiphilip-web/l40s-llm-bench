@@ -64,6 +64,13 @@ VLLM_SMOKE_RUN_ID=l40s-vllm-smoke-YYYYMMDD \
 bash scripts/run_vllm_smoke_profile.sh
 ```
 
+The benchmark client fails closed before network I/O when a real run uses the
+result-free reference protocol or a placeholder vLLM model registration. Keep
+the reference protocol for validation and dry-run only; replace the model ID
+and revision in a measured configuration before setting `VLLM_SMOKE_DRY_RUN=0`.
+The controlled fake-server configuration remains available for measurement
+mechanics and is not model or hardware evidence.
+
 The default endpoint is:
 
 ```text

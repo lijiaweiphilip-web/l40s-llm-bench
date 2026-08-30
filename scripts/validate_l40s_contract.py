@@ -91,7 +91,12 @@ def validate_contract(path: Path) -> dict[str, Any]:
         prompt_tokens, output_tokens = EXPECTED_PROFILES[profile]
         if case.get("prompt_tokens") != prompt_tokens or case.get("output_tokens") != output_tokens:
             _fail(f"{case_id} has unexpected prompt/output targets")
-        if case.get("concurrency") not in EXPECTED_CONCURRENCIES:
+        concurrency = case.get("concurrency")
+        if (
+            isinstance(concurrency, bool)
+            or not isinstance(concurrency, int)
+            or concurrency not in EXPECTED_CONCURRENCIES
+        ):
             _fail(f"{case_id} has unexpected concurrency")
         effective_repeats = case.get("repeats", defaults.get("repeats"))
         if effective_repeats != contract["measured_repeats"]:

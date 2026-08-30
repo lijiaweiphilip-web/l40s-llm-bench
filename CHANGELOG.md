@@ -2,6 +2,17 @@
 
 All notable release preparation notes for this project are recorded here.
 
+## Unreleased
+
+### Safety
+
+- real-mode benchmark execution now fails closed for the result-free reference
+  protocol and placeholder vLLM model registrations before network I/O;
+- the locked L40S protocol validator rejects boolean concurrency values instead
+  of accepting them through Python's `bool`/`int` equivalence;
+- fake-server synthetic configurations remain valid for measuring harness
+  mechanics and do not gain any model or hardware claim.
+
 ## [0.1.6] - 2026-08-30
 
 Packaging and CPU quality-gate repair.

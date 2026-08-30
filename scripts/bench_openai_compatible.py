@@ -77,6 +77,39 @@ def dry_run_record(
     }
 
 
+def ensure_real_mode_allowed(
+    matrix: dict[str, Any], models: dict[str, dict[str, Any]]
+) -> None:
+    """Reject protocol-only and placeholder vLLM inputs before network I/O.
+
+    Synthetic fake-server configurations remain valid in real-request mode:
+    they exercise the HTTP measurement mechanics without claiming model or
+    hardware performance. A result-free reference protocol, however, is
+    intentionally not a runnable real benchmark configuration.
+    """
+
+    contract = matrix.get("contract")
+    if isinstance(contract, dict) and contract.get("status") == "protocol_only":
+        raise ValueError(
+            "protocol_only configuration is dry-run only; provide a measured "
+            "configuration for real mode"
+        )
+
+    for case in matrix.get("cases", []):
+        if not isinstance(case, dict) or case.get("framework") != "vllm":
+            continue
+        model_name = case.get("model")
+        model = models.get(model_name) if isinstance(model_name, str) else None
+        if model is None:
+            raise ValueError(f"vllm real mode requires a registered model: {model_name}")
+        source = str(model.get("source", "")).strip().lower()
+        model_id = str(model.get("model_id", "")).strip().lower()
+        if source == "placeholder" or "replace-with-" in model_id:
+            raise ValueError(
+                "vllm real mode requires a non-placeholder model registration"
+            )
+
+
 def real_request_record(
     case: dict[str, Any],
     repeat_index: int,
@@ -177,6 +210,8 @@ def real_request_record(
 def run_benchmark(args: argparse.Namespace) -> list[dict[str, Any]]:
     matrix = load_benchmark_matrix(args.config)
     models = load_models(args.models_config)
+    if not args.dry_run:
+        ensure_real_mode_allowed(matrix, models)
     run_id = args.run_id or str(uuid.uuid4())
     records: list[dict[str, Any]] = []
     cases = matrix["cases"][: args.limit_cases] if args.limit_cases else matrix["cases"]
