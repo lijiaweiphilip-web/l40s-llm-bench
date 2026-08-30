@@ -34,6 +34,13 @@ def test_vllm_placeholder_model_is_rejected_in_real_mode() -> None:
         ensure_real_mode_allowed(matrix, models)
 
 
+def test_vllm_synthetic_model_is_rejected_in_real_mode() -> None:
+    matrix = load_benchmark_matrix("configs/benchmark_matrix.yaml")
+    models = load_models("configs/models.yaml")
+    with pytest.raises(ValueError, match="synthetic"):
+        ensure_real_mode_allowed(matrix, models)
+
+
 def test_fake_server_synthetic_model_remains_allowed() -> None:
     matrix = load_benchmark_matrix("configs/fake_server_matrix.yaml")
     models = load_models("configs/models.yaml")

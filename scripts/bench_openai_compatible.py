@@ -104,9 +104,10 @@ def ensure_real_mode_allowed(
             raise ValueError(f"vllm real mode requires a registered model: {model_name}")
         source = str(model.get("source", "")).strip().lower()
         model_id = str(model.get("model_id", "")).strip().lower()
-        if source == "placeholder" or "replace-with-" in model_id:
+        if source in {"placeholder", "synthetic"} or "replace-with-" in model_id:
             raise ValueError(
-                "vllm real mode requires a non-placeholder model registration"
+                "vllm real mode requires a non-placeholder, non-synthetic model "
+                "registration"
             )
 
 
