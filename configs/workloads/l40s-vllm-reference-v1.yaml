@@ -1,0 +1,55 @@
+contract:
+  name: l40s-vllm-reference-v1
+  version: "1.0"
+  status: protocol_only
+  purpose: >-
+    Locked workload specification for a future local NVIDIA L40S/vLLM
+    measurement. This file is a protocol, not a benchmark result.
+  model_id: replace-with-public-model-id
+  model_revision: replace-with-fixed-model-revision
+  dtype: replace-before-real-run
+  max_model_len: 2048
+  tokenizer: same-as-model
+  serving_flags: []
+  prompt_seed: 20260830
+  warmup_repeats: 1
+  measured_repeats: 3
+  timeout_seconds: 120
+  public_boundary:
+    real_result_required: true
+    dry_run_is_benchmark_claim: false
+    fake_server_is_hardware_evidence: false
+    no_universal_performance_claim: true
+
+defaults:
+  endpoint: http://127.0.0.1:8000/v1/chat/completions
+  framework: vllm
+  model: vllm-l40s-smoke-model
+  batch_size: 1
+  repeats: 3
+
+cases:
+  - case_id: l40s_reference_short_c1
+    prompt_tokens: 128
+    output_tokens: 64
+    concurrency: 1
+  - case_id: l40s_reference_short_c4
+    prompt_tokens: 128
+    output_tokens: 64
+    concurrency: 4
+  - case_id: l40s_reference_short_c8
+    prompt_tokens: 128
+    output_tokens: 64
+    concurrency: 8
+  - case_id: l40s_reference_medium_c1
+    prompt_tokens: 512
+    output_tokens: 128
+    concurrency: 1
+  - case_id: l40s_reference_medium_c4
+    prompt_tokens: 512
+    output_tokens: 128
+    concurrency: 4
+  - case_id: l40s_reference_medium_c8
+    prompt_tokens: 512
+    output_tokens: 128
+    concurrency: 8
