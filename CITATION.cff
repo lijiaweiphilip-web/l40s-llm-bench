@@ -3,7 +3,8 @@ title: l40s-llm-bench
 authors:
   - family-names: Li
     given-names: Jiawei
-version: 0.1.5
+version: 0.1.6
+date-released: 2026-08-30
 repository-code: https://github.com/lijiaweiphilip-web/l40s-llm-bench
 message: "If this research harness is useful, please cite this repository."
 license: MIT
