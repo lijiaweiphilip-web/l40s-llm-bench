@@ -1,5 +1,8 @@
 import json
+import math
 from pathlib import Path
+
+import pytest
 
 from l40s_bench.schema import validate_result
 from scripts.bench_openai_compatible import dry_run_record
@@ -60,6 +63,62 @@ def test_legacy_record_gets_optional_streaming_fields() -> None:
     assert record["request_index"] == 0
     assert record["error_kind"] is None
     assert record["http_status"] is None
+
+
+@pytest.mark.parametrize(
+    "field", ["latency_ms", "ttft_ms", "tpot_ms", "output_tokens_per_second"]
+)
+@pytest.mark.parametrize("invalid_value", [math.nan, math.inf, -math.inf])
+def test_result_validator_rejects_non_finite_measurements(
+    field: str, invalid_value: float
+) -> None:
+    record = {
+        "schema_version": "0.1",
+        "timestamp_utc": "2026-05-31T00:00:00+00:00",
+        "run_id": "non-finite",
+        "case_id": "case",
+        "framework": "vllm",
+        "model": "model",
+        "prompt_tokens": 128,
+        "output_tokens": 32,
+        "batch_size": 1,
+        "repeat_index": 0,
+        "dry_run": False,
+        "status": "ok",
+        "latency_ms": 10.0,
+        "output_tokens_per_second": 100.0,
+    }
+    record[field] = invalid_value
+
+    with pytest.raises(ValueError, match="finite"):
+        validate_result(record)
+
+
+@pytest.mark.parametrize("field", ["dry_run", "synthetic", "benchmark_claim"])
+@pytest.mark.parametrize("invalid_value", ["false", 0, None, []])
+def test_result_validator_rejects_non_boolean_flags(
+    field: str, invalid_value: object
+) -> None:
+    record = {
+        "schema_version": "0.1",
+        "timestamp_utc": "2026-05-31T00:00:00+00:00",
+        "run_id": "invalid-flag",
+        "case_id": "case",
+        "framework": "vllm",
+        "model": "model",
+        "prompt_tokens": 128,
+        "output_tokens": 32,
+        "batch_size": 1,
+        "repeat_index": 0,
+        "dry_run": False,
+        "status": "ok",
+        "latency_ms": 10.0,
+        "output_tokens_per_second": 100.0,
+        field: invalid_value,
+    }
+
+    with pytest.raises(ValueError, match="boolean"):
+        validate_result(record)
 
 
 def test_synthetic_fake_server_example_validates() -> None:
