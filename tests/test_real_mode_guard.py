@@ -1,5 +1,7 @@
 from argparse import Namespace
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 import yaml
@@ -46,3 +48,21 @@ def test_reference_contract_rejects_boolean_concurrency(tmp_path: Path) -> None:
 
     with pytest.raises(ValueError, match="concurrency"):
         validate_contract(invalid_path)
+
+
+def test_real_mode_guard_cli_is_concise_and_nonzero() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/bench_openai_compatible.py",
+            "--config",
+            "configs/workloads/l40s-vllm-reference-v1.yaml",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 2
+    assert "protocol_only" in result.stderr
+    assert "Traceback" not in result.stderr

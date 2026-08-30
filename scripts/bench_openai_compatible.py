@@ -250,12 +250,17 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def main() -> None:
+def main() -> int:
     args = parse_args()
-    records = run_benchmark(args)
+    try:
+        records = run_benchmark(args)
+    except (OSError, TypeError, ValueError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
     write_jsonl(Path(args.output), records)
     print(f"wrote {len(records)} records to {args.output}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
