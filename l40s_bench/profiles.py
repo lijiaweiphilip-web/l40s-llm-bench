@@ -5,7 +5,7 @@ from typing import Any
 
 import yaml
 
-from l40s_bench.config import load_yaml
+from l40s_bench.config import _positive_integer, load_yaml
 
 REQUIRED_PROFILE_FIELDS = {
     "name",
@@ -38,9 +38,7 @@ def load_workload_profiles(path: str | Path) -> dict[str, Any]:
             raise ValueError(f"duplicate workload profile: {profile['name']}")
         names.add(str(profile["name"]))
         for key in ("prompt_tokens", "output_tokens", "batch_size", "concurrency"):
-            profile[key] = int(profile[key])
-            if profile[key] <= 0:
-                raise ValueError(f"{key} must be positive in {profile['name']}")
+            profile[key] = _positive_integer(profile[key], key, profile["name"])
         normalized.append(profile)
     return {"defaults": defaults, "profiles": normalized}
 
@@ -66,8 +64,14 @@ def profiles_to_matrix(
             "framework": defaults["framework"],
             "model": defaults["model"],
             "endpoint": defaults["endpoint"],
-            "timeout_seconds": int(defaults.get("timeout_seconds", 60)),
-            "repeats": int(defaults.get("repeats", 1)),
+            "timeout_seconds": _positive_integer(
+                defaults.get("timeout_seconds", 60),
+                "timeout_seconds",
+                profile["name"],
+            ),
+            "repeats": _positive_integer(
+                defaults.get("repeats", 1), "repeats", profile["name"]
+            ),
             "prompt_tokens": profile["prompt_tokens"],
             "output_tokens": profile["output_tokens"],
             "batch_size": profile["batch_size"],
