@@ -250,6 +250,8 @@ def validate_bundle(path: str | Path) -> BundleReport:
             BundleIssue(bundle, "manifest limitations must be a non-empty list")
         )
 
+    reference_paths: dict[str, Path] = {}
+    bundle_root = bundle.resolve()
     for field in REFERENCE_FIELDS:
         reference = manifest.get(field)
         if reference is None:
@@ -257,20 +259,29 @@ def validate_bundle(path: str | Path) -> BundleReport:
         if not isinstance(reference, str) or not reference.strip():
             issues.append(BundleIssue(bundle, f"manifest {field} must be a path string"))
             continue
-        if Path(reference).is_absolute():
+        reference_path = Path(reference)
+        if reference_path.is_absolute():
             issues.append(BundleIssue(bundle, f"manifest {field} must be relative"))
             continue
-        if not (bundle / reference).is_file():
+        try:
+            resolved_reference = (bundle / reference_path).resolve()
+            resolved_reference.relative_to(bundle_root)
+        except (OSError, ValueError):
+            issues.append(
+                BundleIssue(bundle, f"manifest {field} must stay within bundle")
+            )
+            continue
+        reference_paths[field] = resolved_reference
+        if not resolved_reference.is_file():
             issues.append(
                 BundleIssue(bundle, f"manifest {field} target missing: {reference}")
             )
 
-    raw_reference = manifest.get("raw_event_file", "raw-events.jsonl")
-    raw_path = (
-        bundle / raw_reference
-        if isinstance(raw_reference, str)
-        else bundle / "raw-events.jsonl"
-    )
+    raw_path = reference_paths.get("raw_event_file")
+    if raw_path is None and "raw_event_file" not in manifest:
+        raw_path = bundle / "raw-events.jsonl"
+    if raw_path is None:
+        return BundleReport((bundle,), tuple(issues))
     synthetic = strict_bool(manifest, "hardware.synthetic", issues, bundle)
     backend = manifest.get("backend") if isinstance(manifest.get("backend"), str) else None
     if not raw_path.is_file():

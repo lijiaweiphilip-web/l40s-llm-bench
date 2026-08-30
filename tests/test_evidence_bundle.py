@@ -52,6 +52,21 @@ def test_evidence_bundle_rejects_missing_required_file(tmp_path: Path) -> None:
     assert any("missing required file environment.json" in issue.message for issue in report.issues)
 
 
+def test_evidence_bundle_rejects_reference_path_traversal(tmp_path: Path) -> None:
+    bundle = copy_example_bundle(tmp_path)
+    outside = tmp_path / "outside.jsonl"
+    outside.write_text((bundle / "raw-events.jsonl").read_text(encoding="utf-8"), encoding="utf-8")
+    manifest_path = bundle / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["raw_event_file"] = "../outside.jsonl"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    report = validate_bundle(bundle)
+
+    assert not report.ok
+    assert any("must stay within bundle" in issue.message for issue in report.issues)
+
+
 def test_evidence_bundle_rejects_count_mismatch(tmp_path: Path) -> None:
     bundle = copy_example_bundle(tmp_path)
     manifest_path = bundle / "manifest.json"
