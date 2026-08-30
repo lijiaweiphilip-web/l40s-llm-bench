@@ -54,6 +54,19 @@ def test_vllm_synthetic_model_is_rejected_in_real_mode() -> None:
         ensure_real_mode_allowed(matrix, models)
 
 
+def test_vllm_real_mode_accepts_fixed_public_provenance() -> None:
+    matrix = {"cases": [{"framework": "vllm", "model": "real-model"}]}
+    models = {
+        "real-model": {
+            "source": "public",
+            "model_id": "org/model",
+            "model_revision": "rev-1",
+        }
+    }
+
+    ensure_real_mode_allowed(matrix, models)
+
+
 def test_fake_server_synthetic_model_remains_allowed() -> None:
     matrix = load_benchmark_matrix("configs/fake_server_matrix.yaml")
     models = load_models("configs/models.yaml")
