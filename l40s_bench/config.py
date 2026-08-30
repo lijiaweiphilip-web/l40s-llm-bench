@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from pathlib import Path
 from typing import Any
 
@@ -13,6 +14,18 @@ REQUIRED_CASE_FIELDS = {
     "output_tokens",
     "batch_size",
 }
+
+
+def _positive_integer(value: Any, field: str, case_id: Any) -> int:
+    if isinstance(value, bool):
+        raise ValueError(f"{field} must be a positive integer in {case_id}")
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise ValueError(f"{field} must be a positive integer in {case_id}") from exc
+    if not math.isfinite(numeric) or not numeric.is_integer() or numeric <= 0:
+        raise ValueError(f"{field} must be a positive integer in {case_id}")
+    return int(numeric)
 
 
 def load_yaml(path: str | Path) -> dict[str, Any]:
@@ -46,15 +59,15 @@ def load_benchmark_matrix(path: str | Path) -> dict[str, Any]:
             raise ValueError(f"duplicate case_id: {case['case_id']}")
         seen_case_ids.add(str(case["case_id"]))
         for key in ("prompt_tokens", "output_tokens", "batch_size"):
-            if int(case[key]) <= 0:
-                raise ValueError(f"{key} must be positive in {case['case_id']}")
-            case[key] = int(case[key])
-        case["repeats"] = int(case.get("repeats", 1))
-        if case["repeats"] <= 0:
-            raise ValueError(f"repeats must be positive in {case['case_id']}")
-        case["concurrency"] = int(case.get("concurrency", case["batch_size"]))
-        if case["concurrency"] <= 0:
-            raise ValueError(f"concurrency must be positive in {case['case_id']}")
+            case[key] = _positive_integer(case[key], key, case["case_id"])
+        case["repeats"] = _positive_integer(
+            case.get("repeats", 1), "repeats", case["case_id"]
+        )
+        case["concurrency"] = _positive_integer(
+            case.get("concurrency", case["batch_size"]),
+            "concurrency",
+            case["case_id"],
+        )
         normalized_cases.append(case)
 
     matrix["cases"] = normalized_cases
