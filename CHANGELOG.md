@@ -2,6 +2,21 @@
 
 All notable release preparation notes for this project are recorded here.
 
+## [0.1.6] - 2026-08-30
+
+Packaging and CPU quality-gate repair.
+
+### Changed
+
+- corrected package discovery and editable-install behavior;
+- aligned the maintained package metadata and citation version;
+- stabilized the fake-server timing regression and CI quality checks;
+- retained the explicit no-real-L40S/vLLM-results boundary.
+
+### Limitations
+
+- This patch still does not include a real L40S, vLLM, model-server, or GPU benchmark artifact.
+
 ## [0.1.5] - 2026-06-10
 
 Maintenance release focused on public maintainer proof packs, newcomer-entry
