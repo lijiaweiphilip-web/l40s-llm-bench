@@ -102,13 +102,22 @@ def ensure_real_mode_allowed(
         model = models.get(model_name) if isinstance(model_name, str) else None
         if model is None:
             raise ValueError(f"vllm real mode requires a registered model: {model_name}")
-        source = str(model.get("source", "")).strip().lower()
-        model_id = str(model.get("model_id", "")).strip().lower()
+        raw_model_id = model.get("model_id")
+        if not isinstance(raw_model_id, str) or not raw_model_id.strip():
+            raise ValueError("vllm real mode requires a non-empty model_id")
+        raw_source = model.get("source")
+        if not isinstance(raw_source, str) or not raw_source.strip():
+            raise ValueError("vllm real mode requires an explicit model source")
+        source = raw_source.strip().lower()
+        model_id = raw_model_id.strip().lower()
         if source in {"placeholder", "synthetic"} or "replace-with-" in model_id:
             raise ValueError(
                 "vllm real mode requires a non-placeholder, non-synthetic model "
                 "registration"
             )
+        raw_revision = model.get("model_revision", model.get("revision"))
+        if not isinstance(raw_revision, str) or not raw_revision.strip():
+            raise ValueError("vllm real mode requires a fixed model revision")
 
 
 def real_request_record(

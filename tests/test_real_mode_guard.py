@@ -47,6 +47,23 @@ def test_fake_server_synthetic_model_remains_allowed() -> None:
     ensure_real_mode_allowed(matrix, models)
 
 
+@pytest.mark.parametrize(
+    ("model", "message"),
+    [
+        ({"source": "public", "model_revision": "rev-1"}, "model_id"),
+        ({"source": "public", "model_id": "org/model"}, "revision"),
+    ],
+)
+def test_vllm_real_mode_requires_fixed_model_provenance(
+    model: dict[str, str], message: str
+) -> None:
+    matrix = {"cases": [{"framework": "vllm", "model": "real-model"}]}
+    models = {"real-model": model}
+
+    with pytest.raises(ValueError, match=message):
+        ensure_real_mode_allowed(matrix, models)
+
+
 def test_reference_contract_rejects_boolean_concurrency(tmp_path: Path) -> None:
     document = yaml.safe_load(Path("configs/workloads/l40s-vllm-reference-v1.yaml").read_text())
     document["cases"][0]["concurrency"] = True
